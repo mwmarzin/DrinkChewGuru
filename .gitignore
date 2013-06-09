@@ -216,3 +216,4 @@ pip-log.txt
 
 #private key files
 *.pem
+*.ppk
