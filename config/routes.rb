@@ -24,6 +24,7 @@ DrinkChewGuru::Application.routes.draw do
   #       get 'sold'
   #     end
   #   end
+  match "privacy", :to => "privacy#policy"
 
   # Sample resource route with sub-resources:
   #   resources :products do
