@@ -208,6 +208,7 @@
 			data-scope="https://www.googleapis.com/auth/plus.login">
 		  </span>
 	  </span>
+	  <script>
 	<!-- code for handling the sign in functionality -->
 	function signinCallback(authResult) {
 		if (authResult['access_token']) {
@@ -221,9 +222,10 @@
 			   "access_denied" - User denied access to your app
 			//   "immediate_failed" - Could not automatically log in the user
 			// console.log('There was an error: ' + authResult['error']);
-  }
-}
-	  <h3>Version .0004</h3>
+ 	   }
+	}
+	</script>
+	  <h3>Version .0006</h3>
     </div>
   </body>
 </html>
