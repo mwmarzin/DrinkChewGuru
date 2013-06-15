@@ -1,4 +1,7 @@
 DrinkChewGuru::Application.routes.draw do
+  #resources :oauth_tokens
+  
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -24,7 +27,10 @@ DrinkChewGuru::Application.routes.draw do
   #       get 'sold'
   #     end
   #   end
+  
   match "privacy", :to => "privacy#policy"
+  match "login", :to=> "login#index"
+  match "oauth", :to=> "oauth_tokens#index"
 
   # Sample resource route with sub-resources:
   #   resources :products do
@@ -48,8 +54,9 @@ DrinkChewGuru::Application.routes.draw do
   #   end
 
   # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  # just remember to delete public/index.html.'
+  root :to => "login#index"
+
 
   # See how all your routes lay out with "rake routes"
 

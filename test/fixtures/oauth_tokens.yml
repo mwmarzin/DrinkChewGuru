@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  username: MyString
+  service_name: MyString
+  accress_token: MyString
+  secret_token: MyString
+  refresh_token: MyString
+
+two:
+  username: MyString
+  service_name: MyString
+  accress_token: MyString
+  secret_token: MyString
+  refresh_token: MyString
