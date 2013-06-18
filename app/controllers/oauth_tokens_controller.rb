@@ -1,59 +1,38 @@
+require 'Provider'
 require 'FacebookProvider'
-require 'net/http'
+require 'httpclient'
+require 'json'
 class OauthTokensController < ApplicationController
-  # GET /oauth_tokens
-  # GET /oauth_tokens.json
-  
+
   def index
-    @oauth_tokens = OauthToken.all
     
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render :json => @oauth_tokens }
     end
   end
 
-  # GET /oauth_tokens/1
-  # GET /oauth_tokens/1.json
-  def show
-    @oauth_token = OauthToken.find(params[:id])
-
+  def call
+    @provider = Provider.new
+    if params[:provider] == "Facebook"
+      @provider = FacebookProvider.new
+    elsif params[:provider] == "Google"
+      #add this in later
+    end
+    @stuff = @provider.methods
+    @client = HTTPClient.new
+    @responseJSON = @client.post(@provider.access_url, @provider.getOAuthParamArray)
+    #@responseArray = JSON.parse(@responseJSON.to_s)
     respond_to do |format|
-      format.html # show.html.erb
-      format.json { render :json => @oauth_token }
+      format.html #request.html.erb
     end
-  end
-
-  # GET /oauth_tokens/new
-  # GET /oauth_tokens/new.json
-  def new
-    @fb = FacebookProvider.new
-    @oauth_token = OauthToken.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render :json => @oauth_token }
-    end
-  end
-
-  # GET /oauth_tokens/1/edit
-  def edit
-    @oauth_token = OauthToken.find(params[:id])
   end
 
   # POST /oauth_tokens
   # POST /oauth_tokens.json
   def create
-    @oauth_token = OauthToken.new(params[:oauth_token])
 
     respond_to do |format|
-      if @oauth_token.save
-        format.html { redirect_to @oauth_token, :notice => 'Oauth token was successfully created.' }
-        format.json { render :json => @oauth_token, :status => :created, :location => @oauth_token }
-      else
-        format.html { render :action => "new" }
-        format.json { render :json => @oauth_token.errors, :status => :unprocessable_entity }
-      end
+      format.html # create.html.erb
     end
   end
 

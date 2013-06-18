@@ -41,6 +41,7 @@ GEM
     execjs (1.4.0)
       multi_json (~> 1.0)
     hike (1.2.3)
+    httpclient (2.3.3)
     i18n (0.6.1)
     journey (1.0.4)
     jquery-rails (3.0.1)
@@ -104,6 +105,7 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails (~> 3.2.1)
+  httpclient
   jquery-rails
   json
   rails (= 3.2.13)
