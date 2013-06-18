@@ -31,6 +31,7 @@ DrinkChewGuru::Application.routes.draw do
   match "privacy", :to => "privacy#policy"
   match "login", :to=> "login#index"
   match "oauth", :to=> "oauth_tokens#index"
+  match "oauth/new", :to => "oauth_tokens#index"
 
   # Sample resource route with sub-resources:
   #   resources :products do

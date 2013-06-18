@@ -1,17 +1,18 @@
 <h1>Listing oauth_tokens</h1>
 
-<h3><%= @fb.getOAuthTokenRequest %></h3>
-
 <table>
-<% @oauth_tokens.each do |oauth_token| %>
-  <tr>
-    <td><%= oauth_token.username %></td>
-    <td><%= oauth_token.service_name %></td>
-    <td><%= oauth_token.accress_token %></td>
-    <td><%= oauth_token.secret_token %></td>
-    <td><%= oauth_token.refresh_token %></td>
-  </tr>
-<% end %>
+	<tr>
+		<td><%= link_to "Click here to connect your profile to Facebook", "oauth/new" %></td>
+	</tr>
+	<tr>
+		<td>We will need the following permissions:
+			<ul>
+				<li> Create events with your facebook account</li>
+				<li> Access to your friends list to invite them to your events</li>
+			</ul>
+		</td>
+	</tr>
 </table>
+
 
 <br />

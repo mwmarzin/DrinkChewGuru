@@ -1,10 +1,10 @@
 require 'FacebookProvider'
+require 'net/http'
 class OauthTokensController < ApplicationController
   # GET /oauth_tokens
   # GET /oauth_tokens.json
   
   def index
-    @fb = FacebookProvider.new
     @oauth_tokens = OauthToken.all
     
     respond_to do |format|
@@ -27,6 +27,7 @@ class OauthTokensController < ApplicationController
   # GET /oauth_tokens/new
   # GET /oauth_tokens/new.json
   def new
+    @fb = FacebookProvider.new
     @oauth_token = OauthToken.new
 
     respond_to do |format|
