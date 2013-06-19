@@ -18,13 +18,8 @@ class OauthTokensController < ApplicationController
     elsif params[:provider] == "Google"
       #add this in later
     end
-    @stuff = @provider.methods
-    @client = HTTPClient.new
-    @responseJSON = @client.post(@provider.access_url, @provider.getOAuthParamArray)
-    #@responseArray = JSON.parse(@responseJSON.to_s)
-    respond_to do |format|
-      format.html #request.html.erb
-    end
+
+    redirect_to(@provider.getOAuthTokenRequestURL())
   end
 
   # POST /oauth_tokens
