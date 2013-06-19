@@ -19,11 +19,11 @@ class OauthTokensController < ApplicationController
       #add this in later
     end
 
-#    redirect_to(@provider.getOAuthTokenRequestURL())
+    redirect_to(@provider.getOAuthTokenRequestURL())
     #@responseArray = JSON.parse(@responseJSON.to_s)
-    respond_to do |format|
-      format.html #request.html.erb
-    end
+    #respond_to do |format|
+    #  format.html #request.html.erb
+    #end
   end
 
   # POST /oauth_tokens
