@@ -11,8 +11,8 @@ class FacebookProvider < Provider
     @perms = "create_event"
   end
   
-  def validateOAuthToken(@response)
-    responseArray = @response.body.split("&")
+  def validateOAuthToken(response)
+    responseArray = response.body.split("&")
     tokenParam = responseArray[0].split("=")
     token = false
     if(tokenParam[0] == "access_token")
