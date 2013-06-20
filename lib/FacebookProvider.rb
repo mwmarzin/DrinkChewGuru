@@ -10,5 +10,17 @@ class FacebookProvider < Provider
     @state = rand(99999)
     @perms = "create_event"
   end
+  
+  def validateOAuthToken(@response)
+    responseArray = @response.body.split("&")
+    tokenParam = responseArray[0].split("=")
+    token = false
+    if(tokenParam[0] == "access_token")
+      token = tokenParam[1]
+    else
+      token = false
+    end
+    token
+  end
 end
   

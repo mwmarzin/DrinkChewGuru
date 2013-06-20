@@ -42,7 +42,9 @@ class OauthTokensController < ApplicationController
     @state = params[:state]
     @exchangeURL = @provider.getOAuthExchangeTokenURL(@code)
     client = HTTPClient.new
-    @responseJSON = client.get(@exchangeURL)
+    @response = client.get(@exchangeURL)
+    @token = @provider.validateOAuthToken(@response)
+
 #    @responseArray = JSON.parse(@responseJSON)
     respond_to do |format|
       format.html # create.html.erb
