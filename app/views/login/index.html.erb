@@ -186,7 +186,7 @@
 					 }
 		</script>
 		
-		<!--										<!-- Place this asynchronous JavaScript just before your </body> tag -->
+												<!-- Place this asynchronous JavaScript just before your </body> tag -->
 															<!-- This is to Add Google+ Script on the page -->
 															
 		<script type="text/javascript">
@@ -196,15 +196,12 @@
 			   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
 			 })();
 		</script>
-		
-		--->
-		
 	</head>
 	<body>
 		<div id="page">
 			<h3>This is the login page for Drink.Chew.Guru.</h3>
 			
-		<!--															<!-- Adding Sign In Button to the page -->
+																	<!-- Adding Sign In Button to the page -->
 																	
 			<span id="signinButton">
 					<span
@@ -215,11 +212,10 @@
 						data-requestvisibleactions="http://schemas.google.com/AddActivity"
 						data-scope="https://www.googleapis.com/auth/plus.login">
 					</span>
-			-->
 		  
 																<!-- code for handling the sign in functionality -->
 																
-			<!--	function signinCallback(authResult) {
+				function signinCallback(authResult) {
 					if (authResult['access_token']) {
 						// Successfully authorized
 						// Hide the sign-in button now that the user is authorized, for example:
@@ -231,7 +227,6 @@
 					   "access_denied" - User denied access to your app
 						//   "immediate_failed" - Could not automatically log in the user
 						// console.log('There was an error: ' + authResult['error']);
-			-->			
 			</span>
 		</div>
 	</body>
