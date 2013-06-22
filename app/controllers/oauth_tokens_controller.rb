@@ -5,7 +5,7 @@ require 'json'
 class OauthTokensController < ApplicationController
 
   def index
-    
+    @fb = FacebookProvider.new
     respond_to do |format|
       format.html # index.html.erb
     end
