@@ -1,7 +1,8 @@
 loading
 <table>
-	<tr><td>Code: <%= @code %></td></tr>
-	<tr><td>State: <%= @state %></td></tr>
-	<tr><td>Exchange URL: <%= @exchangeURL %></td></tr>
-	<tr><td>Response: <%= @responseJSON %></td></tr>
+<% @responseJSON["data"].each |person| %>
+	<tr>
+		<td><%= person %></td> 
+	</tr>
+<% end %>
 </table>
