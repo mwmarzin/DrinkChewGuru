@@ -1,6 +1,6 @@
 loading
 <table>
-<% @responseJSON["data"].each |person| %>
+<% @responseJSON["data"].each do |person| %>
 	<tr>
 		<td><%= person %></td> 
 	</tr>
