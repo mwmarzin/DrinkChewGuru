@@ -7,7 +7,7 @@ We were able to link your profile to Facebook. As proof, here are some of your f
 	</tr>
 	<tr>
 <% @responseJSON["data"].each do |person| %>
-		<td><%= person["picture"]["first_name"] %></td> 
+		<td><%= person["first_name"] %></td> 
 <% end %>
 	</tr>
 </table>
