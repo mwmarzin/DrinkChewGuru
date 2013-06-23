@@ -1,8 +1,8 @@
-loading
+We were able to link your profile to Facebook. As proof, here are some of your friends.
 <table>
-<% @responseJSON["data"].each do |person| %>
 	<tr>
-		<td><%= person %></td> 
+<% @responseJSON["data"].each do |person| %>
+		<td><%= image_tag person["picture"]["data"]["url"] :alt => person["picture"]["first_name"]%></td> 
 	</tr>
 <% end %>
 </table>
