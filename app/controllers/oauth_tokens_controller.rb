@@ -45,7 +45,7 @@ class OauthTokensController < ApplicationController
     @token = FacebookProvider.validateOAuthToken(@response.body)
     headers={"access_token"=>@token}
     @response = client.get("https://graph.facebook.com/me/friends?fields=first_name,picture&limit=5",headers)
-    @responseJSON = JSON.decode(@response)
+    @responseJSON = JSON.parse(@response)
     respond_to do |format|
       format.html # create.html.erb
     end
