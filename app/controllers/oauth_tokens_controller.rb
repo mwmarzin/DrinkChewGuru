@@ -5,7 +5,7 @@ require 'json'
 class OauthTokensController < ApplicationController
 
   def index
-    @fb = FacebookProvider.new
+    @provider = FacebookProvider
     respond_to do |format|
       format.html # index.html.erb
     end
@@ -14,12 +14,11 @@ class OauthTokensController < ApplicationController
   def call
     @provider = Provider.new
     if params[:provider] == "Facebook"
-      @provider = FacebookProvider.new
+      redirect_to(FacebookProvider.getOAuthTokenRequestURL())
     elsif params[:provider] == "Google"
       #add this in later
     end
 
-    redirect_to(@provider.getOAuthTokenRequestURL())
     #@responseArray = JSON.parse(@responseJSON.to_s)
     #respond_to do |format|
     #  format.html #request.html.erb
@@ -31,20 +30,22 @@ class OauthTokensController < ApplicationController
   def create
 
     #need code for validating the state!!!
-    @provider = Provider.new
-    if params[:provider] == "Facebook"
-      @provider = FacebookProvider.new
-    elsif params[:provider] == "Google"
-      #add this in later
-    end
+    #@provider = Provider.new
+    #if params[:provider] == "Facebook"
+    #  @provider = FacebookProvider.new(request.host)
+    #elsif params[:provider] == "Google"
+    #  #add this in later
+    #end
     
     @code = params[:code]
     @state = params[:state]
-    @exchangeURL = @provider.getOAuthExchangeTokenURL(@code)
+    @exchangeURL = FacebookProvider.getOAuthExchangeTokenURL(@code)
     client = HTTPClient.new
     @response = client.get(@exchangeURL)
-    @token = @provider.validateOAuthToken(@response.body)
-
+    @token = FacebookProvider.validateOAuthToken(@response.body)
+    headers={"access_token"=>@token}
+    @response = client.get("https://graph.facebook.com/me/friends?fields=first_name,picture&limit=5",headers)
+    @responseJSON = JSON.decode(@response)
     respond_to do |format|
       format.html # create.html.erb
     end
