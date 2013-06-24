@@ -31,7 +31,6 @@ class OauthTokensController < ApplicationController
   def create
 
     #need code for validating the state!!!
-    @provider = Provider.new
     if params[:provider] == "Facebook"
       @provider = FacebookProvider
     elsif params[:provider] == "Google"
@@ -49,7 +48,7 @@ class OauthTokensController < ApplicationController
     @responseJSON = JSON.parse(@response.body)
     
     OauthToken.create(:username => 'Matt', 
-                      :service_name => @Provider.service_name,
+                      :service_name => FacebookProvider.service_name,
                       :accress_token => @token,
                       :secret_token => 'JKLMNOP',
                       :refresh_token => 'QRSTUVWXYZ')
