@@ -7,6 +7,7 @@ class FacebookProvider < Provider
   @exchange_url = "https://graph.facebook.com/oauth/access_token"
   @perms = "create_event,user_about_me,user_birthday,user_likes,user_events,"
   @state = rand(99999)
+  @service_name = "Facebook"
   
   def self.validateOAuthToken(responseBody)
     responseArray = responseBody.split("&")

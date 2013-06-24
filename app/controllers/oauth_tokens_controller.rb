@@ -13,13 +13,9 @@ class OauthTokensController < ApplicationController
   end
 
   def call
-    @provider = Provider.new
-    if params[:provider] == "Facebook"
-      redirect_to(FacebookProvider.getOAuthTokenRequestURL())
-    elsif params[:provider] == "Google"
-      #add this in later
-    end
+    @provider = getProviderClass(params[:provider])
 
+    redirect_to(@provider.getOAuthTokenRequestURL())
     #@responseArray = JSON.parse(@responseJSON.to_s)
     #respond_to do |format|
     #  format.html #request.html.erb
@@ -31,11 +27,7 @@ class OauthTokensController < ApplicationController
   def create
 
     #need code for validating the state!!!
-    if params[:provider] == "Facebook"
-      @provider = FacebookProvider
-    elsif params[:provider] == "Google"
-      #add this in later
-    end
+    @provider = getProviderClass(params[:provider])
     
     @code = params[:code]
     @state = params[:state]
@@ -48,7 +40,7 @@ class OauthTokensController < ApplicationController
     @responseJSON = JSON.parse(@response.body)
     
     OauthToken.create(:username => 'Matt', 
-                      :service_name => FacebookProvider.service_name,
+                      :service_name => @provider.service_name,
                       :accress_token => @token,
                       :secret_token => 'JKLMNOP',
                       :refresh_token => 'QRSTUVWXYZ')
@@ -56,6 +48,20 @@ class OauthTokensController < ApplicationController
     respond_to do |format|
       format.html # create.html.erb
     end
+  end
+
+  def getProviderClass(providerName)
+    if providerName == "Facebook"
+      provider = FacebookProvider
+    elsif providerName == "Google"
+      raise "Provider not setup ... yet"
+    elsif providerName == "FourSquare"
+      raise "Provider not setup ... yet"
+    else
+      raise "WHOA! I don't know who this is!"
+    end
+    
+    return provider
   end
 
 end

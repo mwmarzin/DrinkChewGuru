@@ -2,6 +2,7 @@
 
 <h3>Your current Tokens:</h3>
 <ul>
+	<li><%= @provider.service_name %>
 	<% @tokens.each do |token| %>
 	<li><%= token.service_name %></li>
 	<% end %>
