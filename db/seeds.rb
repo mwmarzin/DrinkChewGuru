@@ -5,3 +5,8 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Emanuel', :city => cities.first)
+OauthToken.create(:username => 'Matt', 
+             :service_name => 'Facebook',
+             :accress_token => 'ABCDEFGHI',
+             :secret_token => 'JKLMNOP',
+             :refresh_token => 'QRSTUVWXYZ')

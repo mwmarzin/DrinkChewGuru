@@ -1,5 +1,12 @@
 <h1>Connect your profile to other services</h1>
 
+<h3>Your current Tokens:</h3>
+<ul>
+	<% @tokens.each do |token| %>
+	<li><%= token.username %></li>
+	<% end %>
+</ul>
+
 <table>
 	<tr>
 		<td><%= link_to "Click here to connect your profile to Facebook", "/oauth/Facebook" %></td>

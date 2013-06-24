@@ -22,9 +22,4 @@ ActiveRecord::Schema.define(:version => 20130614220718) do
     t.datetime "updated_at",    :null => false
   end
 
-  create_table "oauths", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
 end
