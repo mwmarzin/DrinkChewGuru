@@ -1,0 +1,10 @@
+<html>
+<head>
+</head>
+<body>
+https: //foursquare.com/oauth2/authenticate
+client_id =EXE00JNPDHGUAQXEDXMCCKQ0KOCY2RKT0JVGSAIUZC0LDDDB
+&response_type=code
+& redirect_uri= http://drinkchewguru.elasticbeanstalk.com/foursquare
+</body>
+</html>
