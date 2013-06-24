@@ -31,12 +31,12 @@ class OauthTokensController < ApplicationController
   def create
 
     #need code for validating the state!!!
-    #@provider = Provider.new
-    #if params[:provider] == "Facebook"
-    #  @provider = FacebookProvider.new(request.host)
-    #elsif params[:provider] == "Google"
-    #  #add this in later
-    #end
+    @provider = Provider.new
+    if params[:provider] == "Facebook"
+      @provider = FacebookProvider
+    elsif params[:provider] == "Google"
+      #add this in later
+    end
     
     @code = params[:code]
     @state = params[:state]
@@ -47,6 +47,13 @@ class OauthTokensController < ApplicationController
     headers={"access_token"=>@token}
     @response = client.get("https://graph.facebook.com/me/friends?fields=first_name,picture&limit=5",headers)
     @responseJSON = JSON.parse(@response.body)
+    
+    OauthToken.create(:username => 'Matt', 
+                      :service_name => @Provider.service_name,
+                      :accress_token => @token,
+                      :secret_token => 'JKLMNOP',
+                      :refresh_token => 'QRSTUVWXYZ')
+    
     respond_to do |format|
       format.html # create.html.erb
     end
