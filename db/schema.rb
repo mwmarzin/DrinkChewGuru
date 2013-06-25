@@ -10,7 +10,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130625000617) do
+<<<<<<< HEAD
+ActiveRecord::Schema.define(:version => 20130625175856) do
+=======
+ActiveRecord::Schema.define(:version => 20130625024616) do
+>>>>>>> fc799565f6e42f8b116ba73a4d185003743ba01e
 
   create_table "oauth_tokens", :force => true do |t|
     t.string   "username"
@@ -20,14 +24,17 @@ ActiveRecord::Schema.define(:version => 20130625000617) do
     t.string   "refresh_token"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.string   "provider"
   end
 
+<<<<<<< HEAD
   create_table "oauths", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
-<<<<<<< HEAD
+=======
+>>>>>>> fc799565f6e42f8b116ba73a4d185003743ba01e
   create_table "users", :force => true do |t|
     t.string   "identity_url"
     t.string   "first_name"
@@ -37,6 +44,4 @@ ActiveRecord::Schema.define(:version => 20130625000617) do
     t.datetime "updated_at",   :null => false
   end
 
-=======
->>>>>>> 58021c4788247dfd655074188075a589ef05c921
 end

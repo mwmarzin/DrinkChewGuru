@@ -1,11 +1,12 @@
 class Provider
-  attr_accessor :client_id, :client_secret, :redirect_uri, :access_url, :state,
-  :exchange_url
-  def initalize ()
-    @state = rand(99999)
+  class << self; attr_accessor :client_id, :client_secret, :redirect_uri, :access_url,
+  :exchange_url, :service_name end
+  
+  def initalize (host = "")
+    @redirect_uri += host
   end
   
-  def getOAuthTokenRequestURL()
+  def self.getOAuthTokenRequestURL()
     @request = "#{@access_url}?" +
       "client_id=#{@client_id}" +
       "&redirect_uri=#{@redirect_uri}" +
@@ -13,7 +14,7 @@ class Provider
       "&scope=#{@perms}"
   end
   
-  def getOAuthExchangeTokenURL(code)
+  def self.getOAuthExchangeTokenURL(code)
     @request = "#{@exchange_url}?" + 
       "client_id=#{@client_id}" +
       "&redirect_uri=#{@redirect_uri}" +
@@ -21,7 +22,7 @@ class Provider
       "&code=#{code}"
   end
   
-  def getOAuthParamArray(scope = nil)
+  def self.getOAuthParamArray(scope = nil)
     
     a = {"client_id" => "#{@access_url}",
          "redirect" => "#{@redirect_uri}",
