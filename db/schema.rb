@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(:version => 20130625000617) do
     t.datetime "updated_at", :null => false
   end
 
+<<<<<<< HEAD
   create_table "users", :force => true do |t|
     t.string   "identity_url"
     t.string   "first_name"
@@ -36,4 +37,6 @@ ActiveRecord::Schema.define(:version => 20130625000617) do
     t.datetime "updated_at",   :null => false
   end
 
+=======
+>>>>>>> 58021c4788247dfd655074188075a589ef05c921
 end
