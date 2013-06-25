@@ -39,7 +39,7 @@ class OauthTokensController < ApplicationController
     @response = client.get("https://graph.facebook.com/me/friends?fields=first_name,picture&limit=5",headers)
     @responseJSON = JSON.parse(@response.body)
     
-    OauthToken.create(:username => 'Matt', 
+    OauthToken.create(:username => 'foo', 
                       :service_name => @provider.service_name,
                       :accress_token => @token,
                       :secret_token => 'JKLMNOP',
