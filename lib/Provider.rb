@@ -1,8 +1,9 @@
 class Provider
-  attr_accessor :client_id, :client_secret, :redirect_uri, :access_url, :state,
-  :exchange_url
-  def initalize ()
-    @state = rand(99999)
+  class << self; attr_accessor :client_id, :client_secret, :redirect_uri, :access_url,
+  :exchange_url, :service_name end
+  
+  def initalize (host = "")
+    @redirect_uri += host
   end
   
   def self.getOAuthTokenRequestURL()

@@ -1,4 +1,4 @@
 class LoginController < ApplicationController
-  def hello
+  def profile
   end
 end
