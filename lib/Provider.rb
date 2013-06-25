@@ -5,7 +5,7 @@ class Provider
     @state = rand(99999)
   end
   
-  def getOAuthTokenRequestURL()
+  def self.getOAuthTokenRequestURL()
     @request = "#{@access_url}?" +
       "client_id=#{@client_id}" +
       "&redirect_uri=#{@redirect_uri}" +
@@ -13,7 +13,7 @@ class Provider
       "&scope=#{@perms}"
   end
   
-  def getOAuthExchangeTokenURL(code)
+  def self.getOAuthExchangeTokenURL(code)
     @request = "#{@exchange_url}?" + 
       "client_id=#{@client_id}" +
       "&redirect_uri=#{@redirect_uri}" +
@@ -21,7 +21,7 @@ class Provider
       "&code=#{code}"
   end
   
-  def getOAuthParamArray(scope = nil)
+  def self.getOAuthParamArray(scope = nil)
     
     a = {"client_id" => "#{@access_url}",
          "redirect" => "#{@redirect_uri}",
