@@ -15,7 +15,7 @@ class FourSquareProvider < Provider
 
 
 
-  def self.returnToken(responseBody)
+  def self.returnToken(responseBody,state=0)
     token = OauthToken.new
     responseArray = responseBody.split("&")
     tokenParam = responseArray[0].split("=")

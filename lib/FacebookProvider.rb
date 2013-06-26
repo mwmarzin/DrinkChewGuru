@@ -9,12 +9,11 @@ class FacebookProvider < Provider
   @state = rand(99999)
   @service_name = "Facebook"
   
-  def self.returnToken(responseBody)
+  def self.returnToken(responseBody, state=0)
     oauthToken = OauthToken.new
     responseArray = responseBody.split("&")
     tokenParam = responseArray[0].split("=")
     expiresParam = responseArray[1].split("=")
-    stateParam = responseArray[2].split("=")
     if(tokenParam[0] == "access_token")
       oauthToken.access_token = tokenParam[1]
       oauthToken.expire_time = tokenParam[2]

@@ -8,7 +8,7 @@ class GoogleProvider < Provider
   #@perms = "create_event,user_about_me,user_birthday,user_likes,user_events,"
   #@state = rand(99999)
   
-  def self.validateOAuthToken(responseBody)
+  def self.validateOAuthToken(responseBody, state=0)
     responseArray = responseBody.split("&")
     tokenParam = responseArray[0].split("=")
     token = false
