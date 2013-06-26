@@ -9,7 +9,7 @@ class FacebookProvider < Provider
   @state = rand(99999)
   @service_name = "Facebook"
   
-  def self.returnToken(responseBody, state)
+  def self.returnToken(responseBody)
     oauthToken = OauthToken.new
     responseArray = responseBody.split("&")
     tokenParam = responseArray[0].split("=")
