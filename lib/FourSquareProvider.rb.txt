@@ -1,0 +1,23 @@
+require 'Provider'
+class FourSquareProvider < Provider
+
+def initialize()
+super()
+@client_id = "EXE00JNPDHGUAQXEDXMCCKQ0KOCY2RKT0JVGSAIUZC0LDDDB"
+@client_secret = "KJX1SGYG1ENHBQ02O2B4AUA1R3OFALH1I2MBTNLOOA54NWWX"
+@redirect_uri = "http://drinkchewguru.elasticbeanstalk.com"
+
+end
+
+def validateOAuthToken(responseBody)
+responseArray = responseBody.split("&")
+tokenParam = responseArray[0].split("=")
+token = false
+if(tokenParam[0] == "access_token")
+token = tokenParam[1]
+else
+token = false
+end
+return token
+end
+end

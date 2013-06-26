@@ -18,8 +18,7 @@ class FacebookProvider < Provider
     stateParam = responseArray[2].split("=")
     if(tokenParam[0] == "access_token")
       oauthToken.access_token = tokenParam[1]
-      oauthToken.expires_in = tokenParam[2]
-      oauthToken.provider_name = @service_name
+      oauthToken.expire_time = tokenParam[2]
     else
       raise "error thrown"
     end
