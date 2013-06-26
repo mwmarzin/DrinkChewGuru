@@ -7,15 +7,6 @@ require 'json'
 class OauthTokensController < ApplicationController
 
   def index
-    @token = OauthToken.new
-    
-    @token.access_token = "ABCDEFR"
-    @token.expires_in = 400
-    @token.provider = "facebook"
-    
-    OauthToken.create({:provider => @token.provider,  :access_token => @token.access_token,
-                       :userid => @token.userid, :expires_in => @token.expires_in, :refresh_token => @token.refresh_token})
-    
     respond_to do |format|
       format.html # index.html.erb
     end
@@ -40,10 +31,11 @@ class OauthTokensController < ApplicationController
     
     @code = params[:code]
     @state = params[:state]
-    @exchangeURL = FacebookProvider.getOAuthExchangeTokenURL(@code)
+    
+    @exchangeURL = @provider.getOAuthExchangeTokenURL(@code)
     client = HTTPClient.new
     @response = client.get(@exchangeURL)
-    @token = FacebookProvider.returnToken(@response.body)
+    @token = @provider.returnToken(@response.body)
     headers={"access_token"=>@token}
     @response = client.get("https://graph.facebook.com/me/friends?fields=first_name,picture&limit=5",headers)
     @responseJSON = JSON.parse(@response.body)
