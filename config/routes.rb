@@ -35,7 +35,7 @@ DrinkChewGuru::Application.routes.draw do
   #   end
   
   match "privacy", :to => "privacy#policy"
-  match "login", :to=> "login#index"
+  match "user", :to=> "users#index"
   match "oauth", :to=> "oauth_tokens#index"
   match "oauth/:provider", :to=>"oauth_tokens#call"
   match "oauth/:provider/callback", :to => "oauth_tokens#create"

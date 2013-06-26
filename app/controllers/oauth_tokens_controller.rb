@@ -1,10 +1,21 @@
 require 'Provider'
 require 'FacebookProvider'
+require 'GoogleProvider'
+require 'FourSquareProvider'
 require 'httpclient'
 require 'json'
 class OauthTokensController < ApplicationController
 
   def index
+    @token = OauthToken.new
+    
+    @token.access_token = "ABCDEFR"
+    @token.expires_in = 400
+    @token.provider = "facebook"
+    
+    OauthToken.create({:provider => @token.provider,  :access_token => @token.access_token,
+                       :userid => @token.userid, :expires_in => @token.expires_in, :refresh_token => @token.refresh_token})
+    
     respond_to do |format|
       format.html # index.html.erb
     end
