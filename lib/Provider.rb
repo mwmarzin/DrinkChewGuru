@@ -2,35 +2,20 @@ class Provider
   class << self; attr_accessor :client_id, :client_secret, :redirect_uri, :access_url,
   :exchange_url, :service_name end
   
-  def initalize (host = "")
-    @redirect_uri += host
-  end
-  
   def self.getOAuthTokenRequestURL()
-    @request = "#{@access_url}?" +
-      "client_id=#{@client_id}" +
-      "&redirect_uri=#{@redirect_uri}" +
-      "&state=#{@state}"+
-      "&scope=#{@perms}"
+    raise "This function should be overwritten by a child!"
   end
   
   def self.getOAuthExchangeTokenURL(code)
-    @request = "#{@exchange_url}?" + 
-      "client_id=#{@client_id}" +
-      "&redirect_uri=#{@redirect_uri}" +
-      "&client_secret=#{@client_secret}" +
-      "&code=#{code}"
+    raise "This function should be overwritten by a child!"
   end
   
   def self.getOAuthParamArray(scope = nil)
-    
-    a = {"client_id" => "#{@access_url}",
-         "redirect" => "#{@redirect_uri}",
-         "state" => "#{@state}"
-        }
-    if !scope.nil? 
-      a["scope"] = "#{scope}"
-    end
-    a
+    raise "This function should be overwritten by a child!"
   end
+  
+  def self.returnToken(responseBody, state=0)
+    raise "This function should be overwritten by a child!"
+  end
+  
 end

@@ -9,6 +9,34 @@ class FacebookProvider < Provider
   @state = rand(99999)
   @service_name = "Facebook"
   
+  def self.getOAuthTokenRequestURL()
+    @request = "#{@access_url}?" +
+      "client_id=#{@client_id}" +
+      "&redirect_uri=#{@redirect_uri}" +
+      "&state=#{@state}"+
+      "&scope=#{@perms}"
+  end
+  
+  def self.getOAuthExchangeTokenURL(code)
+    @request = "#{@exchange_url}?" + 
+      "client_id=#{@client_id}" +
+      "&redirect_uri=#{@redirect_uri}" +
+      "&client_secret=#{@client_secret}" +
+      "&code=#{code}"
+  end
+  
+  def self.getOAuthParamArray(scope = nil)
+    
+    a = {"client_id" => "#{@access_url}",
+         "redirect" => "#{@redirect_uri}",
+         "state" => "#{@state}"
+        }
+    if !scope.nil? 
+      a["scope"] = "#{scope}"
+    end
+    a
+  end
+  
   def self.returnToken(responseBody, state=0)
     responseArray = responseBody.split("&")
     tokenParam = responseArray[0].split("=")

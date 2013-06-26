@@ -13,7 +13,9 @@ class FourSquareProvider < Provider
   @state = rand(99999)
   @service_name = "Facebook"
 
-
+  def self.getOAuthTokenRequestURL()
+    
+  end
 
   def self.returnToken(responseBody,state=0)
     #TODO:set this up to return the same hash as facebook, or find a better way of returning data.
