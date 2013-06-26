@@ -54,7 +54,7 @@ class OauthTokensController < ApplicationController
     if providerName == "Facebook"
       provider = FacebookProvider
     elsif providerName == "Google"
-      raise "Provider not setup ... yet"
+      provider = GoogleProvider
     elsif providerName == "FourSquare"
       raise "Provider not setup ... yet"
     else
