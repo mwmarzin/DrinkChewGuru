@@ -6,5 +6,8 @@ class UsersController < ApplicationController
   end
 
   def profile
+    respond_to do |format|
+      format.html # profile.html.erb
+    end
   end
 end

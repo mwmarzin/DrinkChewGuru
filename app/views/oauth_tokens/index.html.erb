@@ -1,13 +1,5 @@
 <h1>Connect your profile to other services</h1>
 
-<h3>Your current Tokens:</h3>
-<ul>
-	<li><%= @provider.service_name %>
-	<% @tokens.each do |token| %>
-	<li><%= token.service_name %></li>
-	<% end %>
-</ul>
-
 <table>
 	<tr>
 		<td><%= link_to "Click here to connect your profile to Facebook", "/oauth/Facebook" %></td>
@@ -17,6 +9,28 @@
 			<ul>
 				<li> Create events with your facebook account</li>
 				<li> Access to your friends list to invite them to your events</li>					
+			</ul>
+		</td>
+	</tr>
+	<tr>
+		<td><%= link_to "Click here to connect your profile to Google", "/oauth/Google" %></td>
+	</tr>
+	<tr>
+		<td>We will need the following permissions:
+			<ul>
+				<li> Send out calendar appointments</li>
+				<li> Access to your friends list</li>					
+			</ul>
+		</td>
+	</tr>
+	<tr>
+		<td><%= link_to "Click here to connect your profile to Facebook", "/oauth/FourSquare" %></td>
+	</tr>
+	<tr>
+		<td>We will need the following permissions:
+			<ul>
+				<li> Access to your checkins </li>
+				<li> Access to your friends list </li>					
 			</ul>
 		</td>
 	</tr>

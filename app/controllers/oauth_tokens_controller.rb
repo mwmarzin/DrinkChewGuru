@@ -6,7 +6,6 @@ class OauthTokensController < ApplicationController
 
   def index
     @tokens = OauthToken.all
-    @provider = FacebookProvider
     respond_to do |format|
       format.html # index.html.erb
     end
