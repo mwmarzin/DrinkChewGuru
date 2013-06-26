@@ -16,6 +16,7 @@ class FacebookProvider < Provider
     if(tokenParam[0] == "access_token")
       access_token = tokenParam[1]
       expires_in = tokenParam[2]
+      provider = @service_name
     else
       raise "error thrown"
     end
