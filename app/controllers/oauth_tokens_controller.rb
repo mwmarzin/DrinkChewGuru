@@ -41,7 +41,7 @@ class OauthTokensController < ApplicationController
     @responseJSON = JSON.parse(@response.body)
     
     #TODO:change the 1 to the userid in session
-    OauthToken.create({:provider => @tokenHash[:provider],  :access_token => @tokenHash[:access_token],
+    OauthToken.create({:provider => @tokenHash[:provider], :access_token => @tokenHash[:access_token],
                        :userid => 1, :expires_in =>  @tokenHash[:expires_in], :refresh_token =>  @tokenHash[:refresh_token]})
     
     
