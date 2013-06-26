@@ -53,7 +53,7 @@ class OauthTokensController < ApplicationController
     elsif providerName == "Google"
       provider = GoogleProvider
     elsif providerName == "FourSquare"
-      provider = FourSquareProvider
+      raise "Provider not setup ... yet"
     else
       raise "WHOA! I don't know who this is!"
     end
