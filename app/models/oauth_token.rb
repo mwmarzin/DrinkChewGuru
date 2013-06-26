@@ -1,3 +1,4 @@
 class OauthToken < ActiveRecord::Base
-  attr_accessible :accress_token, :refresh_token, :secret_token, :service_name, :username
+  belongs_to :user
+  attr_accessible :access_token, :expires_in, :provider_name, :refresh_token, :userid
 end

@@ -1,15 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  username: MyString
-  service_name: MyString
-  accress_token: MyString
-  secret_token: MyString
+  userid: 1
+  provider_name: MyString
+  access_token: MyString
   refresh_token: MyString
+  expires_in: 1
 
 two:
-  username: MyString
-  service_name: MyString
-  accress_token: MyString
-  secret_token: MyString
+  userid: 1
+  provider_name: MyString
+  access_token: MyString
   refresh_token: MyString
+  expires_in: 1

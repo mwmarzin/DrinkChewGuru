@@ -33,16 +33,14 @@ class OauthTokensController < ApplicationController
     @exchangeURL = FacebookProvider.getOAuthExchangeTokenURL(@code)
     client = HTTPClient.new
     @response = client.get(@exchangeURL)
-    @token = FacebookProvider.validateOAuthToken(@response.body)
-    headers={"access_token"=>@token}
+    @token = FacebookProvider.returnToken(@response.body)
+    headers={"access_token"=>@token.access_token}
     @response = client.get("https://graph.facebook.com/me/friends?fields=first_name,picture&limit=5",headers)
     @responseJSON = JSON.parse(@response.body)
     
-    OauthToken.create(:username => 'foo', 
-                      :service_name => @provider.service_name,
-                      :accress_token => @token,
-                      :secret_token => 'JKLMNOP',
-                      :refresh_token => 'QRSTUVWXYZ')
+    @token.userid = 1
+    
+    OauthToken.create(@token)
     
     respond_to do |format|
       format.html # create.html.erb
