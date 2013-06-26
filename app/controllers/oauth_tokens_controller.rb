@@ -26,7 +26,7 @@ class OauthTokensController < ApplicationController
   # POST /oauth_tokens.json
   def create
 
-    #need code for validating the state!!!
+    #TODO:need code for validating the state!!!
     @provider = getProviderClass(params[:provider])
     
     @code = params[:code]
@@ -35,13 +35,14 @@ class OauthTokensController < ApplicationController
     @exchangeURL = @provider.getOAuthExchangeTokenURL(@code)
     client = HTTPClient.new
     @response = client.get(@exchangeURL)
-    @token = @provider.returnToken(@response.body)
-    headers={"access_token"=>@token}
+    @tokenHash = @provider.returnToken(@response.body)
+    headers={"access_token"=>@tokenHash[:access_token]}
     @response = client.get("https://graph.facebook.com/me/friends?fields=first_name,picture&limit=5",headers)
     @responseJSON = JSON.parse(@response.body)
     
-    OauthToken.create({:provider => @token.provider,  :access_token => @token.access_token,
-                       :userid => @token.userid, :expires_in => @token.expires_in, :refresh_token => @token.refresh_token})
+    #TODO:change the 1 to the userid in session
+    OauthToken.create({:provider => @tokenHash[:provider],  :access_token => @tokenHash[:access_token],
+                       :userid => 1, :expires_in =>  @tokenHash[:expires_in], :refresh_token =>  @tokenHash[:refresh_token]})
     
     
     respond_to do |format|

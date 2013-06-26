@@ -10,17 +10,15 @@ class FacebookProvider < Provider
   @service_name = "Facebook"
   
   def self.returnToken(responseBody, state=0)
-    oauthToken = OauthToken.new
     responseArray = responseBody.split("&")
     tokenParam = responseArray[0].split("=")
     expiresParam = responseArray[1].split("=")
     if(tokenParam[0] == "access_token")
-      oauthToken.access_token = tokenParam[1]
-      oauthToken.expires_in = tokenParam[2]
-      oauthToken.provider = @service_name
+      access_token = tokenParam[1]
+      expires_in = tokenParam[2]
     else
       raise "error thrown"
     end
-    return oauthToken
+    return {:access_token => access_token, :expires_in => expires_in, :provider => provider, :refresh_token => ""}
   end
 end

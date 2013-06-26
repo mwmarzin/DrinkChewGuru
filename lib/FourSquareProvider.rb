@@ -16,6 +16,7 @@ class FourSquareProvider < Provider
 
 
   def self.returnToken(responseBody,state=0)
+    #TODO:set this up to return the same hash as facebook, or find a better way of returning data.
     token = OauthToken.new
     responseArray = responseBody.split("&")
     tokenParam = responseArray[0].split("=")
