@@ -35,14 +35,14 @@ class OauthTokensController < ApplicationController
     @exchangeURL = @provider.getOAuthExchangeTokenURL(@code)
     client = HTTPClient.new
     @response = client.get(@exchangeURL)
-    @tokenHash = @provider.returnToken(@response.body)
+    @tokenHash = @provider.returnToken(@response)
     
     #The next couple lines are just to test getting data with the tokens we've just retrieved from the provider
     if params[:provider] == "Facebook"  
       headers={"access_token"=>@tokenHash[:access_token]}
       @response = client.get("https://graph.facebook.com/me/friends?fields=first_name,picture&limit=5",headers)
     elsif providerName == "Google"
-      #add in some sort of a test call to the Google API
+      
     elsif providerName == "FourSquare"
       #add in some sort of a test call to the FourSquare API
     else

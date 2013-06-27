@@ -26,7 +26,6 @@ class FacebookProvider < Provider
   end
   
   def self.getOAuthParamArray(scope = nil)
-    
     a = {"client_id" => "#{@access_url}",
          "redirect" => "#{@redirect_uri}",
          "state" => "#{@state}"
@@ -34,19 +33,23 @@ class FacebookProvider < Provider
     if !scope.nil? 
       a["scope"] = "#{scope}"
     end
-    a
+    return a
   end
   
-  def self.returnToken(responseBody, state=0)
-    responseArray = responseBody.split("&")
-    tokenParam = responseArray[0].split("=")
-    expiresParam = responseArray[1].split("=")
-    if(tokenParam[0] == "access_token")
-      access_token = tokenParam[1]
-      expires_in = tokenParam[2]
-      provider = @service_name
+  def self.returnToken(response, state=0)
+    if response.header["Content-Type"] == "application/text"     
+      responseArray = response.body.split("&")
+      tokenParam = responseArray[0].split("=")
+      expiresParam = responseArray[1].split("=")
+      if(tokenParam[0] == "access_token")
+        access_token = tokenParam[1]
+        expires_in = tokenParam[2]
+        provider = @service_name
+      else
+        raise "error thrown"
+      end
     else
-      raise "error thrown"
+      raise "Wrong type of response"
     end
     return {:access_token => access_token, :expires_in => expires_in, :provider => provider, :refresh_token => ""}
   end
