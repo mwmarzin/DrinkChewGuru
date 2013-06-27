@@ -35,8 +35,9 @@ class OauthTokensController < ApplicationController
     @exchangeURL = @provider.getOAuthExchangeTokenURL(@code)
     client = HTTPClient.new
     @response = client.get(@exchangeURL)
-    @tokenHash = @provider.returnToken(@response)
+    #@tokenHash = @provider.returnToken(@response)
     
+=begin
     #The next couple lines are just to test getting data with the tokens we've just retrieved from the provider
     if params[:provider] == "Facebook"  
       headers={"access_token"=>@tokenHash[:access_token]}
@@ -55,7 +56,7 @@ class OauthTokensController < ApplicationController
     #TODO:change the 1 to the userid in session
     OauthToken.create({:provider => @tokenHash[:provider], :access_token => @tokenHash[:access_token],
                        :userid => 1, :expires_in =>  @tokenHash[:expires_in], :refresh_token =>  @tokenHash[:refresh_token]})
-    
+=end
     
     respond_to do |format|
       format.html # create.html.erb

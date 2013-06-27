@@ -1,18 +1,20 @@
 We were able to link your profile to Facebook. As proof, here are some of your friends.
 <table>
 	<tr>
-<% @responseJSON["data"].each do |person| %>
-		<td><%= image_tag person["picture"]["data"]["url"], :alt => person["first_name"] %></td> 
-<% end %>
+<% #@responseJSON["data"].each do |person| %>
+		<td><%= #image_tag person["picture"]["data"]["url"], :alt => person["first_name"] %></td> 
+<% #end %>
 	</tr>
 	<tr>
-<% @responseJSON["data"].each do |person| %>
-		<td><%= person["first_name"] %></td> 
-<% end %>
+<% #@responseJSON["data"].each do |person| %>
+		<td><%= #person["first_name"] %></td> 
+<% #end %>
 	</tr>
 	<% if params[:provider] == "Google" %>
 	<tr><td><<%= @response.body %></td></tr>
 	<tr><td><<%= @responseJSON %></td></tr>
+	<% else %>
+	<tr><td><<%= @response %></td></tr>
 	<% end %>
 </table>
 
