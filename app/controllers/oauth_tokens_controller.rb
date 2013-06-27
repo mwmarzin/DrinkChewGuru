@@ -34,9 +34,8 @@ class OauthTokensController < ApplicationController
     
     @exchangeURL = @provider.getOAuthExchangeTokenURL(@code)
     client = HTTPClient.new
-    @response = client.get(@exchangeURL)
-    @responseJSON
-    @tokenHash = @provider.returnToken(@response)
+    @tokenResponse = client.get(@exchangeURL)
+    @tokenHash = @provider.returnToken(@tokenResponse)
     
     #The next couple lines are just to test getting data with the tokens we've just retrieved from the provider
     if params[:provider] == "Facebook"  
