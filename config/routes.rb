@@ -39,7 +39,10 @@ DrinkChewGuru::Application.routes.draw do
   match "oauth", :to=> "oauth_tokens#index"
   match "oauth/:provider", :to=>"oauth_tokens#call"
   match "oauth/:provider/callback", :to => "oauth_tokens#create"
-
+  match "openid", :to=>"openid#openIdButton"
+  #match "openid/openIdLogin" :to=>"openid#openIdButton"
+  
+  #map.connect '/openid', :controller=>'openid', :action=>'openIdLogin'
   # Sample resource route with sub-resources:
   #   resources :products do
   #     resources :comments, :sales

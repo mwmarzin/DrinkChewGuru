@@ -10,6 +10,10 @@ We were able to link your profile to Facebook. As proof, here are some of your f
 		<td><%= person["first_name"] %></td> 
 <% end %>
 	</tr>
+	<% if params[:provider] == "Google" %>
+	<tr><td><<%= @response.body %></td></tr>
+	<tr><td><<%= @responseJSON %></td></tr>
+	<% end %>
 </table>
 
 <h3><%= link_to "Click here to return to the tokens page", "/oauth/" %></h3>
