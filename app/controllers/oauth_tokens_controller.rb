@@ -42,7 +42,8 @@ class OauthTokensController < ApplicationController
       headers={"access_token"=>@tokenHash[:access_token]}
       @response = client.get("https://graph.facebook.com/me/friends?fields=first_name,picture&limit=5",headers)
     elsif providerName == "Google"
-      #add in some sort of a test call to the Google API
+	  #very unsure if the following line is right!
+      @response = client.get("https://www.googleapis.com/oauth2/v1/userinfo?access_token=1/fFBGRNJru1FQd44AzqT3Zg",headers)
     elsif providerName == "FourSquare"
       #add in some sort of a test call to the FourSquare API
     else
