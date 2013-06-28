@@ -5,16 +5,17 @@ class FourSquareProvider < Provider
   @redirect_uri = "http://drinkchewguru.elasticbeanstalk.com/oauth/FourSquare/callback"
   @service_name = "FourSquare"
   @exchange_url = ""
-
-  @redirect_uri = "http://drinkchewguru.elasticbeanstalk.com/oauth/Facebook/callback"
-  @access_url = "https://www.facebook.com/dialog/oauth/"
+  
+  @access_url = "https://foursquare.com/oauth2/authenticate"
   @exchange_url = "https://graph.facebook.com/oauth/access_token"
   @perms = "create_event,user_about_me,user_birthday,user_likes,user_events,"
   @state = rand(99999)
-  @service_name = "Facebook"
 
   def self.getOAuthTokenRequestURL()
-    
+    @request = "#{@access_url}?"       +
+      "client_id=#{@client_id}"        +
+      "&redirect_uri=#{@redirect_uri}" +
+      "&response_type=code"
   end
 
   def self.returnToken(responseBody,state=0)

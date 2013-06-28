@@ -34,15 +34,15 @@ class OauthTokensController < ApplicationController
     
     @exchangeURL = @provider.getOAuthExchangeTokenURL(@code)
     client = HTTPClient.new
-    @response = client.get(@exchangeURL)
-    @tokenHash = @provider.returnToken(@response)
+    @tokenResponse = client.get(@exchangeURL)
+    @tokenHash = @provider.returnToken(@tokenResponse)
     
     #The next couple lines are just to test getting data with the tokens we've just retrieved from the provider
     if params[:provider] == "Facebook"  
       headers={"access_token"=>@tokenHash[:access_token]}
       @response = client.get("https://graph.facebook.com/me/friends?fields=first_name,picture&limit=5",headers)
     elsif providerName == "Google"
-	  @response = client.get("https://www.googleapis.com/oauth2/v1/userinfo?access_token=1/fFBGRNJru1FQd44AzqT3Zg",headers)
+
     elsif providerName == "FourSquare"
       #add in some sort of a test call to the FourSquare API
     else
@@ -54,7 +54,6 @@ class OauthTokensController < ApplicationController
     #TODO:change the 1 to the userid in session
     OauthToken.create({:provider => @tokenHash[:provider], :access_token => @tokenHash[:access_token],
                        :userid => 1, :expires_in =>  @tokenHash[:expires_in], :refresh_token =>  @tokenHash[:refresh_token]})
-    
     
     respond_to do |format|
       format.html # create.html.erb
