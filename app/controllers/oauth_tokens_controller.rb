@@ -44,9 +44,6 @@ class OauthTokensController < ApplicationController
     elsif providerName == "Google"
 <<<<<<< HEAD
 
-=======
-      headers={"Authorization: Bearer "=>@tokenHash[:access_token]}
-      @response = client.get("https://www.googleapis.com/oauth2/v1/userinfo?access_token=1/fFBGRNJru1FQd44AzqT3Zg",headers)
 >>>>>>> ce1dcf83764b05f524b744c6b3169ea0459049d8
     elsif providerName == "FourSquare"
       #add in some sort of a test call to the FourSquare API
