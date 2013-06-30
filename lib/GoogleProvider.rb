@@ -29,15 +29,11 @@ class GoogleProvider < Provider
   end
   
   def self.returnToken(response, state=0)
-    if response.header["Content-Type"] == "application/json"     
       responseJson =  JSON.parse(@response.body)
       access_token = responseJson["access_token"]
       expires_in = responseJson["expires_in"]
       refresh_token = responseJson["refresh_token"]
       return {:access_token => access_token, :expires_in => expires_in, :provider => @service_name, :refresh_token => ""}
-    else
-      return ""
-    end
   end
 
 end
