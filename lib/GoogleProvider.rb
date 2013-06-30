@@ -29,7 +29,7 @@ class GoogleProvider < Provider
   end
   
   def self.returnToken(response, state=0)
-      responseJson =  JSON.parse(@response.body)
+      responseJson =  JSON.parse(response.body)
       access_token = responseJson["access_token"]
       expires_in = responseJson["expires_in"]
       refresh_token = responseJson["refresh_token"]
