@@ -15,9 +15,7 @@
 </table>
 <% elsif params[:provider] == "Google" %>
 <ul> Your List of Google Calendars
-	<% @responseJSON["items"].each do |calendar| %>
-	<li><%= calendar["summary"]%></li>
-	<% end %>
+	
 </ul>
 <% elsif params[:provider] == "FourSquare" %>
 
