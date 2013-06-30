@@ -7,7 +7,7 @@ class FourSquareProvider < Provider
   @exchange_url = ""
   
   @access_url = "https://foursquare.com/oauth2/authenticate"
-  @exchange_url = "https://graph.facebook.com/oauth/access_token"
+  @exchange_url = "https://foursquare.com/oauth2/access_token"
   @perms = "create_event,user_about_me,user_birthday,user_likes,user_events"
   @state = rand(99999)
 
@@ -34,7 +34,12 @@ class FourSquareProvider < Provider
     
   #TODO need to implement this
   def self.getOAuthExchangeTokenURL(code)
-    raise "FourSquare Provider Needs This Function!"
+    @request = "#{@exchange_url}?" + 
+      "client_id=#{@client_id}" +
+      "&client_secret=#{@client_secret}" +
+      "&grant_type=authorization_code"   +
+      "&redirect_uri=#{@redirect_uri}"   +
+      "&code=#{code}"
   end
   
   #TODO need to implement this

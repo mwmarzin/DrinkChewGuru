@@ -43,7 +43,7 @@ class OauthTokensController < ApplicationController
       @response = client.get("https://graph.facebook.com/me/friends?fields=first_name,picture&limit=5",headers)
     elsif params[:provider] == "Google"
       headers={"Authorization: Bearer "=>@tokenHash[:access_token]}
-      @response = client.get("https://www.googleapis.com/oauth2/v1/userinfo?alt=json",headers)
+      @response = client.get("https://www.googleapis.com/calendar/v3/users/me/calendarList",headers)
     elsif params[:provider] == "FourSquare"
       #add in some sort of a test call to the FourSquare API
     else
