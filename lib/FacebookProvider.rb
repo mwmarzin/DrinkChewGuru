@@ -37,7 +37,7 @@ class FacebookProvider < Provider
   end
   
   def self.returnToken(response, state=0)
-    #if response.header["Content-Type"] == "application/text"     
+    #if response.header["Content-Type"] == "text/plain; charset=UTF-8"
       responseArray = response.body.split("&")
       tokenParam = responseArray[0].split("=")
       expiresParam = responseArray[1].split("=")

@@ -1,4 +1,6 @@
 We were able to link your profile to Facebook. As proof, here are some of your friends.
+
+<% if params[:provider] == "Facebook" %>
 <table>
 	<tr>
 <% @responseJSON["data"].each do |person| %>
@@ -11,6 +13,11 @@ We were able to link your profile to Facebook. As proof, here are some of your f
 <% end %>
 	</tr>
 </table>
+<% elsif params[:provider] == "Facebook" %>
+
+<% elsif params[:provider] == "FourSquare" %>
+
+<% end %>
 
 <table>
 	<tr><td><%= @tokenResponse.header["Content-Type"] %></td></tr>

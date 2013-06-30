@@ -4,7 +4,7 @@ class GoogleProvider < Provider
   @client_secret = "W1kRezogoDm61Gmyp_gqgI7y"
   @redirect_uri = "http://drinkchewguru.elasticbeanstalk.com/oauth/Google/callback"
   @access_url = "https://accounts.google.com/o/oauth2/auth"
-  #@exchange_url = "https://graph.facebook.com/oauth/access_token"
+  @exchange_url = "https://accounts.google.com/o/oauth2/token"
   #permissions (Google calls this scope)
   @perms = "https://www.googleapis.com/auth/calendar https://www.google.com/m8/feeds/ https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/userinfo.profile"
   @state = rand(99999)
