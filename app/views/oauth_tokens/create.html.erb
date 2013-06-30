@@ -13,11 +13,9 @@ We were able to link your profile to Facebook. As proof, here are some of your f
 <% end %>
 	</tr>
 </table>
-<% elsif params[:provider] == "Facebook" %>
+<% elsif params[:provider] == "Google" %>
 <ul> Your List of Google Calendars
-	<% @responseJSON["items"].each do |calendar| %>
-	<li><%= calendar["summary"]%></li>
-	<% end %>
+
 </ul>
 <% elsif params[:provider] == "FourSquare" %>
 

@@ -35,6 +35,7 @@ class OauthTokensController < ApplicationController
     @exchangeURL = @provider.getOAuthExchangeTokenURL(@code)
     client = HTTPClient.new
     @tokenResponse = client.get(@exchangeURL)
+    puts "Response: "
     @tokenHash = @provider.returnToken(@tokenResponse)
     
     #The next couple lines are just to test getting data with the tokens we've just retrieved from the provider
@@ -42,7 +43,6 @@ class OauthTokensController < ApplicationController
       headers={"access_token"=>@tokenHash[:access_token]}
       @response = client.get("https://graph.facebook.com/me/friends?fields=first_name,picture&limit=5",headers)
     elsif params[:provider] == "Google"
-      puts "tokenHash: "+@tokenHash
       headers={"Authorization: Bearer "=>@tokenHash[:access_token]}
       @response = client.get("https://www.googleapis.com/calendar/v3/users/me/calendarList",headers)
     elsif params[:provider] == "FourSquare"
