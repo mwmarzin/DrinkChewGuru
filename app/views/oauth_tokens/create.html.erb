@@ -1,4 +1,4 @@
-We were able to link your profile to Facebook. As proof, here are some of your friends.
+<b>We were able to link your profile to <%= params[:provider] %>. As proof, here are some of your data.</b>
 
 <% if params[:provider] == "Facebook" %>
 <table>
@@ -15,7 +15,9 @@ We were able to link your profile to Facebook. As proof, here are some of your f
 </table>
 <% elsif params[:provider] == "Google" %>
 <ul> Your List of Google Calendars
-
+	<% @responseJSON["items"].each do |calendar| %>
+	<li><%= calendar["summary"]%></li>
+	<% end %>
 </ul>
 <% elsif params[:provider] == "FourSquare" %>
 

@@ -34,12 +34,14 @@ class OauthTokensController < ApplicationController
     
     @exchangeURL = @provider.getOAuthExchangeTokenURL(@code)
     client = HTTPClient.new
+    
+    #TODO there should be a better way to handle this then to hardcode if the provider wants a POST or a GET. Maybe something in the provider classes?
     if params[:provider] == "Google"
       @tokenResponse = client.post(@provider.exchange_url, @provider.getOAuthExchangeParams(@code))
     else
       @tokenResponse = client.get(@exchangeURL)
     end
-    puts "Response: "
+    
     @tokenHash = @provider.returnToken(@tokenResponse)
     
     #The next couple lines are just to test getting data with the tokens we've just retrieved from the provider

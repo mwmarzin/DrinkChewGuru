@@ -36,14 +36,11 @@ class GoogleProvider < Provider
   end
   
   def self.returnToken(response, state=0)
-=begin
-      responseJson =  JSON.parse(response.body)
-      access_token = responseJson["access_token"]
-      expires_in = responseJson["expires_in"]
-      refresh_token = responseJson["refresh_token"]      
-      return {:access_token => access_token, :expires_in => expires_in, :provider => @service_name, :refresh_token => refresh_token}
-=end
-    return {:access_token => "ABCDEF", :expires_in => "36000", :provider => @service_name, :refresh_token => "GHIKLM"}
+    responseJson =  JSON.parse(response.body)
+    access_token = responseJson["access_token"]
+    expires_in = responseJson["expires_in"]
+    refresh_token = responseJson["refresh_token"]      
+    return {:access_token => access_token, :expires_in => expires_in, :provider => @service_name, :refresh_token => refresh_token}
   end
 
 end
