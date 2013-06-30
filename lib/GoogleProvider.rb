@@ -29,6 +29,12 @@ class GoogleProvider < Provider
       "&redirect_uri=#{@redirect_uri}"
   end
   
+  def self.getOAuthExchangeParams(code)
+    return {:client_id => @client_id, :client_secret => @client_secret,
+            :grant_type => 'authorization_code', :code => code, 
+            :redirect_uri => @redirect_uri,}  
+  end
+  
   def self.returnToken(response, state=0)
 =begin
       responseJson =  JSON.parse(response.body)

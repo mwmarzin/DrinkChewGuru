@@ -34,7 +34,11 @@ class OauthTokensController < ApplicationController
     
     @exchangeURL = @provider.getOAuthExchangeTokenURL(@code)
     client = HTTPClient.new
-    @tokenResponse = client.get(@exchangeURL)
+    if params[:provider] == "Google"
+      @tokenResponse = client.post(@provider.exchange_url, @provider.getOAuthExchangeParams(@code))
+    else
+      @tokenResponse = client.get(@exchangeURL)
+    end
     puts "Response: "
     @tokenHash = @provider.returnToken(@tokenResponse)
     
