@@ -42,6 +42,7 @@ class OauthTokensController < ApplicationController
       headers={"access_token"=>@tokenHash[:access_token]}
       @response = client.get("https://graph.facebook.com/me/friends?fields=first_name,picture&limit=5",headers)
     elsif params[:provider] == "Google"
+      puts @tokenHash
       headers={"Authorization: Bearer "=>@tokenHash[:access_token]}
       @response = client.get("https://www.googleapis.com/calendar/v3/users/me/calendarList",headers)
     elsif params[:provider] == "FourSquare"

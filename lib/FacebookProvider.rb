@@ -44,13 +44,12 @@ class FacebookProvider < Provider
       if(tokenParam[0] == "access_token")
         access_token = tokenParam[1]
         expires_in = tokenParam[2]
-        provider = @service_name
       else
         raise "error thrown"
       end
       #else
       #raise "Wrong type of response"
       #end
-    return {:access_token => access_token, :expires_in => expires_in, :provider => provider, :refresh_token => ""}
+    return {:access_token => access_token, :expires_in => expires_in, :provider => @service_name, :refresh_token => ""}
   end
 end

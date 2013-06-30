@@ -6,7 +6,7 @@ class GoogleProvider < Provider
   @access_url = "https://accounts.google.com/o/oauth2/auth"
   @exchange_url = "https://accounts.google.com/o/oauth2/token"
   #permissions (Google calls this scope)
-  @perms = "https://www.googleapis.com/auth/calendar https://www.google.com/m8/feeds/ https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/userinfo.profile"
+  @perms = "https://www.googleapis.com/auth/calendar https://www.google.com/m8/feeds https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/userinfo.profile"
   @service_name = "Google"
   
   def self.getOAuthTokenRequestURL()
@@ -33,7 +33,7 @@ class GoogleProvider < Provider
       access_token = responseJson["access_token"]
       expires_in = responseJson["expires_in"]
       refresh_token = responseJson["refresh_token"]
-      return {:access_token => access_token, :expires_in => expires_in, :provider => @service_name, :refresh_token => ""}
+      return {:access_token => access_token, :expires_in => expires_in, :provider => @service_name, :refresh_token => refresh_token}
   end
 
 end
