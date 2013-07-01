@@ -4,6 +4,8 @@ DrinkChewGuru::Application.routes.draw do
   get "users/profile"
 
   get "login/profile"
+  
+  get "openid/getOpenIdXRD"
 
   #resources :oauth_tokens
   
