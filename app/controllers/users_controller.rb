@@ -4,6 +4,10 @@ class UsersController < ApplicationController
       format.html # login.html.erb
     end
   end
+  
+  def create
+    
+  end
 
   def profile
     respond_to do |format|

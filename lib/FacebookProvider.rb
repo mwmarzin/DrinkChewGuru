@@ -37,20 +37,19 @@ class FacebookProvider < Provider
   end
   
   def self.returnToken(response, state=0)
-    if response.header["Content-Type"] == "application/text"     
+    #if response.header["Content-Type"] == "text/plain; charset=UTF-8"
       responseArray = response.body.split("&")
       tokenParam = responseArray[0].split("=")
       expiresParam = responseArray[1].split("=")
       if(tokenParam[0] == "access_token")
         access_token = tokenParam[1]
         expires_in = tokenParam[2]
-        provider = @service_name
       else
         raise "error thrown"
       end
-    else
-      raise "Wrong type of response"
-    end
-    return {:access_token => access_token, :expires_in => expires_in, :provider => provider, :refresh_token => ""}
+      #else
+      #raise "Wrong type of response"
+      #end
+    return {:access_token => access_token, :expires_in => expires_in, :provider => @service_name, :refresh_token => ""}
   end
 end

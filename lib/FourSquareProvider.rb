@@ -5,20 +5,21 @@ class FourSquareProvider < Provider
   @redirect_uri = "http://drinkchewguru.elasticbeanstalk.com/oauth/FourSquare/callback"
   @service_name = "FourSquare"
   @exchange_url = ""
-
-  @redirect_uri = "http://drinkchewguru.elasticbeanstalk.com/oauth/Facebook/callback"
-  @access_url = "https://www.facebook.com/dialog/oauth/"
-  @exchange_url = "https://graph.facebook.com/oauth/access_token"
-  @perms = "create_event,user_about_me,user_birthday,user_likes,user_events,"
+  
+  @access_url = "https://foursquare.com/oauth2/authenticate"
+  @exchange_url = "https://foursquare.com/oauth2/access_token"
+  @perms = "create_event,user_about_me,user_birthday,user_likes,user_events"
   @state = rand(99999)
-  @service_name = "Facebook"
 
   def self.getOAuthTokenRequestURL()
-    
+    @request = "#{@access_url}?"       +
+      "client_id=#{@client_id}"        +
+      "&redirect_uri=#{@redirect_uri}" +
+      "&response_type=code"
   end
 
   def self.returnToken(responseBody,state=0)
-    #TODO:set this up to return the same hash as facebook, or find a better way of returning data.
+    #TODO set this up to return the same hash as facebook, or find a better way of returning data.
     token = OauthToken.new
     responseArray = responseBody.split("&")
     tokenParam = responseArray[0].split("=")
@@ -30,4 +31,20 @@ class FourSquareProvider < Provider
     end
     return token
   end
+    
+  #TODO need to implement this
+  def self.getOAuthExchangeTokenURL(code)
+    @request = "#{@exchange_url}?" + 
+      "client_id=#{@client_id}" +
+      "&client_secret=#{@client_secret}" +
+      "&grant_type=authorization_code"   +
+      "&redirect_uri=#{@redirect_uri}"   +
+      "&code=#{code}"
+  end
+  
+  #TODO need to implement this
+  def self.getOAuthParamArray(scope = nil)
+    raise "FourSquare Provider Needs This Function!"
+  end
+  
 end
