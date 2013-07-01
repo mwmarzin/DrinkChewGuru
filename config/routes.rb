@@ -4,6 +4,8 @@ DrinkChewGuru::Application.routes.draw do
   get "users/profile"
 
   get "login/profile"
+  
+  get "openid/getOpenIdXRD"
 
   #resources :oauth_tokens
   
@@ -39,7 +41,7 @@ DrinkChewGuru::Application.routes.draw do
   match "oauth", :to=> "oauth_tokens#index"
   match "oauth/:provider", :to=>"oauth_tokens#call"
   match "oauth/:provider/callback", :to => "oauth_tokens#create"
-  match "openid", :to=>"openid#openIdButton"
+  match "openid", :to=>"openid#openIdLogin"
   match "login/create", :to=>"login#create"
   #match "openid/openIdLogin" :to=>"openid#openIdButton"
   
