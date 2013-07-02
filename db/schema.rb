@@ -10,7 +10,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130626034048) do
+ActiveRecord::Schema.define(:version => 20130702002905) do
+
+  create_table "events", :force => true do |t|
+    t.integer  "event_id"
+    t.integer  "loacation_id"
+    t.datetime "date_time"
+    t.integer  "facebook_id"
+    t.integer  "google_id"
+    t.text     "email_invitees"
+    t.text     "facebook_invitees"
+    t.integer  "created_by"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
 
   create_table "oauth_tokens", :force => true do |t|
     t.string   "access_token"

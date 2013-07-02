@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  event_id: 1
+  loacation_id: 1
+  date_time: 2013-07-01 20:29:05
+  facebook_id: 1
+  google_id: 1
+  email_invitees: MyText
+  facebook_invitees: MyText
+  created_by: 1
+
+two:
+  event_id: 1
+  loacation_id: 1
+  date_time: 2013-07-01 20:29:05
+  facebook_id: 1
+  google_id: 1
+  email_invitees: MyText
+  facebook_invitees: MyText
+  created_by: 1

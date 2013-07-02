@@ -1,4 +1,7 @@
 DrinkChewGuru::Application.routes.draw do
+  resources :events
+
+
   get "users/login"
 
   get "users/profile"
