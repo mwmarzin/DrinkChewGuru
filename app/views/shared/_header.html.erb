@@ -1,0 +1,23 @@
+<%= stylesheet_link_tag "head" %>
+<div id="TopHeader">
+	<span id="logo"><h1>Drink.Chew.Guru</h1></span>
+	<div id="linkMenu">
+		<ul>
+<% if session.has_key?(:userid)%>			
+			<li class="menulink"><%= link_to "Profile", "/profile" %></li>
+			<li class="menulink"><%= link_to "Sign Out", "/user/signout" %></li>
+<% else %>
+			<li class="menulink"><%= link_to "Login", "/login"%></li>
+<% end %>
+			<li class="menulink"><%= link_to "Privacy", "/privacy"%></li>
+		</ul>
+	</div>
+</div>
+<% if params.has_key?(:error) %>
+<div id="error">
+	<span>
+		<p class="errorText">
+	</span>
+</div>
+<% end %>
+	

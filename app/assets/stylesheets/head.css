@@ -1,0 +1,56 @@
+body{
+	margin:0px;
+	padding:0px;
+	border:0px;
+}
+#TopHeader{
+	background-color: #f0f0f0;
+	width: 960px;
+	height:80px;
+	display: block;
+	font-size:15;
+    margin-right: auto;
+    margin-left: auto;
+	text-align: center;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+#logo
+{
+	width: 20%;
+	float:left;
+	padding-left:15px;
+	line-height:0;
+	vertical-align:middle;
+}
+#logo>h1{
+	color:#800080;
+	text-align: left;
+	vertical-align:middle;
+	display:inline-block;
+	font-size:28px;
+	line-height:28px;
+}
+#linkMenu
+{
+	padding-right:15px;
+	height:inherit;
+	text-align:right;
+	vertical-align:middle;
+}
+.menulink
+{
+	display:inline-block;
+	vertical-align:middle;
+}
+.menulink:after
+{
+	content: "  | ";
+}
+.menulink:last-child:after {
+  content: "";
+}
+.errorText
+{
+	color:red;
+}
