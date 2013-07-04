@@ -48,3 +48,10 @@ class FourSquareProvider < Provider
   end
   
 end
+def self.search_locations(text, latitude,longitude)
+client.search_locations(:11 = > latitude, longitude, :query => text)
+end
+def self.client
+client ||= Foursquare2::Client.new(:client_id => 'EXE00JNPDHGUAQXEDXMCCKQ0KOCY2RKT0JVGSAIUZC0LDDDB', :client_secret => 'KJX1SGYG1ENHBQ02O2B4AUA1R3OFALH1I2MBTNLOOA54NWWX')
+end
+end
