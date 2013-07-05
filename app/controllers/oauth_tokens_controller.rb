@@ -16,47 +16,46 @@ class OauthTokensController < ApplicationController
     @provider = getProviderClass(params[:provider])
 
     redirect_to(@provider.getOAuthTokenRequestURL())
-    #@responseArray = JSON.parse(@responseJSON.to_s)
-    #respond_to do |format|
-    #  format.html #request.html.erb
-    #end
   end
 
   # POST /oauth_tokens
   # POST /oauth_tokens.json
   def create
+    begin
+      #TODO:need code for validating the state!!!
+      @provider = getProviderClass(params[:provider])
+    
+      @code = params[:code]
+      @state = params[:state]
+    
+      @exchangeURL = @provider.getOAuthExchangeTokenURL(@code)
+      client = HTTPClient.new
+    
+      #TODO there should be a better way to handle this then to hardcode if the provider wants a POST or a GET. Maybe something in the provider classes?
+      if params[:provider] == "Google"
+        @tokenResponse = client.post(@provider.exchange_url, @provider.getOAuthExchangeParams(@code))
+      else
+        @tokenResponse = client.get(@exchangeURL)
+      end
+    
+      @tokenHash = @provider.returnToken(@tokenResponse)
+    
+      #The next couple lines are just to test getting data with the tokens we've just retrieved from the provider
+      if params[:provider] == "Facebook"  
+        headers={"access_token"=>@tokenHash[:access_token]}
+        @response = client.get("https://graph.facebook.com/me/friends?fields=first_name,picture&limit=5",headers)
+      elsif params[:provider] == "Google"
+        headers={"Authorization: Bearer"=>@tokenHash[:access_token]}
+        @response = client.get("https://www.googleapis.com/calendar/v3/users/me/calendarList?minAccessRole=writer",headers)
+      elsif params[:provider] == "FourSquare"
+        #add in some sort of a test call to the FourSquare API
+      end
 
-    #TODO:need code for validating the state!!!
-    @provider = getProviderClass(params[:provider])
-    
-    @code = params[:code]
-    @state = params[:state]
-    
-    @exchangeURL = @provider.getOAuthExchangeTokenURL(@code)
-    client = HTTPClient.new
-    
-    #TODO there should be a better way to handle this then to hardcode if the provider wants a POST or a GET. Maybe something in the provider classes?
-    if params[:provider] == "Google"
-      @tokenResponse = client.post(@provider.exchange_url, @provider.getOAuthExchangeParams(@code))
-    else
-      @tokenResponse = client.get(@exchangeURL)
+      @responseJSON = JSON.parse(@response.body)
+      
+    rescue => e
+          redirect_to(:controller => "oauth_tokens", :action =>"index", :error => "Sorry! We encountered an error getting data from #{params[:provider]}. If thise continues. Please contact an admin.")
     end
-    
-    @tokenHash = @provider.returnToken(@tokenResponse)
-    
-    #The next couple lines are just to test getting data with the tokens we've just retrieved from the provider
-    if params[:provider] == "Facebook"  
-      headers={"access_token"=>@tokenHash[:access_token]}
-      @response = client.get("https://graph.facebook.com/me/friends?fields=first_name,picture&limit=5",headers)
-    elsif params[:provider] == "Google"
-      headers={"Authorization: Bearer"=>@tokenHash[:access_token]}
-      @response = client.get("https://www.googleapis.com/calendar/v3/users/me/calendarList?minAccessRole=writer",headers)
-    elsif params[:provider] == "FourSquare"
-      #add in some sort of a test call to the FourSquare API
-    end
-
-    @responseJSON = JSON.parse(@response.body)
-    
     #TODO:change the 1 to the userid in session
     OauthToken.create({:provider => @tokenHash[:provider], :access_token => @tokenHash[:access_token],
                        :userid => 1, :expires_in =>  @tokenHash[:expires_in], :refresh_token =>  @tokenHash[:refresh_token]})

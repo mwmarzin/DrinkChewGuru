@@ -16,7 +16,7 @@
 <% if params.has_key?(:error) %>
 <div id="error">
 	<span>
-		<p class="errorText">
+		<p class="errorText"><%= params[:error] %></p>
 	</span>
 </div>
 <% end %>
