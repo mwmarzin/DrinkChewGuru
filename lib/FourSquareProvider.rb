@@ -4,7 +4,6 @@ class FourSquareProvider < Provider
   @client_secret = "KJX1SGYG1ENHBQ02O2B4AUA1R3OFALH1I2MBTNLOOA54NWWX"
   @redirect_uri = "http://drinkchewguru.elasticbeanstalk.com/oauth/FourSquare/callback"
   @service_name = "FourSquare"
-  @exchange_url = ""
   @access_url = "https://foursquare.com/oauth2/authenticate"
   @exchange_url = "https://foursquare.com/oauth2/access_token"
   @perms = "create_event,user_about_me,user_birthday,user_likes,user_events"
@@ -19,14 +18,14 @@ class FourSquareProvider < Provider
 
   def self.returnToken(response, state=0)
     responseJson =  JSON.parse(response.body)
-    if responseJson.has_key?(:access_token)
+    #if responseJson.has_key?(:access_token)
       access_token = responseJson[:access_token]
       access_token = ""
       expires_in = ""
       refresh_token = ""
-    else
-      raise "Error returned from FourSquare"
-    end
+      #else
+      #raise "Error returned from FourSquare"
+      #end
     return {:access_token => access_token, :expires_in => expires_in, :provider => @service_name, :refresh_token => refresh_token}
   end
     
