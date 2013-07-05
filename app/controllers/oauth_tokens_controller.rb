@@ -65,7 +65,7 @@ class OauthTokensController < ApplicationController
       #  redirect_to(:controller => "oauth_tokens", :action =>"index", :error => "Sorry! We encountered an error getting data from #{params[:provider]}. If thise continues. Please contact an admin.")
       #  logger.info 'ERROR on create in oauth tokens'
       #  logger.info e.message
-      end
+      #end
     end
 
     def getProviderClass(providerName)
