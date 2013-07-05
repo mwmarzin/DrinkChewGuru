@@ -47,8 +47,7 @@ class OauthTokensController < ApplicationController
         headers={"Authorization: Bearer"=>@tokenHash[:access_token]}
         @response = client.get("https://www.googleapis.com/calendar/v3/users/me/calendarList?minAccessRole=writer",headers)
       elsif params[:provider] == "FourSquare"
-        headers={"oauth_token"=>@tokenHash[:access_token]}
-        @response = client.get("https://api.foursquare.com/v2/users/self/todos?sort=recent",headers)
+        @response = client.get("https://api.foursquare.com/v2/lists/self/tips?oauth_token=#{@tokenHash[:access_token]}")
       end
 
       @responseJSON = JSON.parse(@response.body)
