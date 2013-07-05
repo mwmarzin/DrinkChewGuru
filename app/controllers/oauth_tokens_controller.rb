@@ -40,14 +40,18 @@ class OauthTokensController < ApplicationController
       @tokenHash = @provider.returnToken(@tokenResponse)
     
       #The next couple lines are just to test getting data with the tokens we've just retrieved from the provider
+      @requestURL = ""
       if params[:provider] == "Facebook"  
         headers={"access_token"=>@tokenHash[:access_token]}
-        @response = client.get("https://graph.facebook.com/me/friends?fields=first_name,picture&limit=5",headers)
+        @requestURL = "https://graph.facebook.com/me/friends?fields=first_name,picture&limit=5"
+        @response = client.get(@requestURL,headers)
       elsif params[:provider] == "Google"
         headers={"Authorization: Bearer"=>@tokenHash[:access_token]}
-        @response = client.get("https://www.googleapis.com/calendar/v3/users/me/calendarList?minAccessRole=writer",headers)
+        @requestURL = "https://www.googleapis.com/calendar/v3/users/me/calendarList?minAccessRole=writer"
+        @response = client.get(@requestURL,headers)
       elsif params[:provider] == "FourSquare"
-        @response = client.get("https://api.foursquare.com/v2/lists/self/tips?oauth_token=#{@tokenHash[:access_token]}")
+        @requestURL = "https://api.foursquare.com/v2/lists/self/todos?oauth_token=#{@tokenHash[:access_token]}"
+        @response = client.get(@requestURL)
       end
 
       @responseJSON = JSON.parse(@response.body)
