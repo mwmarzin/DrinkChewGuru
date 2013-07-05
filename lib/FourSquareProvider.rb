@@ -18,17 +18,16 @@ class FourSquareProvider < Provider
   end
 
   def self.returnToken(responseBody,state=0)
-    #TODO set this up to return the same hash as facebook, or find a better way of returning data.
-    token = OauthToken.new
-    responseArray = responseBody.split("&")
-    tokenParam = responseArray[0].split("=")
-    token = false
-    if(tokenParam[0] == "access_token")
-      token.access_token = tokenParam[1]
+    responseJson =  JSON.parse(response.body)
+    if responseJson.has_key?(:access_token)
+      access_token = responseJson[:access_token]
+      access_token = ""
+      expires_in = ""
+      refresh_token = ""
     else
-      token = false
+      raise "Error returned from FourSquare"
     end
-    return token
+    return {:access_token => access_token, :expires_in => expires_in, :provider => @service_name, :refresh_token => refresh_token}
   end
     
   #TODO need to implement this

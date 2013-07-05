@@ -3,14 +3,14 @@
 <% if params[:provider] == "Facebook" %>
 <table>
 	<tr>
-<% @responseJSON["data"].each do |person| %>
+		<% @responseJSON["data"].each do |person| %>
 		<td><%= image_tag person["picture"]["data"]["url"], :alt => person["first_name"] %></td> 
-<% end %>
+		<% end %>
 	</tr>
 	<tr>
-<% @responseJSON["data"].each do |person| %>
+		<% @responseJSON["data"].each do |person| %>
 		<td><%= person["first_name"] %></td> 
-<% end %>
+		<% end %>
 	</tr>
 </table>
 <% elsif params[:provider] == "Google" %>
@@ -18,7 +18,11 @@
 	
 </ul>
 <% elsif params[:provider] == "FourSquare" %>
-
+<ul>
+	<% @responseJSON["response"]["todos"].each do |todo| %>
+	
+	<% end %>
+</ul>
 <% end %>
 
 <table>
