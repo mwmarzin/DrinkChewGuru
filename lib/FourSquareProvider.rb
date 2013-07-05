@@ -6,7 +6,7 @@ class FourSquareProvider < Provider
   @service_name = "FourSquare"
   @access_url = "https://foursquare.com/oauth2/authenticate"
   @exchange_url = "https://foursquare.com/oauth2/access_token"
-  @perms = "create_event,user_about_me,user_birthday,user_likes,user_events"
+  @perms = ""
   @state = rand(99999)
 
   def self.getOAuthTokenRequestURL()
@@ -18,14 +18,13 @@ class FourSquareProvider < Provider
 
   def self.returnToken(response, state=0)
     responseJson =  JSON.parse(response.body)
-    #if responseJson.has_key?(:access_token)
+    if responseJson.has_key?(:access_token)
       access_token = responseJson[:access_token]
-      access_token = ""
       expires_in = ""
       refresh_token = ""
-      #else
-      #raise "Error returned from FourSquare"
-      #end
+    else
+      raise "Error returned from FourSquare"
+    end
     return {:access_token => access_token, :expires_in => expires_in, :provider => @service_name, :refresh_token => refresh_token}
   end
     
