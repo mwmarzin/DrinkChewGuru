@@ -53,12 +53,13 @@ class OauthTokensController < ApplicationController
 
       @responseJSON = JSON.parse(@response.body)
       
-    rescue => e
-          redirect_to(:controller => "oauth_tokens", :action =>"index", :error => "Sorry! We encountered an error getting data from #{params[:provider]}. If thise continues. Please contact an admin.")
-    end
-    #TODO:change the 1 to the userid in session
-    OauthToken.create({:provider => @tokenHash[:provider], :access_token => @tokenHash[:access_token],
-                       :userid => 1, :expires_in =>  @tokenHash[:expires_in], :refresh_token =>  @tokenHash[:refresh_token]})
+      #TODO:change the 1 to the userid in session
+      OauthToken.create({:provider => @tokenHash[:provider], :access_token => @tokenHash[:access_token],
+        :userid => 1, :expires_in =>  @tokenHash[:expires_in], :refresh_token =>  @tokenHash[:refresh_token]})
+    
+      rescue => e
+        redirect_to(:controller => "oauth_tokens", :action =>"index", :error => "Sorry! We encountered an error getting data from #{params[:provider]}. If thise continues. Please contact an admin.")
+      end
     
     respond_to do |format|
       format.html # create.html.erb
