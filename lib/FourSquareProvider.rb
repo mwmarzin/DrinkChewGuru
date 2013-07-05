@@ -19,7 +19,7 @@ class FourSquareProvider < Provider
   def self.returnToken(response, state=0)
     responseJson =  JSON.parse(response.body)
     #if responseJson.has_key?(:access_token)
-      access_token = responseJson[:access_token]
+      access_token = responseJson["access_token"]
       expires_in = ""
       refresh_token = ""
       #else
