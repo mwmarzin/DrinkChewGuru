@@ -17,16 +17,16 @@ class FourSquareProvider < Provider
       "&response_type=code"
   end
 
-  def self.returnToken(responseBody,state=0)
+  def self.returnToken(response, state=0)
     responseJson =  JSON.parse(response.body)
-    #if responseJson.has_key?(:access_token)
+    if responseJson.has_key?(:access_token)
       access_token = responseJson[:access_token]
       access_token = ""
       expires_in = ""
       refresh_token = ""
-      #else
-      #raise "Error returned from FourSquare"
-      #end
+    else
+      raise "Error returned from FourSquare"
+    end
     return {:access_token => access_token, :expires_in => expires_in, :provider => @service_name, :refresh_token => refresh_token}
   end
     
