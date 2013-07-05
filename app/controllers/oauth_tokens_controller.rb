@@ -19,7 +19,6 @@ class OauthTokensController < ApplicationController
   end
 
   # POST /oauth_tokens
-  # POST /oauth_tokens.json
   def create
     begin
       #TODO:need code for validating the state!!!
@@ -57,27 +56,27 @@ class OauthTokensController < ApplicationController
       OauthToken.create({:provider => @tokenHash[:provider], :access_token => @tokenHash[:access_token],
         :userid => 1, :expires_in =>  @tokenHash[:expires_in], :refresh_token =>  @tokenHash[:refresh_token]})
     
+      respond_to do |format|
+        format.html # create.html.erb
+      end
+        
       rescue => e
         redirect_to(:controller => "oauth_tokens", :action =>"index", :error => "Sorry! We encountered an error getting data from #{params[:provider]}. If thise continues. Please contact an admin.")
       end
-    
-    respond_to do |format|
-      format.html # create.html.erb
     end
-  end
 
-  def getProviderClass(providerName)
-    if providerName == "Facebook"
-      provider = FacebookProvider
-    elsif providerName == "Google"
-      provider = GoogleProvider
-    elsif providerName == "FourSquare"
-      provider = FourSquareProvider
-    else
-      raise "WHOA! I don't know who this is!"
-    end
+    def getProviderClass(providerName)
+      if providerName == "Facebook"
+        provider = FacebookProvider
+      elsif providerName == "Google"
+        provider = GoogleProvider
+      elsif providerName == "FourSquare"
+        provider = FourSquareProvider
+      else
+        raise "WHOA! I don't know who this is!"
+      end
     
-    return provider
-  end
+      return provider
+    end
 
-end
+  end
