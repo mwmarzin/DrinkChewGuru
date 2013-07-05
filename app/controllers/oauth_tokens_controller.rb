@@ -20,7 +20,7 @@ class OauthTokensController < ApplicationController
 
   # POST /oauth_tokens
   def create
-    begin
+    #begin
       #TODO:need code for validating the state!!!
       @provider = getProviderClass(params[:provider])
     
@@ -64,11 +64,11 @@ class OauthTokensController < ApplicationController
         format.html # create.html.erb
       end
         
-      rescue => e
-        redirect_to(:controller => "oauth_tokens", :action =>"index", :error => "Sorry! We encountered an error getting data from #{params[:provider]}. If thise continues. Please contact an admin.")
-        logger.info 'ERROR on create in oauth tokens'
-        logger.info e.message
-      end
+      #rescue => e
+        #redirect_to(:controller => "oauth_tokens", :action =>"index", :error => "Sorry! We encountered an error getting data from #{params[:provider]}. If thise continues. Please contact an admin.")
+        #logger.info 'ERROR on create in oauth tokens'
+        #logger.info e.message
+        #end
     end
 
     def getProviderClass(providerName)
