@@ -20,7 +20,7 @@
 <% elsif params[:provider] == "FourSquare" %>
 <table>
 	<tr>
-		<% @responseJSON["response"]["todos"]["items"].each do |item| %>
+		<% @responseJSON["response"]["list"]["listItems"]["items"].each do |item| %>
 		<td><%= item["venue"]["name"] %></td>
 		<% end %>
 	</tr>
