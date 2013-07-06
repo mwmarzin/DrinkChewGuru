@@ -18,9 +18,13 @@
 	
 </ul>
 <% elsif params[:provider] == "FourSquare" %>
-<ul>
-
-</ul>
+<table>
+	<tr>
+		<% @responseJSON["response"]["todos"]["items"].each do |item| %>
+		<td><%= item["venue"]["name"] %></td>
+		<% end %>
+	</tr>
+</table>
 <% end %>
 
 <table>
