@@ -3,6 +3,11 @@
 	<h3>Connect your profile to other services</h3>
 
 	<table>
+		<% if @tokensHash[FacebookProvider.service_name] %>
+		<tr>
+			<td>Great!!! We can access your Facebook Profile</td>
+		</tr>
+		<% else %>
 		<tr>
 			<td><%= link_to "Click here to connect your profile to Facebook", "/oauth/Facebook" %></td>
 		</tr>
@@ -14,6 +19,13 @@
 				</ul>
 			</td>
 		</tr>
+		<% end %>
+		
+		<% if @tokensHash[GoogleProvider.service_name] %>
+		<tr>
+			<td>Great!!! We can access your Google Profile.</td>
+		</tr>
+		<% else %>
 		<tr>
 			<td><%= link_to "Click here to connect your profile to Google", "/oauth/Google" %></td>
 		</tr>
@@ -25,6 +37,14 @@
 				</ul>
 			</td>
 		</tr>
+		<% end %>
+		
+		
+		<% if @tokensHash[FourSquareProvider.service_name] %>
+		<tr>
+			<td>Great!!! We can access your FourSquare Profile.</td>
+		</tr>
+		<% else %>
 		<tr>
 			<td><%= link_to "Click here to connect your profile to FourSquare", "/oauth/FourSquare" %></td>
 		</tr>
@@ -36,5 +56,6 @@
 				</ul>
 			</td>
 		</tr>
+		<% end %>
 	</table>
 </div>

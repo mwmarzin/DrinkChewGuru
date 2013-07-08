@@ -51,8 +51,13 @@ body{
 .menulink:last-child:after {
   content: "";
 }
-.errorText
+#flash_alert
 {
 	color:red;
+	text-align:center;
+}
+#flash_notice
+{
+	color:green;
 	text-align:center;
 }

@@ -10,10 +10,10 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130702002905) do
+ActiveRecord::Schema.define(:version => 20130707182150) do
 
   create_table "events", :force => true do |t|
-    t.integer  "event_id"
+    t.integer  "user_id"
     t.integer  "loacation_id"
     t.datetime "date_time"
     t.integer  "facebook_id"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(:version => 20130702002905) do
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
     t.string   "provider"
-    t.integer  "userid"
+    t.integer  "user_id"
     t.integer  "expires_in"
   end
 

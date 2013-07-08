@@ -1,6 +1,7 @@
 DrinkChewGuru::Application.routes.draw do
   resources :events
-
+  resources :oauth_tokens
+  resources :users
 
   get "users/login"
 
@@ -9,8 +10,6 @@ DrinkChewGuru::Application.routes.draw do
   get "login/profile"
   
   get "openid/getOpenIdXRD"
-
-  #resources :oauth_tokens
   
 
   # The priority is based upon order of creation:
@@ -38,9 +37,10 @@ DrinkChewGuru::Application.routes.draw do
   #       get 'sold'
   #     end
   #   end
-  
+  match "signout", :to => "users#signout"
   match "privacy", :to => "privacy#policy"
-  match "user", :to=> "users#index"
+  match "user", :to=> "users#profile"
+  match "login", :to=>"users#login"
   match "oauth", :to=> "oauth_tokens#index"
   match "oauth/:provider", :to=>"oauth_tokens#call"
   match "oauth/:provider/callback", :to => "oauth_tokens#create"

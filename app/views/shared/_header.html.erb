@@ -4,8 +4,8 @@
 	<div id="linkMenu">
 		<ul>
 <% if session.has_key?(:userid)%>			
-			<li class="menulink"><%= link_to "Profile", "/profile" %></li>
-			<li class="menulink"><%= link_to "Sign Out", "/user/signout" %></li>
+			<li class="menulink"><%= link_to "Profile", "/users/profile" %></li>
+			<li class="menulink"><%= link_to "Sign Out", "/signout" %></li>
 <% else %>
 			<li class="menulink"><%= link_to "Login", "/login"%></li>
 <% end %>
@@ -20,4 +20,10 @@
 	</span>
 </div>
 <% end %>
+
+<div class="notices">
+	<% flash.each do |name, msg| %>
+	  <%= content_tag :div, msg, :id => "flash_#{name}" %>
+	<% end %>
+</div>
 	

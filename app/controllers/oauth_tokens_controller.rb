@@ -7,8 +7,15 @@ require 'json'
 class OauthTokensController < ApplicationController
 
   def index
-    respond_to do |format|
-      format.html # index.html.erb
+    if(session[:userid])
+      @user = User.find(session[:userid])
+      #TODO need to add something to validate if tokens are still valid and refresh the token if needed.
+      @tokensHash = @user.oauth_tokens.index_by(&:provider)
+      respond_to do |format|
+        format.html # index.html.erb
+      end
+    else
+      redirect_to "/login", :alert => "Please sign in."
     end
   end
 
@@ -20,7 +27,7 @@ class OauthTokensController < ApplicationController
 
   # POST /oauth_tokens
   def create
-    #begin
+    begin
       #TODO:need code for validating the state!!!
       @provider = getProviderClass(params[:provider])
     
@@ -64,11 +71,11 @@ class OauthTokensController < ApplicationController
         format.html # create.html.erb
       end
         
-      #rescue => e
-        #redirect_to(:controller => "oauth_tokens", :action =>"index", :error => "Sorry! We encountered an error getting data from #{params[:provider]}. If thise continues. Please contact an admin.")
-        #logger.info 'ERROR on create in oauth tokens'
-        #logger.info e.message
-        #end
+      rescue => e
+        redirect_to(:controller => "oauth_tokens", :action =>"index", :alert => "Sorry! We encountered an error getting data from #{params[:provider]}. If thise continues. Please contact an admin.")
+        logger.info 'ERROR on create in oauth tokens'
+        logger.info e.message
+      end
     end
 
     def getProviderClass(providerName)
