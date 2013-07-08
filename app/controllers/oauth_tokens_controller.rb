@@ -29,6 +29,7 @@ class OauthTokensController < ApplicationController
   def create
     #begin
       #TODO:need code for validating the state!!!
+      @user = User.find(session[:userid])
       @provider = getProviderClass(params[:provider])
     
       @code = params[:code]
@@ -63,9 +64,14 @@ class OauthTokensController < ApplicationController
 
       @responseJSON = JSON.parse(@response.body)
       
-      OauthToken.create({:provider => @tokenHash[:provider], :access_token => @tokenHash[:access_token],
-        :userid => session[:userid], :expires_in =>  @tokenHash[:expires_in], :refresh_token =>  @tokenHash[:refresh_token]})
+      @token = @user.oauth_tokens.build({:provider => @tokenHash[:provider], :access_token => @tokenHash[:access_token],
+                                         :expires_in =>  @tokenHash[:expires_in], :refresh_token =>  @tokenHash[:refresh_token]})
     
+      if @token.save
+        flash[:notice] = "Successfully linked profile to #{params[:provider]}."
+      else
+        flash[:alert] = "Encountered a problem saving your token for #{params[:provider]} to our database. Seek help!"
+      end
       respond_to do |format|
         format.html # create.html.erb
       end
