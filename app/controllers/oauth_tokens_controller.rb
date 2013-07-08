@@ -27,7 +27,7 @@ class OauthTokensController < ApplicationController
 
   # POST /oauth_tokens
   def create
-    begin
+    #begin
       #TODO:need code for validating the state!!!
       @provider = getProviderClass(params[:provider])
     
@@ -63,19 +63,18 @@ class OauthTokensController < ApplicationController
 
       @responseJSON = JSON.parse(@response.body)
       
-      #TODO:change the 1 to the userid in session
       OauthToken.create({:provider => @tokenHash[:provider], :access_token => @tokenHash[:access_token],
-        :userid => 1, :expires_in =>  @tokenHash[:expires_in], :refresh_token =>  @tokenHash[:refresh_token]})
+        :userid => session[:userid], :expires_in =>  @tokenHash[:expires_in], :refresh_token =>  @tokenHash[:refresh_token]})
     
       respond_to do |format|
         format.html # create.html.erb
       end
         
-      rescue => e
-        redirect_to(:controller => "oauth_tokens", :action =>"index", :alert => "Sorry! We encountered an error getting data from #{params[:provider]}. If thise continues. Please contact an admin.")
-        logger.info 'ERROR on create in oauth tokens'
-        logger.info e.message
-      end
+      #rescue => e
+      #  redirect_to(:controller => "oauth_tokens", :action =>"index", {:alert => "Sorry! We encountered an error getting data from #{params[:provider]}. If thise continues. Please contact an admin."})
+      #  logger.info 'ERROR on create in oauth tokens'
+      #  logger.info e.message
+      #end
     end
 
     def getProviderClass(providerName)
