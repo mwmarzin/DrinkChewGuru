@@ -77,9 +77,8 @@ class OauthTokensController < ApplicationController
       end
         
     rescue => e
-   #   redirect_to(:controller => "oauth_tokens", :action =>"index", 
-	#			{:alert => "Sorry! We encountered an error getting data from #{params[:provider]}. If this continues. Please contact an admin."
-	#			})
+      flash[:alert] = "Sorry! We encountered an error getting data from #{params[:provider]}. If this continues. Please contact an admin."
+      redirect_to(:controller => "oauth_tokens", :action =>"index")
       logger.info 'ERROR on create in oauth tokens'
       logger.info e.message
     end
