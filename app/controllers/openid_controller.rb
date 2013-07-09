@@ -48,8 +48,18 @@ def getOpenIdXRD
 &openid.identity=http://specs.openid.net/auth/2.0/identifier_select
 &openid.return_to=http://drinkchewguru.elasticbeanstalk.com/oauth
 &openid.realm=http://drinkchewguru.elasticbeanstalk.com/oauth
-&openid.assoc_handle=ABSmpf6DNMw
+&openid.ns.pape=http://specs.openid.net/extensions/pape/1.0
+&openid.ns.ui=http://specs.openid.net/extensions/ui/1.0
+&openid.ns.ax=http://openid.net/srv/ax/1.0
+&openid.ax.mode=fetch_request
+&openid.ax.required=email,firstname,lastname
+&openid.ax.type.email=http://axschema.org/contact/email
+&openid.ax.type.firstname=http://axschema.org/namePerson/first
+&openid.ax.type.lastname=http://axschema.org/namePerson/last
+&openid.ns.max_auth_age=120
 &openid.mode=checkid_setup
+&openid.ui.icon=true
+&openid.assoc_handle=ABSmpf6DNMw
 &openid.ui.mode=popup"
 		authURL = xrdurl.to_s()+parameters.to_s()
    end
