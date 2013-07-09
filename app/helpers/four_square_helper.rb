@@ -1,0 +1,2 @@
+module FourSquareHelper
+end

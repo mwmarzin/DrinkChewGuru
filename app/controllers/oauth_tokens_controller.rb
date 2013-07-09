@@ -59,8 +59,8 @@ class OauthTokensController < ApplicationController
         @response = client.get(@requestURL,headers)
       elsif params[:provider] == "FourSquare"
         @requestURL = "https://api.foursquare.com/v2/lists/self/todos?oauth_token=#{@tokenHash[:access_token]}"
-       @requestURL1=  "https://api.foursquare.com/v2/venues/search?oauth_token=#{@tokenHash[:access_token]}"
-          @response1= client.get(@requestURL1)
+        #  @requestURL1=  "https://api.foursquare.com/v2/venues/search?oauth_token=#{@tokenHash[:access_token]}"
+         # @response1= client.get(@requestURL1)
            
         @response = client.get(@requestURL)
       end

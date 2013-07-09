@@ -1,4 +1,10 @@
 DrinkChewGuru::Application.routes.draw do
+  get "four_square/venue_search"
+
+  get "four_square/check_in"
+
+  get "four_square/post_rview"
+
   resources :events
   resources :oauth_tokens
   resources :users
