@@ -1,6 +1,11 @@
-class EventsController < ApplicationController
-  # GET /events
-  # GET /events.json
+class EventsController < ApplicationController  
+  before_filter
+  #TODO clean up this file with functions we don't need
+  
+  
+  
+  
+  
   def index
     @events = Event.all
 

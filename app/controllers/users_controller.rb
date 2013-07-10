@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_filter :checklogin, :only =>[:profile]
+
   def login
     @user = User.new
     respond_to do |format|
@@ -26,8 +28,6 @@ class UsersController < ApplicationController
   end
 
   def profile
-    respond_to do |format|
-      format.html # profile.html.erb
-    end
+    
   end
 end

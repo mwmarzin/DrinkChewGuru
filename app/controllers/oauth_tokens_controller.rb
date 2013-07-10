@@ -5,17 +5,24 @@ require 'FourSquareProvider'
 require 'httpclient'
 require 'json'
 class OauthTokensController < ApplicationController
-
+  before_filter :checklogin, :only => [:index, :create]
+  
   def index
-    if(session[:userid])
-      @user = User.find(session[:userid])
-      #TODO need to add something to validate if tokens are still valid and refresh the token if needed.
-      @tokensHash = @user.oauth_tokens.index_by(&:provider)
-      respond_to do |format|
-        format.html # index.html.erb
-      end
-    else
-      redirect_to "/login", :alert => "Please sign in."
+    @user = User.find(session[:userid])
+    
+    #TODO need to add something to validate if tokens are still valid and refresh the token if needed.
+    @tokensHash = @user.oauth_tokens.index_by(&:provider)
+    
+    @userHasAllTokens = false
+    #check to see that the user has tokens for all the Providers
+    if ( @tokensHash[FourSquareProvider.service_name] &&
+         @tokensHash[GoogleProvider.service_name]     &&
+         @tokensHash[FacebookProvider.service_name] )
+      @userHasAllTokens = true
+    end
+    
+    respond_to do |format|
+      format.html # index.html.erb
     end
   end
 

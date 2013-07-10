@@ -43,17 +43,25 @@ DrinkChewGuru::Application.routes.draw do
   #       get 'sold'
   #     end
   #   end
-  match "signout", :to => "users#signout"
+
   match "privacy", :to => "privacy#policy"
-  match "user", :to=> "users#profile"
+  #users routes
+  match "profile", :to=> "users#profile"
   match "login", :to=>"users#login"
+  match "user/create", :to=>"users#create"
+  match "signout", :to => "users#signout"
+  #oauth routes
   match "oauth", :to=> "oauth_tokens#index"
   match "oauth/:provider", :to=>"oauth_tokens#call"
   match "oauth/:provider/callback", :to => "oauth_tokens#create"
+  #openid routes
   match "openid", :to=>"openid#openIdButton"
   match "openid/getOpenIdXRD", :to=>"openid#getOpenIdXRD"
-  match "login/create", :to=>"login#create"
-  #match "openid/openIdLogin" :to=>"openid#openIdButton"
+    #match "openid/openIdLogin" :to=>"openid#openIdButton"
+  #venue routes
+  match "venues/search", :to=>"venues#search"
+  match "venues/search/results",:to=>"venues#results"
+  match "venue/:id",:to=>"venues#display"
   
   #map.connect '/openid', :controller=>'openid', :action=>'openIdLogin'
   # Sample resource route with sub-resources:

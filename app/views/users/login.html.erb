@@ -1,32 +1,30 @@
-<% content_for :head do%>
-	<%= javascript_include_tag "login" %>
-	<%= stylesheet_link_tag "login" %>
-<% end %>
 <%= render "shared/header" %>
 <div id="page">
-	<h3>This is the login page for Drink.Chew.Guru.</h3>
-<!--	<span id="signinButton">
-		<span
-		class="g-signin"
-		data-callback="signinCallback"
-		data-clientid="307247955504.apps.googleusercontent.com"
-		data-cookiepolicy="single_host_origin"
-		data-requestvisibleactions="http://schemas.google.com/AddActivity"
-		data-scope="https://www.googleapis.com/auth/plus.login">
-	</span>
--->
-	<h3>The following is a form to create a user. Its only to test creating a user until the OpenID stuff is done</h3>
-	<table>
-	<%= form_for @user do |f| %>	
-	<tr><td><%= f.label :email %></td>
-		<td><%= f.text_field :email %></td></tr>
-	<tr><td><%= f.label :first_name %></td>
-		<td><%= f.text_field :first_name %></td>
-		<td><%= f.label :last_name %></td>
-		<td><%= f.text_field :last_name %></td></tr>
-	<tr><td><%= f.label :identity_url, "OpenId URL:" %></td>
-		<td><%= f.text_field :identity_url %></td></tr>
-	<tr><td colspan=4><%= f.submit %></td></tr>
-	<% end %>
-	</table>
+	<div id="content">
+		<h3>This is the login page for Drink.Chew.Guru.</h3>
+	<!--	<span id="signinButton">
+			<span
+			class="g-signin"
+			data-callback="signinCallback"
+			data-clientid="307247955504.apps.googleusercontent.com"
+			data-cookiepolicy="single_host_origin"
+			data-requestvisibleactions="http://schemas.google.com/AddActivity"
+			data-scope="https://www.googleapis.com/auth/plus.login">
+		</span>
+	-->
+		<h3>The following is a form to create a user. Its only to test creating a user until the OpenID stuff is done</h3>
+		<table>
+		<%= form_for @user do |f| %>	
+		<tr><td><%= f.label :email %></td>
+			<td><%= f.text_field :email %></td></tr>
+		<tr><td><%= f.label :first_name %></td>
+			<td><%= f.text_field :first_name %></td>
+			<td><%= f.label :last_name %></td>
+			<td><%= f.text_field :last_name %></td></tr>
+		<tr><td><%= f.label :identity_url, "OpenId URL:" %></td>
+			<td><%= f.text_field :identity_url %></td></tr>
+		<tr><td colspan=4><%= f.submit %></td></tr>
+		<% end %>
+		</table>
+	</div>
 </div>

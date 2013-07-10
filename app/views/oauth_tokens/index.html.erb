@@ -1,61 +1,67 @@
 <%= render "shared/header" %>
 <div id="page">
-	<h3>Connect your profile to other services</h3>
+	<div id="content">
+		<h3>Connect your profile to other services</h3>
 
-	<table>
-		<% if @tokensHash[FacebookProvider.service_name] %>
-		<tr>
-			<td>Great!!! We can access your Facebook Profile</td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to "Click here to connect your profile to Facebook", "/oauth/Facebook" %></td>
-		</tr>
-		<tr>
-			<td>We will need the following permissions:
-				<ul>
-					<li> Create events with your facebook account</li>
-					<li> Access to your friends list to invite them to your events</li>					
-				</ul>
-			</td>
-		</tr>
-		<% end %>
+		<table>
+			<% if @tokensHash[FacebookProvider.service_name] %>
+			<tr>
+				<td>Great!!! We can access your Facebook Profile</td>
+			</tr>
+			<% else %>
+			<tr>
+				<td><%= link_to "Click here to connect your profile to Facebook", "/oauth/Facebook" %></td>
+			</tr>
+			<tr>
+				<td>We will need the following permissions:
+					<ul>
+						<li> Create events with your facebook account</li>
+						<li> Access to your friends list to invite them to your events</li>					
+					</ul>
+				</td>
+			</tr>
+			<% end %>
 		
-		<% if @tokensHash[GoogleProvider.service_name] %>
-		<tr>
-			<td>Great!!! We can access your Google Profile.</td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to "Click here to connect your profile to Google", "/oauth/Google" %></td>
-		</tr>
-		<tr>
-			<td>We will need the following permissions:
-				<ul>
-					<li> Send out calendar appointments</li>
-					<li> Access to your friends list</li>					
-				</ul>
-			</td>
-		</tr>
-		<% end %>
+			<% if @tokensHash[GoogleProvider.service_name] %>
+			<tr>
+				<td>Great!!! We can access your Google Profile.</td>
+			</tr>
+			<% else %>
+			<tr>
+				<td><%= link_to "Click here to connect your profile to Google", "/oauth/Google" %></td>
+			</tr>
+			<tr>
+				<td>We will need the following permissions:
+					<ul>
+						<li> Send out calendar appointments</li>
+						<li> Access to your friends list</li>					
+					</ul>
+				</td>
+			</tr>
+			<% end %>
 		
 		
-		<% if @tokensHash[FourSquareProvider.service_name] %>
-		<tr>
-			<td>Great!!! We can access your FourSquare Profile.</td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to "Click here to connect your profile to FourSquare", "/oauth/FourSquare" %></td>
-		</tr>
-		<tr>
-			<td>We will need the following permissions:
-				<ul>
-					<li> Access to your checkins </li>
-					<li> Access to your friends list </li>					
-				</ul>
-			</td>
-		</tr>
-		<% end %>
-	</table>
+			<% if @tokensHash[FourSquareProvider.service_name] %>
+			<tr>
+				<td>Great!!! We can access your FourSquare Profile.</td>
+			</tr>
+			<% else %>
+			<tr>
+				<td><%= link_to "Click here to connect your profile to FourSquare", "/oauth/FourSquare" %></td>
+			</tr>
+			<tr>
+				<td>We will need the following permissions:
+					<ul>
+						<li> Access to your checkins </li>
+						<li> Access to your friends list </li>					
+					</ul>
+				</td>
+			</tr>
+			<% end %>
+		
+
+			<tr>
+			
+		</table>
+	</div>
 </div>

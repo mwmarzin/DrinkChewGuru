@@ -1,2 +1,21 @@
-<h1>Users#profile</h1>
-<p>Find me in app/views/users/profile.html.erb</p>
+<% content_for :head do%>
+	<%= javascript_include_tag "login" %>
+	<%= stylesheet_link_tag "login" %>
+<% end %>
+<%= render "shared/header" %>
+
+
+<div id="page">
+	<div id="content">
+		<h3> Profile for <%= @user.first_name%> <%=@user.last_name%> </h3>
+		
+		<table>
+			<tr><th>Planned Events</th></tr>
+			<% @user.events.each do |event|%>
+			<tr><td><%= event.date_time%></td></tr>
+			<% end %>
+		</table>
+		
+		<%= link_to "Click here to start creating a new event", "/venues/search" %>
+	</div>
+</div>
