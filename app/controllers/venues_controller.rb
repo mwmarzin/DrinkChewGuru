@@ -5,6 +5,7 @@ class VenuesController < ApplicationController
     #TODO display a page that the user can user to search foursquare for a venue
     #the controller doesn't do much here
     #show redirect to the users page when
+      @city =params[:cityname]
   end
 
   def results
