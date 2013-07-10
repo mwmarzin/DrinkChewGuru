@@ -57,6 +57,7 @@ DrinkChewGuru::Application.routes.draw do
   #openid routes
   match "openid", :to=>"openid#openIdButton"
   match "openid/getOpenIdXRD", :to=>"openid#getOpenIdXRD"
+  match "openid/openIdDetails", :to=>"openid#openIdDetails"
     #match "openid/openIdLogin" :to=>"openid#openIdButton"
   #venue routes
   match "venues/search", :to=>"venues#search"
