@@ -18,6 +18,9 @@ class OpenidController < ApplicationController
 	
 	def openIdDetails
 		@fname = params[:'openid.ext1.value.firstname']
+		@lname = params[:'openid.ext1.value.lastname']
+		@email = params[:'openid.ext1.value.email']
+		@identity_url = params[:'openid.identity']
 	end
 	
 def getOpenIdXRD
