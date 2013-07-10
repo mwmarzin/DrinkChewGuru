@@ -17,7 +17,7 @@ class OpenidController < ApplicationController
 	end
 	
 	def openIdDetails
-		
+		@fname = params[:openid.ext1.value.firstname]
 	end
 	
 def getOpenIdXRD
