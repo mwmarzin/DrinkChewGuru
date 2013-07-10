@@ -18,7 +18,7 @@ class OpenidController < ApplicationController
 	
 def getOpenIdXRD
 		user = params[:user]
-		print user+"\n"
+#		print user+"\n"
 
 		http = HTTPClient.new
 		response1 = http.get "https://www.google.com/accounts/o8/id","Content-Type" => "application/xrds+xml"
