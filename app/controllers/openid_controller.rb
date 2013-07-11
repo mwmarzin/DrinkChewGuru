@@ -82,7 +82,7 @@ def getOpenIdXRD
 &openid.ax.type.email=http://axschema.org/contact/email
 &openid.ax.type.firstname=http://axschema.org/namePerson/first
 &openid.ax.type.lastname=http://axschema.org/namePerson/last
-&openid.ns.max_auth_age=120
+&openid.ns.max_auth_age=2592000 
 &openid.mode=checkid_setup
 &openid.ui.icon=true
 &openid.assoc_handle=ABSmpf6DNMw
