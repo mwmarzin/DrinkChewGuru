@@ -19,6 +19,13 @@ class VenuesController < ApplicationController
   end
 
   def results
+      client = HTTPClient.new
+      version = Time.now.strftime("%Y%m%d")
+      oauth_token = temp_token = "ISH5O3EJNGHGI5O4PRKF5GXADOM3S4K4AUJWVMDWLS35TVOH"
+      
+      @url = "https://api.foursquare.com/v2/venues/search?ll=40.7,-74&oauth_token=#{oauth_token}&v=#{version}"
+      @result_url=   client.get(@url)
+
     #TODO use the information entered in the "search" page to make a query string that can be used to query FourSquare for venues
     #Should use a new method in the FourSquareProvider class to take a parameter and have it make the query string that can then use httpclient to do a get data.
     #display the results in a page
