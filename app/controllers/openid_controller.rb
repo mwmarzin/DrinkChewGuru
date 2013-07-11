@@ -21,6 +21,7 @@ class OpenidController < ApplicationController
 		@lname = params[:'openid.ext1.value.lastname']
 		@email = params[:'openid.ext1.value.email']
 		@identity_url = params[:'openid.identity']
+		@user = User.create(first_name: "abcd", last_name: "last", email:"abcd@g.com",identity_url:"Indentity_URL")
 	end
 	
 def getOpenIdXRD
