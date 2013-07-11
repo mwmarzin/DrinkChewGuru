@@ -12,6 +12,7 @@
 			data-scope="https://www.googleapis.com/auth/plus.login">
 		</span>
 	-->
+	<!--
 		<h3>The following is a form to create a user. Its only to test creating a user until the OpenID stuff is done</h3>
 		<table>
 		<%= form_for @user do |f| %>	
@@ -27,8 +28,9 @@
 		<% end %>
 		</table>
 	</div>
+	-->
 	<div>
-		<h3>Login with Google</h3>
+		<h3>Please login with Google Credentials. You will be prompted to login to google.</h3>
 		<form name="input" action="openid/getOpenIdXRD" method="get">
 			<input type="submit" value="Login With Google">
 		</form>
