@@ -17,6 +17,10 @@ class OpenidController < ApplicationController
 	end
 	
 	def openIdDetails
+		@mode = params[:'openid.mode']
+		if(@mode == "cancel")
+			render "permissionDeclined"
+		end
 		@fname = params[:'openid.ext1.value.firstname']
 		@lname = params[:'openid.ext1.value.lastname']
 		@email = params[:'openid.ext1.value.email']
@@ -30,6 +34,11 @@ class OpenidController < ApplicationController
 		else
 			@message = "User Already Exists"
 		end
+	end
+	
+	def permissionDeclined
+	
+	
 	end
 	
 def getOpenIdXRD
