@@ -74,8 +74,8 @@ def getOpenIdXRD
 		parameters = "?openid.ns=http://specs.openid.net/auth/2.0
 &openid.claimed_id=http://specs.openid.net/auth/2.0/identifier_select
 &openid.identity=http://specs.openid.net/auth/2.0/identifier_select
-&openid.return_to=http://drinkchewguru.elasticbeanstalk.com/openid/openIdDetails
-&openid.realm=http://drinkchewguru.elasticbeanstalk.com/openid/openIdDetails
+&openid.return_to=http://drinkchewguru.elasticbeanstalk.com/user/create
+&openid.realm=http://drinkchewguru.elasticbeanstalk.com/user/create
 &openid.ns.pape=http://specs.openid.net/extensions/pape/1.0
 &openid.ns.ui=http://specs.openid.net/extensions/ui/1.0
 &openid.ns.ax=http://openid.net/srv/ax/1.0
