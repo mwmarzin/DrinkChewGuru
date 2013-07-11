@@ -21,7 +21,14 @@ class OpenidController < ApplicationController
 		@lname = params[:'openid.ext1.value.lastname']
 		@email = params[:'openid.ext1.value.email']
 		@identity_url = params[:'openid.identity']
-		@user = User.create(first_name: "abcd", last_name: "last", email:"abcd@g.com",identity_url:"Indentity_URL")
+		@findUser = User.findBy(email:@email)
+		@user
+		@message
+		if @findUser.nil?
+			@user = User.create(first_name: @fname, last_name: @lname, email:@email,identity_url:@identity_url)
+			@message = "User Created Successfully"
+		else
+			@message = "User Already Exists"
 	end
 	
 def getOpenIdXRD
