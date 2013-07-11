@@ -21,7 +21,7 @@ class OpenidController < ApplicationController
 		@lname = params[:'openid.ext1.value.lastname']
 		@email = params[:'openid.ext1.value.email']
 		@identity_url = params[:'openid.identity']
-		@findUser = User.find_by(email:@email)
+		@findUser = User.find_by_email(@email)
 		@user
 		@message
 		if @findUser.nil?
