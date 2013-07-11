@@ -36,7 +36,7 @@ class OpenidController < ApplicationController
 		else
 			@message = "User Already Exists"
 		end
-   # session[:userid] = @user.id
+    session[:userid] = @user.id
 	end
 	
 	def permissionDeclined
