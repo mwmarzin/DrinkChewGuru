@@ -30,7 +30,9 @@ class OpenidController < ApplicationController
 		@message
 		if @findUser.nil?
 			@user = User.create(first_name: @fname, last_name: @lname, email:@email,identity_url:@identity_url)
+            if @user.save
 			@message = "User Created Successfully"
+                end
 		else
 			@message = "User Already Exists"
 		end
