@@ -8,14 +8,14 @@ class VenuesController < ApplicationController
     #TODO display a page that the user can user to search foursquare for a venue
     #the controller doesn't do much here
     #show redirect to the users page when
-      @city =params[:cityname]
+      @location=params[:location]
+      @query=params[:query]
       client = HTTPClient.new
         version = Time.now.strftime("%Y%m%d")
       oauth_token = temp_token = "ISH5O3EJNGHGI5O4PRKF5GXADOM3S4K4AUJWVMDWLS35TVOH"
       
-       @url = "https://api.foursquare.com/v2/venues/search?ll=40.7,-74&oauth_token=#{oauth_token}&v=#{version}"
-  @result_url=   client.get(@url)
-
+       @url = "https://api.foursquare.com/v2/venues/search?near=#{@location}&query=\#{@query}&oauth_token=#{oauth_token}&v=#{version}"
+       @response = client.get(@url)
   end
 
   def results

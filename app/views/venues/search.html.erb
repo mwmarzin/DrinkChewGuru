@@ -3,7 +3,8 @@
 	<div id="content">
 		<h1>search a venue</h1>
 		<%=form_tag do %>
-		enter city:<%=search_field_tag 'cityname'%><br/>
+		enter location:<%=search_field_tag 'location'%><br/>
+		enter search:<%=search_field_tag 'query'%><br/>
 		<%=submit_tag 'submit your search'%>
 
 		<%end%>
@@ -11,7 +12,7 @@
 			<%=@city%>
 		</div>
 		<div>
-			<%=@result_url.body%>
+			<%=@response.body%>
 		</div>
 	</div>
 </div>
