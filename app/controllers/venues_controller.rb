@@ -9,6 +9,10 @@ class VenuesController < ApplicationController
     #the controller doesn't do much here
     #show redirect to the users page when
       @city =params[:cityname]
+      oauth_token = temp_token = "ISH5O3EJNGHGI5O4PRKF5GXADOM3S4K4AUJWVMDWLS35TVOH"
+       @url = "https://api.foursquare.com/v2/venues/search?oauth_token=#{oauth_token}&v=#{version}&near=@city"
+  result_url=   client.get(@url)
+
   end
 
   def results
@@ -17,6 +21,8 @@ class VenuesController < ApplicationController
     #display the results in a page
     #should redirect "/venue/:id" where :id is the FourSquare Venue Id
     #we could also include a direct link to create an event here which redirects to /event/new/:id
+      
+      
   end
 
   
