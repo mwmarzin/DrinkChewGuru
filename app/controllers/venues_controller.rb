@@ -9,6 +9,7 @@ class VenuesController < ApplicationController
     #the controller doesn't do much here
     #show redirect to the users page when
       @city =params[:cityname]
+      client = HTTPClient.new
       oauth_token = temp_token = "ISH5O3EJNGHGI5O4PRKF5GXADOM3S4K4AUJWVMDWLS35TVOH"
         version = Time.now.strftime("%Y%m%d")
        @url = "https://api.foursquare.com/v2/venues/search?oauth_token=#{oauth_token}&v=#{version}&near=@city"
