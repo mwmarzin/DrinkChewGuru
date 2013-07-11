@@ -29,6 +29,7 @@ class OpenidController < ApplicationController
 			@message = "User Created Successfully"
 		else
 			@message = "User Already Exists"
+		end
 	end
 	
 def getOpenIdXRD
@@ -78,7 +79,4 @@ def getOpenIdXRD
 &openid.ui.mode=popup"
 		authURL = xrdurl.to_s()+parameters.to_s()
    end
-
-	
-
 end
