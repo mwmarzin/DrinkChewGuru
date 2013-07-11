@@ -82,9 +82,7 @@ class OauthTokensController < ApplicationController
       else
         flash[:alert] = "Encountered a problem saving your token for #{params[:provider]} to our database. Seek help!"
       end
-      respond_to do |format|
-        format.html # create.html.erb
-      end
+      redirect_to "/oauth"
         
     rescue => e
       flash[:alert] = "Sorry! We encountered an error getting data from #{params[:provider]}. If this continues. Please contact an admin."
