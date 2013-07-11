@@ -8,9 +8,11 @@ Last Name: <%= @lname %> </br>
 Google Email Id: <%= @email %> </br>
 OpenId Url: <%= @identity_url %> </br>
 Message: <%= @message %> </br>
+<% if @user != nil %>
 USER Details: <%= @user %> </br>
-First Name = <%= @user?.first_name %> </br>
-Last Name = <%= @user?.last_name %> </br>
-Email = <%= @user?.email %>
+First Name = <%= @user.first_name %> </br>
+Last Name = <%= @user.last_name %> </br>
+Email = <%= @user.email %>
+<% end %>
 </body>
 </html>
