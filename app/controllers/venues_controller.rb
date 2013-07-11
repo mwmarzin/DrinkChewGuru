@@ -26,7 +26,7 @@ class VenuesController < ApplicationController
     #should have a link to create a new event at this location which redirects to "/event/new/:id"
     if (@tokensHash[FourSquareProvider.service_name])
       foursquare_id = params[:id]
-      @venue = VenuesController.getVenueInformation(foursquare_id, @tokensHash[FourSquareProvider.service_name])
+      @venue = VenuesController.getVenueInformation(foursquare_id, @tokensHash[FourSquareProvider.service_name].access_token)
     else
       flash[:alert] = "We need a token from FourSquare for you to use this page. Please sign in with FourSquare."
       redirect_to("/oauth")
