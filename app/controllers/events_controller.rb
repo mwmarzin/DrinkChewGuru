@@ -2,7 +2,7 @@ class EventsController < ApplicationController
   before_filter
   #TODO clean up this file with functions we don't need
   
-  
+  #It seems like we should keep all of these functions 
   
   
   
