@@ -78,7 +78,7 @@ class VenuesController < ApplicationController
     end 
   end
   
-  def convertJsonToVenue(venueJson = "")
+  def self.convertJsonToVenue(venueJson = "")
     venue = Venue.new
     venue.id = venueJson["id"]
     venue.name = venueJson["name"] 
