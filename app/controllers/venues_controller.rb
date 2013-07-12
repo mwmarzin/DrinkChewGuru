@@ -101,6 +101,7 @@ class VenuesController < ApplicationController
         end
       end
     end
+    return venue
   end
   
 end
