@@ -61,33 +61,37 @@ class VenuesController < ApplicationController
     response = client.get(request_url)
     responseJson = JSON.parse(response.body)
     if (responseJson["meta"]["code"] && (responseJson["meta"]["code"] == 200))
-      venueJson = responseJson["response"]["venue"]
-      venue = Venue.new
-      venue.id = venueJson["id"]
-      venue.name = venueJson["name"] 
-      locationJson = venueJson["location"]
-      venue.location = Location.new
-      venue.location.address = locationJson["address"]
-      venue.location.zip = locationJson["postalCode"]
-      venue.location.city = locationJson["city"]
-      venue.location.state = locationJson["state"]
-      venue.location.country = locationJson["country"]
-      venue.likeCount = venueJson["likes"]["count"]
-      
-      if (venueJson["tips"]["count"] && venueJson["tips"]["count"] > 0)
-        venue.tips = Array.new
-        tipsJson = venueJson["tips"]["groups"]
-        
-        tipsJson.each do |group|
-          group["items"].each do |tip|
-            venue.tips.push(tip["text"])
-          end
-        end
-      end
+       venueJson = responseJson["response"]["venue"]
+      venue = convertJsonToVenue(venueJson)
       return venue
     else
       raise "Error returned from FourSquare API."
     end 
+  end
+  
+  def convertJsonToVenue(venueJson = "")
+    venue = Venue.new
+    venue.id = venueJson["id"]
+    venue.name = venueJson["name"] 
+    locationJson = venueJson["location"]
+    venue.location = Location.new
+    venue.location.address = locationJson["address"]
+    venue.location.zip = locationJson["postalCode"]
+    venue.location.city = locationJson["city"]
+    venue.location.state = locationJson["state"]
+    venue.location.country = locationJson["country"]
+    venue.likeCount = venueJson["likes"]["count"]
+    
+    if (venueJson["tips"]["count"] && venueJson["tips"]["count"] > 0)
+      venue.tips = Array.new
+      tipsJson = venueJson["tips"]["groups"]
+      
+      tipsJson.each do |group|
+        group["items"].each do |tip|
+          venue.tips.push(tip["text"])
+        end
+      end
+    end
   end
   
 end
