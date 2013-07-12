@@ -29,8 +29,8 @@ class UsersController < ApplicationController
 		@email = params[:'openid.ext1.value.email']
 		@identity_url = params[:'openid.identity']
 		@findUser = User.find_by_email(@email)
-		@user
-		@message
+		@user = User.find_by_email(@email)
+#		@message
 		if @findUser.nil?
 			@user = User.create(first_name: @fname, last_name: @lname, email:@email,identity_url:@identity_url)
             if @user.save

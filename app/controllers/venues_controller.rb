@@ -14,8 +14,9 @@ class VenuesController < ApplicationController
         version = Time.now.strftime("%Y%m%d")
       oauth_token = temp_token = "ISH5O3EJNGHGI5O4PRKF5GXADOM3S4K4AUJWVMDWLS35TVOH"
       
-       @url = "https://api.foursquare.com/v2/venues/search?near=#{@location}&query=\#{@query}&oauth_token=#{oauth_token}&v=#{version}"
+       @url = "https://api.foursquare.com/v2/venues/search?near=#{@location}&query=#{@query}&oauth_token=#{oauth_token}&v=#{version}"
        @response = client.get(@url)
+      
   end
 
   def results
