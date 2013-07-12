@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   		@mode = params[:'openid.mode']
 		if(@mode == "cancel")
 			flash[:alert] = "error"
-			redirect_to "/"
+			redirect_to "/oauth"
 		end
 		@fname = params[:'openid.ext1.value.firstname']
 		@lname = params[:'openid.ext1.value.lastname']
