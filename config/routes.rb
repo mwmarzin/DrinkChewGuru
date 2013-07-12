@@ -64,7 +64,7 @@ DrinkChewGuru::Application.routes.draw do
   match "venues/search/results",:to=>"venues#results"
     # match "venues/result",:to=>"venues/result"
   match "venue/:id",:to=>"venues#display"
-  
+  match "events/new/:fsid",:to=>"events#new"
   #map.connect '/openid', :controller=>'openid', :action=>'openIdLogin'
   # Sample resource route with sub-resources:
   #   resources :products do
