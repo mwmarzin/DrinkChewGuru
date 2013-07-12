@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   		@mode = params[:'openid.mode']
 		if(@mode == "cancel")
 			flash[:alert] = "error"
-			redirect_to "/oauth"
+			redirect_to "/"
 		end
 		@fname = params[:'openid.ext1.value.firstname']
 		@lname = params[:'openid.ext1.value.lastname']
@@ -34,12 +34,15 @@ class UsersController < ApplicationController
 		if @findUser.nil?
 			@user = User.create(first_name: @fname, last_name: @lname, email:@email,identity_url:@identity_url)
             if @user.save
-			@message = "User Created Successfully"
-                end
+				flash[:notice] = "User Created Successfully"
+            else
+				flash[:alert] = "There was a problem!"
+		    end
 		else
-			@message = "User Already Exists"
+			flash[:notice] = "Logged in Sueccessfully"
 		end
-    session[:userid] = @user.id
+		session[:userid] = @user.id
+		redirect_to "/oauth"
   end
   def signout
     if session[:userid]
