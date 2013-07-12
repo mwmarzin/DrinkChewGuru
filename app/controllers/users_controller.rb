@@ -7,7 +7,7 @@ class UsersController < ApplicationController
       format.html # login.html.erb
     end
   end
-  
+=begin  
   def create
     @user = User.new(params[:user])
     if @user.save
@@ -17,7 +17,30 @@ class UsersController < ApplicationController
       render "login"
     end
   end
-
+=end
+  def create
+  		@mode = params[:'openid.mode']
+		if(@mode == "cancel")
+			flash[:alert] = "error"
+			redirect_to "/"
+		end
+		@fname = params[:'openid.ext1.value.firstname']
+		@lname = params[:'openid.ext1.value.lastname']
+		@email = params[:'openid.ext1.value.email']
+		@identity_url = params[:'openid.identity']
+		@findUser = User.find_by_email(@email)
+		@user
+		@message
+		if @findUser.nil?
+			@user = User.create(first_name: @fname, last_name: @lname, email:@email,identity_url:@identity_url)
+            if @user.save
+			@message = "User Created Successfully"
+                end
+		else
+			@message = "User Already Exists"
+		end
+    session[:userid] = @user.id
+  end
   def signout
     if session[:userid]
       session[:userid] = nil
