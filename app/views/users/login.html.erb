@@ -1,18 +1,8 @@
-<html>
-<style type="text/css">
-.submit input
-{
-	color: #000;
-    background: #ffa20f;
-    border: 2px outset #d7b9c9
-}
-</style>
-
 <%= render "shared/header" %>
 <div id="page">
 	<div id="content">
-	<!--	<h3>This is the login page for Drink.Chew.Guru.</h3>
-		<span id="signinButton">
+		<h3>This is the login page for Drink.Chew.Guru.</h3>
+	<!--	<span id="signinButton">
 			<span
 			class="g-signin"
 			data-callback="signinCallback"
@@ -41,10 +31,9 @@
 	-->
 	<div>
 		<h3>Please login with Google Credentials. You will be prompted to login to google.</h3> </br> 
-		<form name="input" action="openid/getOpenIdXRD" method="get" class="submit">
+		<form name="input" action="openid/getOpenIdXRD" method="get">
 			<input type="submit" value="Login With Google">
 		</form>
 		</br>
 	</div>
 </div>
-</html>
