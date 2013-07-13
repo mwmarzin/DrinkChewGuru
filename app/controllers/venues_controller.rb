@@ -21,7 +21,7 @@ class VenuesController < ApplicationController
           if (params[:query])
                @url = @url + "&query=#{@query}"
           end
-           @url = @url + = "&oauth_token=#{oauth_token}&v=#{version}"
+           @url = @url + "&oauth_token=#{oauth_token}&v=#{version}"
            @response = client.get(@url)
       end
       
