@@ -32,7 +32,7 @@ class UsersController < ApplicationController
 		@user = User.find_by_email(@email)
 #		@message
 		if @user.nil?
-			@user = User.create(first_name: @fname, last_name: @lname, email:@email,identity_url:@identity_url)
+			@user = User.create(:first_name => @fname, :last_name => @lname, :email => @email, :identity_url => @identity_url)
             if @user.save
 				flash[:notice] = "User Created Successfully"
             else

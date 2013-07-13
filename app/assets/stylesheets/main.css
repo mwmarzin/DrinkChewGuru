@@ -17,6 +17,7 @@ h1, h2, h3{
 	font-size:15;
     margin-right: auto;
     margin-left: auto;
+	margin-top: 15px;
 	text-align: center;
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
@@ -31,6 +32,7 @@ h1, h2, h3{
 #page{
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;
+	margin-bottom: 15px;
 }
 #content{
 	margin-left:10px;
@@ -45,16 +47,16 @@ h1, h2, h3{
 	width: 20%;
 	float:left;
 	padding-left:15px;
+	margin-top:25px;
 	line-height:0;
 	vertical-align:middle;
-}
-#logo>h1{
+	
 	color:#800080;
 	text-align: left;
-	vertical-align:middle;
 	display:inline-block;
-	font-size:28px;
-	line-height:28px;
+	font-size:30px;
+	font-weight:bold;
+	line-height:30px;
 }
 #linkMenu
 {
