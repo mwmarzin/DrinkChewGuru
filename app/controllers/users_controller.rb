@@ -41,8 +41,8 @@ class UsersController < ApplicationController
 		else
 			flash[:notice] = "Logged in Successfully"
 		end
-#		session[:userid] = @user.id
-		session[:userid] = @user.email
+		session[:userid] = @user.id
+#		session[:userid] = @user.email
 		redirect_to "/oauth"
   end
   def signout
