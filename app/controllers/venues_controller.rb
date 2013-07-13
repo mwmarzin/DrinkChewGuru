@@ -40,6 +40,8 @@ class VenuesController < ApplicationController
     #display the results in a page
     #should redirect "/venue/:id" where :id is the FourSquare Venue Id
     #we could also include a direct link to create an event here which redirects to /event/new/:id
+    
+    #TODO we could condense this page into the the same as search by displaying results if they exist
       
       
   end

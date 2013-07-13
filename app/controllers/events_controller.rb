@@ -1,11 +1,9 @@
 class EventsController < ApplicationController  
   before_filter
   #TODO clean up this file with functions we don't need
-  
   #It seems like we should keep all of these functions 
   
-  
-  
+=begin
   def index
     @events = Event.all
 
@@ -14,11 +12,15 @@ class EventsController < ApplicationController
       format.json { render :json => @events }
     end
   end
-
+=end
+  
+  
   # GET /events/1
   # GET /events/1.json
   def show
+    #TODO this should query based the id being equal to the id in the events table on the session[:userid] being equal to the user_id column in the table
     @event = Event.find(params[:id])
+
 
     respond_to do |format|
       format.html # show.html.erb
@@ -29,6 +31,7 @@ class EventsController < ApplicationController
   # GET /events/new
   # GET /events/new.json
   def new
+    #TODO we should be reading in an id parameter for the venue id, we can use the VenueController's class function to get information about the venue and display the _venue_info partial in the app/shared directory to display the . 
     @event = Event.new
 
     respond_to do |format|

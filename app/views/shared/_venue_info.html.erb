@@ -1,0 +1,20 @@
+<h2><%= @venue.name %></h2>
+<table>
+	<tr>
+		<td>Address:</td>
+		<td><%= " #{@venue.location.address}, #{@venue.location.city}, #{@venue.location.zip} #{@venue.location.state}"%></td>
+	</tr>
+	<tr>
+		<td colspan=2>Liked by <%= @venue.likeCount %> people.</td>
+	</tr>
+</table>
+<a href="#" onclick="toggle_visibility('tipsWrapper')">Click here to display Tips</a></br>
+<div id="tipsWrapper" style="display: none">
+	<h3>Tips</h3>
+	<ul id="tipsList">
+	<% @venue.tips.each do |tip|%>
+		<li><%= tip %></li>
+	<% end %>
+	</ul>
+</div>
+<%= link_to "Click here to create an event at this location", "/events/new" %>

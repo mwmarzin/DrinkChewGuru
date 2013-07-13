@@ -7,17 +7,7 @@ class UsersController < ApplicationController
       format.html # login.html.erb
     end
   end
-=begin  
-  def create
-    @user = User.new(params[:user])
-    if @user.save
-      session[:userid] = @user.id
-      redirect_to "/oauth", :notice => "Account Created!"
-    else
-      render "login"
-    end
-  end
-=end
+
   def create
   		@mode = params[:'openid.mode']
 		if(@mode == "cancel")

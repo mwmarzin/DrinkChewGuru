@@ -7,22 +7,6 @@
 
 <div id="page">
 	<div id="content">
-		<h2><%= @venue.name %></h2>
-		<table>
-			<tr>
-				<td>Address:</td>
-				<td><%= " #{@venue.location.address}, #{@venue.location.city}, #{@venue.location.zip} #{@venue.location.state}"%></td>
-			</tr>
-			<tr>
-				<td colspan=2>Liked by <%= @venue.likeCount %> people.</td>
-			</tr>
-		</table>
-		<h3>Tips</h3>
-		<ul>
-		<% @venue.tips.each do |tip|%>
-			<li><%= tip %></li>
-		<% end %>
-		</ul>
-		<%= link_to "Click here to create an event at this location", "/events/new" %>
+		<%= render "shared/venue_info" %>
 	</div>
 </div>
