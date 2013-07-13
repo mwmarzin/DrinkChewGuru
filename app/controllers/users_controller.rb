@@ -39,9 +39,10 @@ class UsersController < ApplicationController
 				flash[:alert] = "There was a problem!"
 		    end
 		else
-			flash[:notice] = "Logged in Sueccessfully"
+			flash[:notice] = "Logged in Successfully"
 		end
-		session[:userid] = @user.id
+#		session[:userid] = @user.id
+		session[:email] = @user.email
 		redirect_to "/oauth"
   end
   def signout
