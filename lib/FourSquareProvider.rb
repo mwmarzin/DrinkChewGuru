@@ -52,15 +52,11 @@ class FourSquareProvider < Provider
     response = client.get(request_url)
     responseJson = JSON.parse(response.body)
         
-    if (responseJson["meta"]["code"] && (responseJson["meta"]["code"] == 200))
-      responseJson["response"]["todos"]["items"].each do |todo|
-        venueJson = todo["tip"]["venue"]
-        todos.push(VenuesController.convertJsonToVenue(venueJson))
-      end
-      return todos
-    else
-      raise "Error returned from FourSquare API."
-    end 
+    responseJson["response"]["todos"]["items"].each do |todo|
+      venueJson = todo["tip"]["venue"]
+      todos.push(VenuesController.convertJsonToVenue(venueJson))
+    end
+    return todos
   end
   
 end
