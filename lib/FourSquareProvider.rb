@@ -38,7 +38,7 @@ class FourSquareProvider < Provider
       "&code=#{code}"
   end
   
-  #TODO need to implement this
+  #TODO need to correctly stub this out.
   def self.getOAuthParamArray(scope = nil)
     raise "FourSquare Provider Needs This Function!"
   end
