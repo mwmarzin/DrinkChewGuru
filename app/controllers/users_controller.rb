@@ -3,8 +3,12 @@ class UsersController < ApplicationController
   before_filter :checklogin, :only =>[:profile]
 
   def login
-    respond_to do |format|
-      format.html # login.html.erb
+    if session[:userid]
+      redirect_to "/profile"
+    else
+      respond_to do |format|
+        format.html # login.html.erb
+      end
     end
   end
 
@@ -45,8 +49,8 @@ class UsersController < ApplicationController
   end
 
   def profile
-    @todos = FourSquareProvider.getUserTodos(@tokensHash[FourSquareProvider.service_name].access_token)
-    
+    #@todos = FourSquareProvider.getUserTodos(@tokensHash[FourSquareProvider.service_name].access_token)
+    @todos = Array.new
   end
   
   
