@@ -19,27 +19,28 @@ class UsersController < ApplicationController
 		if(@mode == "cancel")
 			flash[:alert] = "error"
 			redirect_to "/"
-		end
-		@fname = params[:'openid.ext1.value.firstname']
-		@lname = params[:'openid.ext1.value.lastname']
-		@email = params[:'openid.ext1.value.email']
-		@identity_url = params[:'openid.identity']
-#		@findUser = User.find_by_email(@email)
-		@user = User.find_by_email(@email)
-#		@message
-		if @user.nil?
-			@user = User.create(:first_name => @fname, :last_name => @lname, :email => @email, :identity_url => @identity_url)
-            if @user.save
-				flash[:notice] = "User Created Successfully"
-            else
-				flash[:alert] = "There was a problem!"
-		    end
-		else
-			flash[:notice] = "Logged in Successfully"
-		end
-		session[:userid] = @user.id
-#		session[:userid] = @user.email
-		redirect_to "/oauth"
+    else
+  		@fname = params[:'openid.ext1.value.firstname']
+  		@lname = params[:'openid.ext1.value.lastname']
+  		@email = params[:'openid.ext1.value.email']
+  		@identity_url = params[:'openid.identity']
+  #		@findUser = User.find_by_email(@email)
+  		@user = User.find_by_email(@email)
+  #		@message
+  		if @user.nil?
+  			@user = User.create(:first_name => @fname, :last_name => @lname, :email => @email, :identity_url => @identity_url)
+              if @user.save
+  				flash[:notice] = "User Created Successfully"
+              else
+  				flash[:alert] = "There was a problem!"
+  		    end
+  		else
+  			flash[:notice] = "Logged in Successfully"
+  		end
+  		session[:userid] = @user.id
+  #		session[:userid] = @user.email
+  		redirect_to "/oauth"
+    end
   end
   def signout
     if session[:userid]
