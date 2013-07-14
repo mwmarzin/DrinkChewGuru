@@ -48,13 +48,16 @@ class FourSquareProvider < Provider
     client = HTTPClient.new
     version = Time.now.strftime("%Y%m%d")
     
-    request_url = "https://api.foursquare.com/v2/users/self/todos?sort=recent&#{token}&v=#{version}"
+    request_url = "https://api.foursquare.com/v2/users/self/todos?sort=recent&oauth_token=#{token}&v=#{version}"
     response = client.get(request_url)
     responseJson = JSON.parse(response.body)
-    return response.body
-    responseJson["response"]["todos"]["items"].each do |todo|
-      venueJson = todo["tip"]["venue"]
-      todos.push(VenuesController.convertJsonToVenue(venueJson))
+    if (responseJson["meta"]["code"] && (responseJson["meta"]["code"] == 200))
+      responseJson["response"]["todos"]["items"].each do |todo|
+        venueJson = todo["tip"]["venue"]
+        todos.push(VenuesController.convertJsonToVenue(venueJson))
+      end
+    else
+      raise "Error returned from FourSquare API."
     end
     return todos
   end
