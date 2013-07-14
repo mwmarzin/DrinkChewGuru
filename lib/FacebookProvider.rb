@@ -36,6 +36,15 @@ class FacebookProvider < Provider
     return a
   end
   
+  def self.returnFriendsList(token="")
+    friends = Array.new
+    client = HTTPClient.new
+    headers={"access_token"=>token}
+    @requestURL = "https://graph.facebook.com/me/friends?fields=first_name,picture"
+    @response = client.get(@requestURL,headers)
+    
+  end
+  
   def self.returnToken(response, state=0)
     responseArray = response.body.split("&")
     tokenParam = responseArray[0].split("=")

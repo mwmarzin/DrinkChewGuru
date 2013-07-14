@@ -43,11 +43,24 @@ class FourSquareProvider < Provider
     raise "FourSquare Provider Needs This Function!"
   end
   
+  def self.getUserTodos(token = "")
+    todos = Array.new
+    client = HTTPClient.new
+    version = Time.now.strftime("%Y%m%d")
+    
+    request_url = "https://api.foursquare.com/v2/users/self/todos?sort=recent&#{token}&v=#{version}"
+    response = client.get(request_url)
+    responseJson = JSON.parse(response.body)
+        
+    if (responseJson["meta"]["code"] && (responseJson["meta"]["code"] == 200))
+      responseJson["response"]["todos"]["items"].each do |todo|
+        venueJson = todo["tip"]["venue"]
+        todos.push(VenuesController.convertJsonToVenue(venueJson))
+      end
+      return todos
+    else
+      raise "Error returned from FourSquare API."
+    end 
+  end
+  
 end
-#def self.search_locations(text, latitude,longitude)
-#  client.search_locations(:11 = > latitude, longitude, :query => text)
-#end
-#def self.client
-#  client ||= Foursquare2::Client.new(:client_id => 'EXE00JNPDHGUAQXEDXMCCKQ0KOCY2RKT0JVGSAIUZC0LDDDB', :client_secret => 'KJX1SGYG1ENHBQ02O2B4AUA1R3OFALH1I2MBTNLOOA54NWWX')
-#end
-#end

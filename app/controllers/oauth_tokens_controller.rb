@@ -20,9 +20,13 @@ class OauthTokensController < ApplicationController
          @tokensHash[FacebookProvider.service_name] )
       @userHasAllTokens = true
     end
-    
-    respond_to do |format|
-      format.html # index.html.erb
+    if @userHasAllTokens == true
+      flash[:notice] == "We're all signed in, enjoy using Drink.Chew.Guru!"
+      redirect_to "/profile"
+    else
+      respond_to do |format|
+        format.html # index.html.erb
+      end
     end
   end
 

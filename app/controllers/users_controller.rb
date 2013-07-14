@@ -1,8 +1,8 @@
+require 'FacebookProvider'
 class UsersController < ApplicationController
   before_filter :checklogin, :only =>[:profile]
 
   def login
-    @user = User.new
     respond_to do |format|
       format.html # login.html.erb
     end
@@ -45,6 +45,9 @@ class UsersController < ApplicationController
   end
 
   def profile
+    @todos = FourSquareProvider.getUserTodos(@tokensHash)
     
   end
+  
+  
 end

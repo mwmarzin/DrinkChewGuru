@@ -72,7 +72,7 @@ class VenuesController < ApplicationController
     response = client.get(request_url)
     responseJson = JSON.parse(response.body)
     if (responseJson["meta"]["code"] && (responseJson["meta"]["code"] == 200))
-       venueJson = responseJson["response"]["venue"]
+      venueJson = responseJson["response"]["venue"]
       venue = convertJsonToVenue(venueJson)
       return venue
     else

@@ -1,3 +1,6 @@
+require 'httpclient'
+require 'json'
+
 class Provider
   class << self; attr_accessor :client_id, :client_secret, :redirect_uri, :access_url,
   :exchange_url, :service_name end

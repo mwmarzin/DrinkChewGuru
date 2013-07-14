@@ -1,5 +1,5 @@
 class EventsController < ApplicationController  
-  before_filter
+  before_filter :checklogin
   #TODO clean up this file with functions we don't need
   #It seems like we should keep all of these functions 
   
@@ -32,6 +32,8 @@ class EventsController < ApplicationController
   # GET /events/new.json
   def new
     #TODO we should be reading in an id parameter for the venue id, we can use the VenueController's class function to get information about the venue and display the _venue_info partial in the app/shared directory to display the . 
+    foursquare_id = params[:fs_id]
+    
     @event = Event.new
 
     respond_to do |format|
