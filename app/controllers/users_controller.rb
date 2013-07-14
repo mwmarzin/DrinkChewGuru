@@ -1,4 +1,6 @@
 require 'FacebookProvider'
+require 'FourSquareProvider'
+require 'GoogleProvider'
 class UsersController < ApplicationController
   before_filter :checklogin, :only =>[:profile]
 
