@@ -51,6 +51,7 @@ class FourSquareProvider < Provider
     request_url = "https://api.foursquare.com/v2/users/self/todos?sort=recent&oauth_token=#{token}&v=#{version}"
     response = client.get(request_url)
     responseJson = JSON.parse(response.body)
+    #TODO need more error checking to make sure these imbedded fields exist
     if (responseJson["meta"]["code"] && (responseJson["meta"]["code"] == 200))
       responseJson["response"]["todos"]["items"].each do |todo|
         venueJson = todo["tip"]["venue"]

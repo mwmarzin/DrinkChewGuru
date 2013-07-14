@@ -71,6 +71,7 @@ class VenuesController < ApplicationController
     request_url = "https://api.foursquare.com/v2/venues/#{venue_id}?oauth_token=#{oauth_token}&v=#{version}"
     response = client.get(request_url)
     responseJson = JSON.parse(response.body)
+    #TODO needs more error checking!
     if (responseJson["meta"]["code"] && (responseJson["meta"]["code"] == 200))
       venueJson = responseJson["response"]["venue"]
       venue = convertJsonToVenue(venueJson)
@@ -82,7 +83,7 @@ class VenuesController < ApplicationController
   
   def self.convertJsonToVenue(venueJson = "")
     venue = Venue.new
-    venue.id = venueJson["id"]
+    venue.id = venueJson["id"] 
     venue.name = venueJson["name"] 
     locationJson = venueJson["location"]
     venue.location = Location.new
@@ -91,11 +92,12 @@ class VenuesController < ApplicationController
     venue.location.city = locationJson["city"]
     venue.location.state = locationJson["state"]
     venue.location.country = locationJson["country"]
-    venue.likeCount = venueJson["likes"]["count"]
+    venue.likeCount = venueJson["likes"]["count"] unless venueJson["likes"].nil?
     
-    if (venueJson["tips"]["count"] && venueJson["tips"]["count"] > 0)
+    tipsJson = venueJson["tips"]
+    if (!tipsJson.nil? && tipsJson["count"] && tipsJson["count"] > 0)
       venue.tips = Array.new
-      tipsJson = venueJson["tips"]["groups"]
+      tipsJson = tipsJson["groups"]
       
       tipsJson.each do |group|
         group["items"].each do |tip|
