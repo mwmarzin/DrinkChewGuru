@@ -13,9 +13,7 @@
 		
 		<h4>Todos From FourSquare</h4>
 		<ul>
-		<% @todos.each do |todo| %>
-			<li><%= todo.name%></li>
-		<% end %>
+			<%= todos %>
 		</ul>
 		<%= link_to "Click here to start creating a new event", "/venues/search" %>
 	</div>

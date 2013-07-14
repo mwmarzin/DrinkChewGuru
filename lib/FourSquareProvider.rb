@@ -51,7 +51,7 @@ class FourSquareProvider < Provider
     request_url = "https://api.foursquare.com/v2/users/self/todos?sort=recent&#{token}&v=#{version}"
     response = client.get(request_url)
     responseJson = JSON.parse(response.body)
-        
+    return response.body
     responseJson["response"]["todos"]["items"].each do |todo|
       venueJson = todo["tip"]["venue"]
       todos.push(VenuesController.convertJsonToVenue(venueJson))
