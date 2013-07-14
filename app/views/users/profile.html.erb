@@ -13,12 +13,32 @@
 		
 		<h4>Todos From FourSquare</h4>
 		<ul>
-			<%= @todos %>
+			<% @todos.each do |todo| %>
+			<li>
+				<span class="todoListing">
+					<%= link_to "#{todo.name}", "/events/new/#{todo.id}"%>
+				</span>
+				<span class="todoLocation">
+					<%= "#{todo.location.city}, #{todo.location.state}"%>
+				</spane>
+			</li>
+			<% end %>
 		</ul>
 		
+		<h4>You have Oauth Tokens for the Following Providers</h4>
+		<table>
+			<tr>
+				<th>Service Provider</th>
+				<th>Created At</th>
+			</tr>
+				
 		<% @user.oauth_tokens.each do |token|%>
-		<p><%= token.provider%>:<%= token.access_token %></p>
+			<tr>
+				<td><%= token.provider%></td>
+				<td><%= token.created_at%></td>
+			</tr>
 		<% end %>
+		</table>
 		<%= link_to "Click here to start creating a new event", "/venues/search" %>
 	</div>
 </div>
