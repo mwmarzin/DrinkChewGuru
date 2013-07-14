@@ -17,7 +17,7 @@
 		</ul>
 		
 		<% @user.oauth_tokens.each do |token|%>
-		<p>token.access_token</p>
+		<p><%= token.provider%>:<%= token.access_token %></p>
 		<% end %>
 		<%= link_to "Click here to start creating a new event", "/venues/search" %>
 	</div>
