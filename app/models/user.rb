@@ -13,20 +13,18 @@ class User < ActiveRecord::Base
   
   
   def getFriendsList()
-    tokenHash = @oauth_tokens.index_by(&:provider)
+    tokenHash = oauth_tokens.index_by(&:provider)
     token = tokenHash[FacebookProvider.service_name]
     
     friends = Array.new
     client = HTTPClient.new
     headers={"access_token"=>token}
     requestURL = "https://graph.facebook.com/me/friends?fields=first_name,picture"
-    response = client.get(@requestURL,headers)
-    
-    
+    response = client.get(@requestURL,headers)    
   end
   
   def getTodos()
-    tokenHash = @oauth_tokens.index_by(&:provider)
+    tokenHash = oauth_tokens.index_by(&:provider)
     token = tokenHash[FourSquareProvider.service_name]
     todos = Array.new
     client = HTTPClient.new
