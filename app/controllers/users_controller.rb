@@ -52,7 +52,7 @@ class UsersController < ApplicationController
   end
 
   def profile
-    @todos = @user.getTodos(@tokensHash[FourSquareProvider.service_name].access_token)
+    @todos = @user.getTodos()
   end
   
 end
