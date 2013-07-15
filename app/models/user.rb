@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   
   def getFriendsList()
     tokenHash = oauth_tokens.index_by(&:provider)
-    token = tokenHash[FacebookProvider.service_name]
+    token = tokenHash[FacebookProvider.service_name].access_token
     
     friends = Array.new
     client = HTTPClient.new
@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
   
   def getTodos()
     tokenHash = oauth_tokens.index_by(&:provider)
-    token = tokenHash[FourSquareProvider.service_name]
+    token = tokenHash[FourSquareProvider.service_name].access_token
     todos = Array.new
     client = HTTPClient.new
     version = Time.now.strftime("%Y%m%d")
