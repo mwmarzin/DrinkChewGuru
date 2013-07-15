@@ -43,6 +43,9 @@ class FacebookProvider < Provider
     @requestURL = "https://graph.facebook.com/me/friends?fields=first_name,picture"
     @response = client.get(@requestURL,headers)
     
+    
+    
+    
   end
   
   def self.returnToken(response, state=0)

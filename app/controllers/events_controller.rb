@@ -1,3 +1,9 @@
+require 'Provider'
+require 'FacebookProvider'
+require 'GoogleProvider'
+require 'FourSquareProvider'
+require 'httpclient'
+require 'json'
 class EventsController < ApplicationController  
   before_filter :checklogin
   #TODO clean up this file with functions we don't need
@@ -33,9 +39,16 @@ class EventsController < ApplicationController
   def new
     #TODO we should be reading in an id parameter for the venue id, we can use the VenueController's class function to get information about the venue and display the _venue_info partial in the app/shared directory to display the . 
     foursquare_id = params[:fs_id]
-    
-    @event = Event.new
 
+    @venue = VenuesController.getVenueInformation(foursquare_id, @tokenHash[FourSquareProvider.service_name])
+
+    if @tokenHash[FacebookProvider.service_name]
+        friends = FacebookProvider.returnFriendsList(@tokenHash[FacebookProvider.service_name])
+    else
+      
+    end
+    
+    
     respond_to do |format|
       format.html # new.html.erb
       format.json { render :json => @event }
