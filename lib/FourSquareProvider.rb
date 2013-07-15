@@ -43,24 +43,4 @@ class FourSquareProvider < Provider
     raise "FourSquare Provider Needs This Function!"
   end
   
-  def self.getUserTodos(token = "")
-    todos = Array.new
-    client = HTTPClient.new
-    version = Time.now.strftime("%Y%m%d")
-    
-    request_url = "https://api.foursquare.com/v2/users/self/todos?sort=recent&oauth_token=#{token}&v=#{version}"
-    response = client.get(request_url)
-    responseJson = JSON.parse(response.body)
-    #TODO need more error checking to make sure these imbedded fields exist
-    if (responseJson["meta"]["code"] && (responseJson["meta"]["code"] == 200))
-      responseJson["response"]["todos"]["items"].each do |todo|
-        venueJson = todo["tip"]["venue"]
-        todos.push(VenuesController.convertJsonToVenue(venueJson))
-      end
-    else
-      raise "Error returned from FourSquare API."
-    end
-    return todos
-  end
-  
 end
