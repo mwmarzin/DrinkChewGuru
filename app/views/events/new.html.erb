@@ -1,5 +1,14 @@
-<h1>New event</h1>
+<% content_for :head do%>
+	<%= javascript_include_tag "login" %>
+	<%= stylesheet_link_tag "login" %>
+<% end %>
+<%= render "shared/header" %>
 
-<%= render 'form' %>
 
-<%= link_to 'Back', events_path %>
+<div id="page">
+	<div id="content">
+		<%= render "shared/venue_info" %>
+		<!-- Form for Google Calendar and Event Info -->
+		<% form_for ...%>
+	</div>
+</div>
