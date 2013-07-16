@@ -21,7 +21,24 @@ class User < ActiveRecord::Base
     headers={"access_token"=>token}
     requestURL = "https://graph.facebook.com/me/friends?fields=id,first_name,last_name,picture"
     response = client.get(@requestURL,headers)    
-    return response.body
+    responseJson = JSON.parse(response.body)
+    if responseJson["data"]
+      friendsJson = responseJson["data"]
+      friendsJson.each do |friendJson|
+        friend = Friend.new
+        friend.provider = "Facebook"
+        friend.providerid = friendJson["id"]
+        friend.first_name = friendJson["first_name"]
+        friend.last_name = friendJson["last_name"]
+        if friendJson["picture"]["data"] && friendJson["picture"]["data"]["url"]
+          friend.picture_url = friendJson["picture"]["data"]["url"]
+        end
+        friends.push(friend)
+      end
+    else 
+      raise "Error getting data from Facebook API"
+    end
+    return friends
   end
   
   def getTodos()

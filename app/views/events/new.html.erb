@@ -9,5 +9,15 @@
 	<div id="content">
 		<%= render "shared/venue_info" %>
 		<!-- Form for Google Calendar and Event Info -->
+		
+		<table>
+		<% friends.each do |friend| %>
+			<tr>
+				<td> [ ] </td>
+				<td> <%= image_tag friend.picture_url  :alt => friend.first_name %></td>
+				<td> <%= friend.first_name %></br> <%= friend.last_name %>
+			</tr>
+		<% end %>
+		</table>
 	</div>
 </div>
