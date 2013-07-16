@@ -44,8 +44,8 @@ class EventsController < ApplicationController
     oauth_token = @tokensHash[FourSquareProvider.service_name].access_token
     version = Time.now.strftime("%Y%m%d")
     client  = HTTPClient.new
-    request_url = "https://api.foursquare.com/v2/venues/#{venue_id}?oauth_token=#{oauth_token}&v=#{version}"
-    @response = client.get(request_url)
+    @request_url = "https://api.foursquare.com/v2/venues/#{venue_id}?oauth_token=#{oauth_token}&v=#{version}"
+    @response = client.get(@request_url)
     @responseJson = JSON.parse(@response.body)
 
     #if @tokenHash[FacebookProvider.service_name]
