@@ -48,7 +48,6 @@ class EventsController < ApplicationController
     @response = client.get(request_url)
     @responseJson = JSON.parse(@response.body)
 
-
     #if @tokenHash[FacebookProvider.service_name]
     #    friends = FacebookProvider.returnFriendsList(@tokensHash[FacebookProvider.service_name])
     #else
