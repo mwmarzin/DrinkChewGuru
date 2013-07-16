@@ -3,6 +3,7 @@ require 'FacebookProvider'
 require 'GoogleProvider'
 require 'FourSquareProvider'
 require 'httpclient'
+require 'Friend'
 require 'json'
 
 class User < ActiveRecord::Base
