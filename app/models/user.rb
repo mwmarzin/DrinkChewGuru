@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
     client = HTTPClient.new
     headers={"access_token"=>token}
     requestURL = "https://graph.facebook.com/me/friends?fields=id,first_name,last_name,picture"
-    response = client.get(@requestURL,headers)    
+    response = client.get(requestURL,headers)    
     responseJson = JSON.parse(response.body)
     if responseJson["data"]
       friendsJson = responseJson["data"]
@@ -35,6 +35,7 @@ class User < ActiveRecord::Base
         end
         friends.push(friend)
       end
+      #TODO handle the paging returned from Facebook. If theres another page, read it in and get those friends too.
     else 
       raise "Error getting data from Facebook API"
     end
