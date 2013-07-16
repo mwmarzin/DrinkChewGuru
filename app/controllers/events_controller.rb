@@ -41,7 +41,7 @@ class EventsController < ApplicationController
     foursquare_id = params[:fs_id]
 
     #@venue = VenuesController.getVenueInformation(foursquare_id, @tokensHash[FourSquareProvider.service_name].access_token)
-    oauth_token = @tokensHash[FacebookProvider.service_name]
+    oauth_token = @tokensHash[FourSquareProvider.service_name].access_token
     version = Time.now.strftime("%Y%m%d")
     client  = HTTPClient.new
     request_url = "https://api.foursquare.com/v2/venues/#{venue_id}?oauth_token=#{oauth_token}&v=#{version}"
