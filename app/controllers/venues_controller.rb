@@ -9,7 +9,7 @@ class VenuesController < ApplicationController
     #the controller doesn't do much here
     #show redirect to the users page when
      
-      if (params[:location] || params[:query])
+      # if (params[:location] || params[:query])
           @location=params[:location]
           @query=params[:query]
           client = HTTPClient.new
