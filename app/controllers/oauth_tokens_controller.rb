@@ -8,11 +8,6 @@ class OauthTokensController < ApplicationController
   before_filter :checklogin, :only => [:index, :create]
   
   def index
-    @user = User.find(session[:userid])
-    
-    #TODO need to add something to validate if tokens are still valid and refresh the token if needed.
-    @tokensHash = @user.oauth_tokens.index_by(&:provider)
-    
     @userHasAllTokens = false
     #check to see that the user has tokens for all the Providers
     if ( @tokensHash[FourSquareProvider.service_name] &&
