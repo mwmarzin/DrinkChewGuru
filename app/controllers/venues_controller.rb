@@ -1,5 +1,6 @@
 require 'FourSquareProvider'
 require 'Venue'
+require 'json'
 
 class VenuesController < ApplicationController
   before_filter :checklogin
@@ -25,7 +26,19 @@ class VenuesController < ApplicationController
           #    @url = @url + "&oauth_token=s#{oauth_token}&v=#{version}"
           @response = client.get(@url)
       @responseJson = JSON.parse(@response.body)
-          
+      venueJson = @responseJson["response"]["venue"]
+      @venue = Venue.new
+      @venue.id = venueJson["id"]
+      @venue.name = venueJson["name"]
+      locationJson = venueJson["location"]
+      venue.location = Location.new
+      venue.location.address = locationJson["address"]
+      venue.location.zip = locationJson["postalCode"]
+      venue.location.city = locationJson["city"]
+      venue.location.state = locationJson["state"]
+      venue.location.country = locationJson["country"]
+
+      
         end
 
   def results
