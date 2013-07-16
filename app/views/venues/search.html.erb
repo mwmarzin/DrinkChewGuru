@@ -12,7 +12,9 @@
 			<%=@location%><br/>
 			<%=@query%>
 		</div>
-		<%=@responseJson%>
+		<%@responseJson.each do|venue| %>
+		<%=venue.id%>
+		
 
 		
 	</div>
