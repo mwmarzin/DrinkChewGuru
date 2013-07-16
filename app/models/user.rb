@@ -19,8 +19,9 @@ class User < ActiveRecord::Base
     friends = Array.new
     client = HTTPClient.new
     headers={"access_token"=>token}
-    requestURL = "https://graph.facebook.com/me/friends?fields=first_name,picture"
+    requestURL = "https://graph.facebook.com/me/friends?fields=id,first_name,last_name,picture"
     response = client.get(@requestURL,headers)    
+    return response.body
   end
   
   def getTodos()

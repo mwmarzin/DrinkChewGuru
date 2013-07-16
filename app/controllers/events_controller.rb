@@ -40,13 +40,20 @@ class EventsController < ApplicationController
     #TODO we should be reading in an id parameter for the venue id, we can use the VenueController's class function to get information about the venue and display the _venue_info partial in the app/shared directory to display the . 
     foursquare_id = params[:fs_id]
 
-    @venue = VenuesController.getVenueInformation(foursquare_id, @tokensHash[FourSquareProvider.service_name].access_token)
+    #@venue = VenuesController.getVenueInformation(foursquare_id, @tokensHash[FourSquareProvider.service_name].access_token)
+    oauth_token = @tokensHash[FacebookProvider.service_name]
+    version = Time.now.strftime("%Y%m%d")
+    client  = HTTPClient.new
+    request_url = "https://api.foursquare.com/v2/venues/#{venue_id}?oauth_token=#{oauth_token}&v=#{version}"
+    @response = client.get(request_url)
+    @responseJson = JSON.parse(response.body)
 
-    if @tokenHash[FacebookProvider.service_name]
-        friends = FacebookProvider.returnFriendsList(@tokensHash[FacebookProvider.service_name])
-    else
+
+    #if @tokenHash[FacebookProvider.service_name]
+    #    friends = FacebookProvider.returnFriendsList(@tokensHash[FacebookProvider.service_name])
+    #else
       
-    end
+    #end
     
     
     respond_to do |format|
