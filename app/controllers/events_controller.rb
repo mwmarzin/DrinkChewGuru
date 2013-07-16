@@ -38,7 +38,7 @@ class EventsController < ApplicationController
   # GET /events/new.json
   def new
     #TODO we should be reading in an id parameter for the venue id, we can use the VenueController's class function to get information about the venue and display the _venue_info partial in the app/shared directory to display the . 
-    foursquare_id = params[:fs_id]
+    venue_id = params[:fs_id]
 
     #@venue = VenuesController.getVenueInformation(foursquare_id, @tokensHash[FourSquareProvider.service_name].access_token)
     oauth_token = @tokensHash[FourSquareProvider.service_name].access_token
