@@ -42,5 +42,24 @@
 		<% end %>
 		</table>
 		<%= link_to "Click here to start creating a new event", "/venues/search" %>
+		<br/>
+		<br/>
+		<br/>
+		
+		
+		<h4>Friends to Invite</h4>
+		<% form_tag({controller: "user", action: "profile"}, method: "get") do  %>
+			<table>
+			<% @friends.each do |friend| %>
+				<tr>
+					<td> <%= check_box_tag(friend.id) %></td>
+					<td> <%= image_tag friend.picture_url,  :alt => friend.first_name %></td>
+					<td> <%= friend.first_name %></br> <%= friend.last_name %>
+				</tr>
+			<% end %>
+			</table>
+		<% end %>
+		
+		
 	</div>
 </div>

@@ -53,6 +53,7 @@ class UsersController < ApplicationController
 
   def profile
     @todos = @user.getTodos()
+    @friends = @user.getFriendsList()
   end
   
 end
