@@ -4,6 +4,7 @@ require 'GoogleProvider'
 require 'FourSquareProvider'
 require 'httpclient'
 require 'json'
+require 'time'
 class OauthTokensController < ApplicationController
   before_filter :checklogin, :only => [:index, :create]
   
@@ -30,7 +31,8 @@ class OauthTokensController < ApplicationController
 
     redirect_to(@provider.getOAuthTokenRequestURL())
   end
-
+  
+  
   # POST /oauth_tokens
   def create
     #begin
@@ -70,25 +72,39 @@ class OauthTokensController < ApplicationController
 
         @response = client.get(@requestURL)
       end
+	  
 
       @responseJSON = JSON.parse(@response.body)
       
       @token = @user.oauth_tokens.build({:provider => @tokenHash[:provider], :access_token => @tokenHash[:access_token],
                                          :expires_in =>  @tokenHash[:expires_in], :refresh_token =>  @tokenHash[:refresh_token]})
-    
-      if @token.save
-        flash[:notice] = "Successfully linked profile to #{params[:provider]}."
-      else
-        flash[:alert] = "Encountered a problem saving your token for #{params[:provider]} to our database. Seek help!"
-      end
-      redirect_to "/oauth"
-        
-      #rescue => e
-      #flash[:alert] = "Sorry! We encountered an error getting data from #{params[:provider]}. If this continues. Please contact an admin."
-      #redirect_to(:controller => "oauth_tokens", :action =>"index")
-      #logger.info 'ERROR on create in oauth tokens'
-      #logger.info e.message
-      #end
+										  
+										 
+	# code for getting refresh token from Google in case if the access token expires
+	for params[:provider] == "Google"
+		if (Time.now - OauthToken.created_at) = 0
+			@refresh_token = client.post(https://accounts.google.com/o/oauth2/token
+&client_id=307247955504.apps.googleusercontent.com
+&client_secret=W1kRezogoDm61Gmyp_gqgI7y
+&refresh_token=@tokenHash[:refresh_token]
+&grant_type=refresh_token)
+		end
+		
+	end	
+
+		  if @token.save
+			flash[:notice] = "Successfully linked profile to #{params[:provider]}."
+		  else
+			flash[:alert] = "Encountered a problem saving your token for #{params[:provider]} to our database. Seek help!"
+		  end
+		  redirect_to "/oauth"
+			
+		  #rescue => e
+		  #flash[:alert] = "Sorry! We encountered an error getting data from #{params[:provider]}. If this continues. Please contact an admin."
+		  #redirect_to(:controller => "oauth_tokens", :action =>"index")
+		  #logger.info 'ERROR on create in oauth tokens'
+		  #logger.info e.message
+		  #end
   end
 
   def getProviderClass(providerName)
