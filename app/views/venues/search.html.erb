@@ -14,7 +14,9 @@
 			<%=@query%><br/>
 		</div>
 		 
-		<%=@venue_name%>
+		<%@responseJson.each do|v|%>
+		<%=v.id%>
+		<%end%>
 	</div>
 </div>
 </html>
