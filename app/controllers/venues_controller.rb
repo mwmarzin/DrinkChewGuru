@@ -28,9 +28,10 @@ class VenuesController < ApplicationController
      
       #if @response.code == "200"
       @responseJson = JSON.parse(@response.body)
-       @responseJson["response"]["venues"][0].each do |result|
-      @venue_name =    result["name"]
-      end
+     @search_venue = @responseJson["response"]["venues"]
+      #  @responseJson["response"]["venues"][0].each do |result|
+      #   @venue_name =    result["name"]
+      # end
       #puts @responseJson
      
 
