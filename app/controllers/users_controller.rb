@@ -55,7 +55,7 @@ class UsersController < ApplicationController
     @todos = @user.getTodos()
     @friends = @user.getFriendsList()
     @invitees = "";
-    
+
     params.each do |key,value|
       if key.starts_with?("invitee_")
         @invitees = @invitees + key

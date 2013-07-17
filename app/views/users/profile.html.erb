@@ -50,7 +50,7 @@
 		<h4>Friends to Invite</h4>
 		<%= form_tag("/profile", method: "post") do  %>
 			<table>
-			<% while i < @friends.count %>
+			<% for i in 0..(@friends.count - 1)  %>
 				<tr>
 					<% for j in 0..5 %>
 						<% if (i + j) < @friends.count %>
