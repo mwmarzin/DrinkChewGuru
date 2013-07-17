@@ -1,12 +1,13 @@
+<html>
 <%= render "shared/header" %>
 <div id="page">
 	<div id="content">
-		<h1>search a venue</h1>
+		<h2>search a venue</h2>
+		
 		<%=form_tag do %>
 		enter location:<%=search_field_tag 'location'%><br/>
 		enter search:<%=search_field_tag 'query'%><br/>
 		<%=submit_tag 'submit your search'%>
-
 		<%end%>
 		<div>
 			<%=@location%><br/>
@@ -14,8 +15,6 @@
 		</div>
 		<%@responseJson.each do|venue| %>
 		<%=venue.id%>
-		
-
-		
 	</div>
 </div>
+</html>
