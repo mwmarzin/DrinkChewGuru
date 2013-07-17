@@ -15,12 +15,8 @@
 		</div>
 		 
  
-      <%@responseJson.each do |doc|%> 
-          <%=doc["id"]%> 
-          <%= doc["name"]%>
-		  <%= doc.inspect %>
-		 
-		<%end%> 
+    
+		
 		<div>
 		<%@responseJson['response']['venues'][0].each do |venue|%>
 		    <%= venue['name']  %>
