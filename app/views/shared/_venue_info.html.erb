@@ -1,8 +1,3 @@
-<% 
-if !show_create_link 
-	show_create_link = true 
-end 
-%>
 <h2><%= @venue.name %></h2>
 <table>
 	<tr>
@@ -22,6 +17,3 @@ end
 	<% end %>
 	</ul>
 </div>
-<% if show_create_link == true %>
-<%= link_to "Click here to create an event at this location", "/events/new" %>
-<% end %>
