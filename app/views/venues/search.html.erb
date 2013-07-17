@@ -13,13 +13,11 @@
 			<%=@location%><br/>
 			<%=@query%><br/>
 		</div>
-		<%@responseJson["response"]["venues"].each do |v| %>
-				<%= v['id'] %>
-				<% end %>
-		<!--<%=@venue_name%>-->
-	<!--	<%@responseJson.each do|v|%>
-		<%=v.id%>
-		<%end%>-->
+		<ul>
+			<li><%=@response.body%></li>
+			<li><%=@url%>
+		</ul>
+
 	</div>
 </div>
 </html>
