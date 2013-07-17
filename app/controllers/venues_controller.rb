@@ -99,11 +99,10 @@ class VenuesController < ApplicationController
     venue.location.country = locationJson["country"]
     venue.likeCount = venueJson["likes"]["count"] unless venueJson["likes"].nil?
     
+    venue.tips = Array.new
     tipsJson = venueJson["tips"]
     if (!tipsJson.nil? && tipsJson["count"] && tipsJson["count"] > 0)
-      venue.tips = Array.new
-      tipsJson = tipsJson["groups"]
-      
+      tipsJson = tipsJson["groups"]      
       tipsJson.each do |group|
         group["items"].each do |tip|
           venue.tips.push(tip["text"])
