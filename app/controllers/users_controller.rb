@@ -54,6 +54,12 @@ class UsersController < ApplicationController
   def profile
     @todos = @user.getTodos()
     @friends = @user.getFriendsList()
+    @invitees = "";
+    
+    params.each do |param|
+      if param.key.starts_with?("invitee_")
+        @invitees = @invitees + param.key
+    end
   end
   
 end

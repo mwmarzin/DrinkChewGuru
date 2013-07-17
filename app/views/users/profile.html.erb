@@ -48,17 +48,30 @@
 		
 		
 		<h4>Friends to Invite</h4>
-		<%= form_tag("/profile", method: "get") do  %>
+		<%= form_tag("/profile", method: "post") do  %>
 			<table>
-			<% @friends.each do |friend| %>
+			<% while i < @friends.count do |friend| %>
 				<tr>
-					<td> <%= check_box_tag("invite_#{friend.providerid}") %></td>
-					<td> <%= image_tag friend.picture_url,  :alt => friend.first_name %></td>
-					<td> <%= friend.first_name %></br> <%= friend.last_name %>
+					<% for j in 0..5 %>
+					<% if (i + j) < @friends.count %>
+					<td colspan=2> <%= check_box_tag("invitee_#{@friends[i+j].providerid}") %></td>
+					<% else %>
+					<td colspan=2></td>
+					<% end %>
 				</tr>
+				<tr>
+					<% for j in 0..5 %>
+					<% if (i + j) < @friends.count %>
+					<td> <%= image_tag friend.picture_url,  :alt => friend.first_name %></td>
+					<td> <%= friend.first_name %></br> <%= friend.last_name %></td>
+					<% else %>
+					<td colspan=2></td>
+					<% end %>
+				</tr>
+				<% i += 5 %>
 			<% end %>
 			<tr>
-				<td colspan=3>
+				<td colspan=10>
 					<%= submit_tag("Create Event!") %>
 				</td>
 			</tr>
@@ -70,5 +83,7 @@
 		<li><%= param %></li>
 		<% end %>
 		</ul>
+		<p>Invitee Ids</p>
+		<p><%= @invitees %></p>
 	</div>
 </div>
