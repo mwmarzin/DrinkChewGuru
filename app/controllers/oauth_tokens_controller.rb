@@ -83,16 +83,7 @@ class OauthTokensController < ApplicationController
 		  if @token.save
 			flash[:notice] = "Successfully linked profile to #{params[:provider]}."
 		  else
-		  # code for getting refresh token from Google in case if the access token expires
-			for params[:provider] == "Google"
-				if (Time.now-oauth_token.created_at) = 0	
-					@refresh_token = client.post(https://accounts.google.com/o/oauth2/token
-&client_id=307247955504.apps.googleusercontent.com
-&client_secret=W1kRezogoDm61Gmyp_gqgI7y
-&refresh_token=@tokenHash[:refresh_token]
-&grant_type=refresh_token)
-				end
-		end
+		  
 			flash[:alert] = "Encountered a problem saving your token for #{params[:provider]} to our database. Seek help!"
 		  end
 		  redirect_to "/oauth"
