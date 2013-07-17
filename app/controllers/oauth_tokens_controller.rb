@@ -12,8 +12,8 @@ class OauthTokensController < ApplicationController
     @userHasAllTokens = false
     #check to see that the user has tokens for all the Providers
     if ( @tokensHash[FourSquareProvider.service_name] &&
-         @tokensHash[GoogleProvider.service_name]     &&
-         @tokensHash[FacebookProvider.service_name] )
+      @tokensHash[GoogleProvider.service_name]     &&
+      @tokensHash[FacebookProvider.service_name] )
       @userHasAllTokens = true
     end
     if @userHasAllTokens == true
@@ -36,73 +36,63 @@ class OauthTokensController < ApplicationController
   # POST /oauth_tokens
   def create
     #begin
-      #TODO:need code for validating the state!!!
-      @user = User.find(session[:userid])
-      @provider = getProviderClass(params[:provider])
+    #TODO:need code for validating the state!!!
+    @user = User.find(session[:userid])
+    @provider = getProviderClass(params[:provider])
     
-      @code = params[:code]
-      @state = params[:state]
+    @code = params[:code]
+    @state = params[:state]
     
-      @exchangeURL = @provider.getOAuthExchangeTokenURL(@code)
-      client = HTTPClient.new
+    @exchangeURL = @provider.getOAuthExchangeTokenURL(@code)
+    client = HTTPClient.new
     
-      #TODO there should be a better way to handle this then to hardcode if the provider wants a POST or a GET. Maybe something in the provider classes?
-      if params[:provider] == "Google"
-        @tokenResponse = client.post(@provider.exchange_url, @provider.getOAuthExchangeParams(@code))
-      else
-        @tokenResponse = client.get(@exchangeURL)
-      end
+    #TODO there should be a better way to handle this then to hardcode if the provider wants a POST or a GET. Maybe something in the provider classes?
+    if params[:provider] == "Google"
+      @tokenResponse = client.post(@provider.exchange_url, @provider.getOAuthExchangeParams(@code))
+    else
+      @tokenResponse = client.get(@exchangeURL)
+    end
     
-      @tokenHash = @provider.returnToken(@tokenResponse)
+    @tokenHash = @provider.returnToken(@tokenResponse)
     
-      #The next couple lines are just to test getting data with the tokens we've just retrieved from the provider
-      @requestURL = ""
-      if params[:provider] == "Facebook"  
-        headers={"access_token"=>@tokenHash[:access_token]}
-        @requestURL = "https://graph.facebook.com/me/friends?fields=first_name,picture&limit=5"
-        @response = client.get(@requestURL,headers)
-      elsif params[:provider] == "Google"
-        headers={"Authorization: Bearer"=>@tokenHash[:access_token]}
-        @requestURL = "https://www.googleapis.com/calendar/v3/users/me/calendarList?minAccessRole=writer"
-        @response = client.get(@requestURL,headers)
-      elsif params[:provider] == "FourSquare"
-        @requestURL = "https://api.foursquare.com/v2/lists/self/todos?oauth_token=#{@tokenHash[:access_token]}"
+    #The next couple lines are just to test getting data with the tokens we've just retrieved from the provider
+    @requestURL = ""
+    if params[:provider] == "Facebook"  
+      headers={"access_token"=>@tokenHash[:access_token]}
+      @requestURL = "https://graph.facebook.com/me/friends?fields=first_name,picture&limit=5"
+      @response = client.get(@requestURL,headers)
+    elsif params[:provider] == "Google"
+      headers={"Authorization: Bearer"=>@tokenHash[:access_token]}
+      @requestURL = "https://www.googleapis.com/calendar/v3/users/me/calendarList?minAccessRole=writer"
+      @response = client.get(@requestURL,headers)
+    elsif params[:provider] == "FourSquare"
+      @requestURL = "https://api.foursquare.com/v2/lists/self/todos?oauth_token=#{@tokenHash[:access_token]}"
     
 
 
-        @response = client.get(@requestURL)
-      end
+      @response = client.get(@requestURL)
+    end
 	  
 
-      @responseJSON = JSON.parse(@response.body)
+    @responseJSON = JSON.parse(@response.body)
       
-      @token = @user.oauth_tokens.build({:provider => @tokenHash[:provider], :access_token => @tokenHash[:access_token],
-                                         :expires_in =>  @tokenHash[:expires_in], :refresh_token =>  @tokenHash[:refresh_token]})
+    @token = @user.oauth_tokens.build({:provider => @tokenHash[:provider], :access_token => @tokenHash[:access_token],
+      :expires_in =>  @tokenHash[:expires_in], :refresh_token =>  @tokenHash[:refresh_token]})
 										  
 
-		  if @token.save
-			flash[:notice] = "Successfully linked profile to #{params[:provider]}."
-		  else
-		  # code for getting refresh token from Google in case if the access token expires
-			for params[:provider] == "Google"
-				if (Time.now-oauth_token.created_at) = 0	
-					@refresh_token = client.post(https://accounts.google.com/o/oauth2/token
-&client_id=307247955504.apps.googleusercontent.com
-&client_secret=W1kRezogoDm61Gmyp_gqgI7y
-&refresh_token=@tokenHash[:refresh_token]
-&grant_type=refresh_token)
-				end
-		end
-			flash[:alert] = "Encountered a problem saving your token for #{params[:provider]} to our database. Seek help!"
-		  end
-		  redirect_to "/oauth"
+      if @token.save
+        flash[:notice] = "Successfully linked profile to #{params[:provider]}."
+      end
+      flash[:alert] = "Encountered a problem saving your token for #{params[:provider]} to our database. Seek help!"
+    end
+    redirect_to "/oauth"
 			
-		  #rescue => e
-		  #flash[:alert] = "Sorry! We encountered an error getting data from #{params[:provider]}. If this continues. Please contact an admin."
-		  #redirect_to(:controller => "oauth_tokens", :action =>"index")
-		  #logger.info 'ERROR on create in oauth tokens'
-		  #logger.info e.message
-		  #end
+    #rescue => e
+    #flash[:alert] = "Sorry! We encountered an error getting data from #{params[:provider]}. If this continues. Please contact an admin."
+    #redirect_to(:controller => "oauth_tokens", :action =>"index")
+    #logger.info 'ERROR on create in oauth tokens'
+    #logger.info e.message
+    #end
   end
 
   def getProviderClass(providerName)
@@ -118,4 +108,4 @@ class OauthTokensController < ApplicationController
     return provider
   end
 
-  end
+end
