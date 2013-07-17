@@ -29,19 +29,10 @@ class VenuesController < ApplicationController
     if response.code == "200"
       @responseJson = JSON.parse(@response.body)
       #puts @responseJson
-<<<<<<< HEAD
-       @responseJson.each do |doc|
-          puts doc["id"]
-          puts doc["name"]
-            
-           end
-=======
       @responseJson.each do |doc|
         puts doc["id"]
-        puts doc
-        puts ""
-        puts ""
->>>>>>> f33fd9ce0ff23c3254d06d39ecdfaedef0bb0dc2
+        puts doc["name"]
+            
       end
     end
   end
