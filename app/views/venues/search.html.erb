@@ -14,9 +14,12 @@
 			<%=@query%>
 		</div>
 		 
+ 
+      <% @responseJson.each do |doc|%> 
+          <%=doc["id"]%> 
+          <%= doc["name"]%>
 		 
-		 
-		 
+		end 
 		 
 	</div>
 </div>
