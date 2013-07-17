@@ -8,16 +8,48 @@
 <div id="page">
 	<div id="content">
 		<%= render "shared/venue_info" %>
+		<%= form_tag("/profile", method: "post") do  %>
 		<!-- Form for Google Calendar and Event Info -->
 		<h4>Friends to Invite</h4>
-		<table>
-		<% @friends.each do |friend| %>
+			<table>
+			<% i = 0%>
+			<% while i < @friends.count %>
+				<tr>
+					<% for j in 0..4 %>
+						<% if (i + j) < @friends.count %>
+						<td colspan=2> <%= image_tag @friends[i + j].picture_url,  :alt => @friends[i + j].first_name %></td>
+						<% else %>
+						<td colspan=2></td>
+						<% end %>
+					<% end %>
+				</tr>
+				<tr>
+					<% for j in 0..4 %>
+						<% if (i + j) < @friends.count %>
+						<td> <%= check_box_tag("invitee_#{@friends[i + j].providerid}") %></td>
+						<td> <%= "#{@friends[i + j].first_name} #{@friends[i + j].last_name}" %></td>
+						<% else %>
+						<td colspan=2></td>
+						<% end %>
+					<% end %>
+				</tr>
+				<% i += 5 %>
+			<% end %>
 			<tr>
-				<td> [ ] </td>
-				<td> <%= image_tag friend.picture_url,  :alt => friend.first_name %></td>
-				<td> <%= friend.first_name %></br> <%= friend.last_name %>
+				<td colspan=10>
+					<%= submit_tag("Create Event!") %>
+				</td>
 			</tr>
+			</table>
 		<% end %>
-		</table>
+		
+		<ul>
+		<% params.each do |param| %>
+		<li><%= param %></li>
+		<% end %>
+		</ul>
+		<p>Invitee Ids</p>
+		<p><%= @invitees %></p>
+
 	</div>
 </div>

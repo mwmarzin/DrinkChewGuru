@@ -57,9 +57,12 @@ class UsersController < ApplicationController
     @invitees = "";
 
     params.each do |key,value|
-      if key.starts_with?("invitee_")
-        @invitees = @invitees + key
+      if key.start_with?("invitee_")
+        @invitees = @invitees + key.split('_')[1] + "," 
       end
+    end
+    if @invitees.end_with?(',')
+      @invitees.chop
     end
   end
   

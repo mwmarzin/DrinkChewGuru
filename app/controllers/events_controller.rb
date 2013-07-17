@@ -43,9 +43,16 @@ class EventsController < ApplicationController
     @venue = VenuesController.getVenueInformation(venue_id, @tokensHash[FourSquareProvider.service_name].access_token)
 
     @friends = @user.getFriendsList()
-    #Use this to iterate through friends and try to use it put the friends in groups on the page
-    #TODO maybe page them???
-    @i = 0
+    @invitees = "";
+
+    params.each do |key,value|
+      if key.start_with?("invitee_")
+        @invitees = @invitees + key.split('_')[1] + "," 
+      end
+    end
+    if @invitees.end_with?(',')
+      @invitees.chop
+    end
     
     respond_to do |format|
       format.html # new.html.erb
