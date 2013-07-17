@@ -48,7 +48,7 @@
 		
 		
 		<h4>Friends to Invite</h4>
-		<% form_tag({controller: "user", action: "profile"}, method: "get") do  %>
+		<% form_tag("/profile", method: "get") do  %>
 			<table>
 			<% @friends.each do |friend| %>
 				<tr>
