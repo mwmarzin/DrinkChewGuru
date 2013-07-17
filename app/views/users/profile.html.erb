@@ -50,22 +50,24 @@
 		<h4>Friends to Invite</h4>
 		<%= form_tag("/profile", method: "post") do  %>
 			<table>
-			<% while i < @friends.count do |friend| %>
+			<% while i < @friends.count %>
 				<tr>
 					<% for j in 0..5 %>
-					<% if (i + j) < @friends.count %>
-					<td colspan=2> <%= check_box_tag("invitee_#{@friends[i+j].providerid}") %></td>
-					<% else %>
-					<td colspan=2></td>
+						<% if (i + j) < @friends.count %>
+						<td colspan=2> <%= image_tag @friend[i + j].picture_url,  :alt => @friend[i + j].first_name %></td>
+						<% else %>
+						<td colspan=2></td>
+						<% end %>
 					<% end %>
 				</tr>
 				<tr>
 					<% for j in 0..5 %>
-					<% if (i + j) < @friends.count %>
-					<td> <%= image_tag friend.picture_url,  :alt => friend.first_name %></td>
-					<td> <%= friend.first_name %></br> <%= friend.last_name %></td>
-					<% else %>
-					<td colspan=2></td>
+						<% if (i + j) < @friends.count %>
+						<td> <%= check_box_tag("invitee_#{@friends[i + j].providerid}") %></td>
+						<td> <%= "#{@friend[i + j].first_name} #{@friend[i + j].last_name}" %></td>
+						<% else %>
+						<td colspan=2></td>
+						<% end %>
 					<% end %>
 				</tr>
 				<% i += 5 %>
