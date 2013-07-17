@@ -25,8 +25,16 @@ class VenuesController < ApplicationController
           #  end
           #    @url = @url + "&oauth_token=s#{oauth_token}&v=#{version}"
           @response = client.get(@url)
+     
+      if response.code == "200"
       @responseJson = JSON.parse(@response.body)
-      puts @responseJson
+      #puts @responseJson
+       @responseJson.each do |doc|
+          puts doc["id"]
+          puts doc
+           puts ""
+           puts ""
+      end
       
         end
 
