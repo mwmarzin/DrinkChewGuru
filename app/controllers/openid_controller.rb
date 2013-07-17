@@ -87,8 +87,9 @@ def getOpenIdXRD
 &openid.ns.max_auth_age=600 
 &openid.mode=checkid_setup
 &openid.ui.icon=true
-&openid.assoc_handle=ABSmpf6DNMw
+
 &openid.ui.mode=popup"
 		authURL = xrdurl.to_s()+parameters.to_s()
    end
 end
+# &openid.assoc_handle=ABSmpf6DNMw
