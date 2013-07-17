@@ -15,13 +15,17 @@
 		</div>
 		 
  
-      <% @responseJson.each do |doc|%> 
+      <%@responseJson.each do |doc|%> 
           <%=doc["id"]%> 
           <%= doc["name"]%>
 		  <%= doc.inspect %>
 		 
 		<%end%> 
-		 
+		<div>
+		<%@venues['response']['venues'][0].each do |venue|%>
+		    <%= venue['name']  %>
+			<%end%>
+		</div>
 	</div>
 </div>
 </html>
