@@ -11,17 +11,10 @@
 		<%end%>
 		<div>
 			<%=@location%><br/>
-			<%=@query%>
+			<%=@query%><br/>
 		</div>
 		 
- 
-    
-		
-		<div>
-		<%@responseJson['response']['venues'][0].each do |venue|%>
-		    <%= venue['name']  %>
-			<%end%>
-		</div>
+		<%=@venue_name%>
 	</div>
 </div>
 </html>
