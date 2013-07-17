@@ -35,8 +35,7 @@ class VenuesController < ApplicationController
      
 
       
-      
-    end
+   
   end
 
   def results
