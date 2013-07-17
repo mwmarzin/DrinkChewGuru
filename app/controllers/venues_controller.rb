@@ -26,8 +26,14 @@ class VenuesController < ApplicationController
     #    @url = @url + "&oauth_token=s#{oauth_token}&v=#{version}"
     @response = client.get(@url)
      
+    @venues = Array.new
       #if @response.code == "200"
       @responseJson = JSON.parse(@response.body)
+      @responseJson["response"]["venues"].each do |venueJson|
+        venue = convertJsonToVenue(venueJson)
+        @venues.push(venue)
+        
+      end
       # search_venue = @responseJson["response"]["venues"]
       # @venue_name=search_venue["name"]
       #  @responseJson["response"]["venues"][0].each do |result|
@@ -49,6 +55,7 @@ class VenuesController < ApplicationController
       
     @url = "https://api.foursquare.com/v2/venues/search?ll=40.7,-74&oauth_token=#{oauth_token}&v=#{version}"
     @result_url=   client.get(@url)
+
 
     #TODO use the information entered in the "search" page to make a query string that can be used to query FourSquare for venues
     #Should use a new method in the FourSquareProvider class to take a parameter and have it make the query string that can then use httpclient to do a get data.

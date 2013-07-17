@@ -79,11 +79,12 @@ class OauthTokensController < ApplicationController
     @token = @user.oauth_tokens.build({:provider => @tokenHash[:provider], :access_token => @tokenHash[:access_token],
       :expires_in =>  @tokenHash[:expires_in], :refresh_token =>  @tokenHash[:refresh_token]})
 										  
-      if @token.save
-        flash[:notice] = "Successfully linked profile to #{params[:provider]}."
-      end
+    if @token.save
+      flash[:notice] = "Successfully linked profile to #{params[:provider]}."
+    else
       flash[:alert] = "Encountered a problem saving your token for #{params[:provider]} to our database. Seek help!"
     end
+      
     redirect_to "/oauth"
 			
     #rescue => e
