@@ -31,9 +31,9 @@ class VenuesController < ApplicationController
       #puts @responseJson
        @responseJson.each do |doc|
           puts doc["id"]
-          puts doc
-           puts ""
-           puts ""
+          puts doc["name"]
+            
+           end
       end
       
         end
