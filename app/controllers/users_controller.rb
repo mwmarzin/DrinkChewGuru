@@ -59,6 +59,7 @@ class UsersController < ApplicationController
     params.each do |param|
       if param.key.starts_with?("invitee_")
         @invitees = @invitees + param.key
+      end
     end
   end
   
