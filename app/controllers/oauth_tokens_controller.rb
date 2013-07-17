@@ -82,7 +82,7 @@ class OauthTokensController < ApplicationController
 										 
 	# code for getting refresh token from Google in case if the access token expires
 	for params[:provider] == "Google"
-		if (Time.now - OauthToken.created_at) = 0
+		if (Time.now-oauth_token.created_at) = 0
 			@refresh_token = client.post(https://accounts.google.com/o/oauth2/token
 &client_id=307247955504.apps.googleusercontent.com
 &client_secret=W1kRezogoDm61Gmyp_gqgI7y
