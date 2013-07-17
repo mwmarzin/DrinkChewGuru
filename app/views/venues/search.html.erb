@@ -18,8 +18,9 @@
       <% @responseJson.each do |doc|%> 
           <%=doc["id"]%> 
           <%= doc["name"]%>
+		  <%= doc.inspect %>
 		 
-		end 
+		<%end%> 
 		 
 	</div>
 </div>
