@@ -10,51 +10,43 @@ class VenuesController < ApplicationController
     #the controller doesn't do much here
     #show redirect to the users page when
      
-    # if (params[:location] || params[:query])
-    @location=params[:location]
-    @query=params[:query]
-    client = HTTPClient.new
-    version = Time.now.strftime("%Y%m%d")
-    oauth_token = temp_token = "ISH5O3EJNGHGI5O4PRKF5GXADOM3S4K4AUJWVMDWLS35TVOH"
-    @url = "https://api.foursquare.com/v2/venues/search?near=#{@location}&query=#{@query}&limit=10&oauth_token=#{oauth_token}&v=#{version}"
-    # if (params[:location])
-    #    @url = @url + "near=#{@location}"
-    #  end
-    #    if (params[:query])
-    #   @url = @url + "&query=#{@query}"
-    #  end
-    #    @url = @url + "&oauth_token=s#{oauth_token}&v=#{version}"
-    @response = client.get(@url)
+      # if (params[:location] || params[:query])
+          @location=params[:location]
+          @query=params[:query]
+          client = HTTPClient.new
+          version = Time.now.strftime("%Y%m%d")
+          oauth_token = temp_token = "ISH5O3EJNGHGI5O4PRKF5GXADOM3S4K4AUJWVMDWLS35TVOH"
+          @url = "https://api.foursquare.com/v2/venues/search?near=#{@location}&query=#{@query}&limit=10&oauth_token=#{oauth_token}&v=#{version}"
+          # if (params[:location])
+          #    @url = @url + "near=#{@location}"
+          #  end
+          #    if (params[:query])
+          #   @url = @url + "&query=#{@query}"
+          #  end
+          #    @url = @url + "&oauth_token=s#{oauth_token}&v=#{version}"
+          @response = client.get(@url)
      
-    if response.code == "200"
+      if @response.code == "200"
       @responseJson = JSON.parse(@response.body)
       #puts @responseJson
-<<<<<<< HEAD
        @responseJson.each do |doc|
           puts doc["id"]
           puts doc["name"]
             
            end
-=======
-      @responseJson.each do |doc|
-        puts doc["id"]
-        puts doc
-        puts ""
-        puts ""
->>>>>>> f33fd9ce0ff23c3254d06d39ecdfaedef0bb0dc2
       end
-    end
-  end
+      
+        end
 
   def results
-    @location=params[:location]
+      @location=params[:location]
 
-    client = HTTPClient.new
-    version = Time.now.strftime("%Y%m%d")
-    oauth_token = temp_token = "ISH5O3EJNGHGI5O4PRKF5GXADOM3S4K4AUJWVMDWLS35TVOH"
+      client = HTTPClient.new
+      version = Time.now.strftime("%Y%m%d")
+      oauth_token = temp_token = "ISH5O3EJNGHGI5O4PRKF5GXADOM3S4K4AUJWVMDWLS35TVOH"
       
-    @url = "https://api.foursquare.com/v2/venues/search?ll=40.7,-74&oauth_token=#{oauth_token}&v=#{version}"
-    @result_url=   client.get(@url)
+      @url = "https://api.foursquare.com/v2/venues/search?ll=40.7,-74&oauth_token=#{oauth_token}&v=#{version}"
+      @result_url=   client.get(@url)
 
     #TODO use the information entered in the "search" page to make a query string that can be used to query FourSquare for venues
     #Should use a new method in the FourSquareProvider class to take a parameter and have it make the query string that can then use httpclient to do a get data.
