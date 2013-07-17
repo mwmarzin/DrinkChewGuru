@@ -22,7 +22,7 @@
 		 
 		<%end%> 
 		<div>
-		<%@venues['response']['venues'][0].each do |venue|%>
+		<%@responseJson['response']['venues'][0].each do |venue|%>
 		    <%= venue['name']  %>
 			<%end%>
 		</div>
