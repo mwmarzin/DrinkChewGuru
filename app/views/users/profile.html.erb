@@ -2,12 +2,17 @@
 
 <div id="page">
 	<div id="content">
-		<h3> Profile for <%= @user.first_name%> <%=@user.last_name%> </h3>
+		<h3> Profile for <%= "#{@user.first_name} #{@user.last_name}" %> </h3>
 		
 		<table>
-			<tr><th>Planned Events</th></tr>
-			<% @user.events.each do |event|%>
-			<tr><td><%= event.date_time%></td></tr>
+			<tr><th>Planned Events:</th></tr>
+			<% if @user.events.count == 0%>
+				<tr><td>No Events Planned!</td></tr>
+				<tr><td><%= link_to "Click here to start creating a new event", "/venues/search" %></td></tr>
+			<% else %>
+				<% @user.events.each do |event|%>
+					<tr><td><%= event.date_time%></td></tr>
+				<% end %>
 			<% end %>
 		</table>
 		
@@ -41,7 +46,6 @@
 			</tr>
 		<% end %>
 		</table>
-		<%= link_to "Click here to start creating a new event", "/venues/search" %>
 		<br/>
 		<br/>
 		<br/>
