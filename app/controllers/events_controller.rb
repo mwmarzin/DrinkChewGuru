@@ -33,7 +33,7 @@ class EventsController < ApplicationController
     @friends = @user.getFriendsList()
     @invitees = Array.new
     client = HTTPClient.new
-    date = nil
+    @date = nil
 
     params.each do |key,value|
       if key.start_with?("invitee_")
@@ -52,7 +52,7 @@ class EventsController < ApplicationController
     end
     if (params[:event])
       event = params[:event]
-      date = Date.new event["event_date(1i)"].to_i, event["event_date(2i)"].to_i, event["event_date(3i)"].to_i
+      @date = Date.new event["event_date(1i)"].to_i, event["event_date(2i)"].to_i, event["event_date(3i)"].to_i
     end
     #Get Calendar Information from Google API
     user_email=@user.email
