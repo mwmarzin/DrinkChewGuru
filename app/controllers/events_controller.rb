@@ -91,14 +91,6 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    venue_id = params[:venue_id]
-    venue = VenuesController.getVenueInformation(venue_id, @tokensHash[FourSquareProvider.service_name].access_token)
-    create_event_hash = createFacebookEvent(@tokensHash[FacebookProvider.service_name].access_token,
-                                            name,
-                                            venue,)
-    #self.createFacebookEvent(oauth_token="", name="Home", venue=Venue.new, start_time="2012-07-04T19:00:00-0700", end_time="2012-07-04T19:00:00-0700", description="", privacy_type = "FRIENDS")
-    #@event = Event.create(:user_id => @user.id, :date_time, :email_invitees, :facebook_id, :facebook_invitees, :description, :google_id, :loacation_id)
-    
     
     respond_to do |format|
       if @event.save
@@ -116,8 +108,17 @@ class EventsController < ApplicationController
   def update
     #@event = Event.find(params[:id])
     
+    venue_id = params[:venue_id]
+    venue = VenuesController.getVenueInformation(venue_id, @tokensHash[FourSquareProvider.service_name].access_token)
     
+    
+    create_event_hash = createFacebookEvent(@tokensHash[FacebookProvider.service_name].access_token,
+                                            name,
+                                            venue,)
+    #self.createFacebookEvent(oauth_token="", name="Home", venue=Venue.new, start_time="2012-07-04T19:00:00-0700", end_time="2012-07-04T19:00:00-0700", description="", privacy_type = "FRIENDS")
+    #@event = Event.create(:user_id => @user.id, :date_time, :email_invitees, :facebook_id, :facebook_invitees, :description, :google_id, :loacation_id)
 
+=begin
     respond_to do |format|
       if @event.update_attributes(params[:event])
         format.html { redirect_to @event, :notice => 'Event was successfully updated.' }
@@ -127,6 +128,7 @@ class EventsController < ApplicationController
         format.json { render :json => @event.errors, :status => :unprocessable_entity }
       end
     end
+=end
   end
 
   # DELETE /events/1
