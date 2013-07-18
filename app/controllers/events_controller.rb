@@ -34,6 +34,7 @@ class EventsController < ApplicationController
     @invitees = Array.new
     client = HTTPClient.new
     @date = nil
+    @invite_string = ""
 
     params.each do |key,value|
       if key.start_with?("invitee_")
