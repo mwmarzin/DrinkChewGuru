@@ -64,20 +64,25 @@ class EventsController < ApplicationController
   def edit
     #@event = Event.find(params[:id])
     #TODO we should be reading in an id parameter for the venue id, we can use the VenueController's class function to get information about the venue and display the _venue_info partial in the app/shared directory to display the . 
-    venue_id = params[:event_id]
+    @event_id = params[:event_id]
 
-    @venue = VenuesController.getVenueInformation(venue_id, @tokensHash[FourSquareProvider.service_name].access_token)
+    @venue = VenuesController.getVenueInformation(@event_id, @tokensHash[FourSquareProvider.service_name].access_token)
 
     @friends = @user.getFriendsList()
-    @invitees = "";
+    @invitees = Array.new;
 
     params.each do |key,value|
       if key.start_with?("invitee_")
-        @invitees = @invitees + key.split('_')[1] + "," 
+        @invitees.push(key.split('_')[1])
       end
     end
-    if @invitees.end_with?(',')
-      @invitees.chop
+    
+    for i in 0..(@invitees - 1)
+      if i == (@invitees - 1)
+        @invite_string = @invitees[i]
+      else
+        @invite_string = @invitees[i] + ","
+      end
     end
     
     respond_to do |format|
@@ -106,7 +111,9 @@ class EventsController < ApplicationController
   # PUT /events/1
   # PUT /events/1.json
   def update
-    @event = Event.find(params[:id])
+    #@event = Event.find(params[:id])
+    
+    
 
     respond_to do |format|
       if @event.update_attributes(params[:event])
@@ -129,5 +136,9 @@ class EventsController < ApplicationController
       format.html { redirect_to events_url }
       format.json { head :no_content }
     end
+  end
+  
+  def self.createFacebookEvent
+    
   end
 end
