@@ -10,6 +10,17 @@
 		<%= render "shared/venue_info" %>
 		<%= form_tag("/profile", method: "post") do  %>
 		<!-- Form for Google Calendar and Event Info -->
+		<h4>Event Info</h4>
+		
+		<%=label_tag(:Event_Name, "Enter Event Name")%><br/>
+		<%=text_field_tag(:Event_Name)%><br/>
+		
+		<%=label_tag(:Event_Date, "Enter Date")%><br/>
+		<%=text_field_tag(:Event_Date)%><br/>
+		
+		<%=label_tag(:Event_Time, "Enter Time")%><br/>
+		<%=text_field_tag(:Event_Time)%><br/>
+		
 		<h4>Friends to Invite</h4>
 			<table>
 			<% i = 0%>
