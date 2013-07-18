@@ -61,6 +61,8 @@ class OauthTokensController < ApplicationController
         @tokenResponse = client.get(@exchangeURL)
       end
       
+      @tokenHash = @provider.returnToken(@tokenResponse)
+      
       @token = @user.oauth_tokens.build({:provider => @tokenHash[:provider], :access_token => @tokenHash[:access_token], :expires_in =>  @tokenHash[:expires_in], :refresh_token =>  @tokenHash[:refresh_token]})
 										  
       if @token.save
