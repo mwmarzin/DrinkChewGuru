@@ -49,10 +49,10 @@ class EventsController < ApplicationController
     end
 
     #Get Calendar Information from Google API
-    headers={"Authorization: Bearer"=>@tokensHash[GoogleProvider.service_name].access_token}
+    @headers={"Authorization: Bearer"=>@tokensHash[GoogleProvider.service_name].access_token}
     @requestURL = "https://www.googleapis.com/calendar/v3/users/me/calendarList"
     #@requestURL = "https://www.googleapis.com/calendar/v3/users/me/calendarList?minAccessRole=writer"
-    @response = client.get(@requestURL,headers)
+    @response = client.get(@requestURL,@headers)
 
     respond_to do |format|
       format.html # new.html.erb
