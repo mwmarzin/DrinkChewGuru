@@ -40,18 +40,17 @@ class EventsController < ApplicationController
       end
     end
     
-    for i in 0..(@invitees.count - 1)
-      if i == (@invitees.count - 1)
-        @invite_string = @invitees[i]
-      else
-        @invite_string = @invitees[i] + ","
+    if @invitees.count > 0
+      for i in 0..(@invitees.count - 1)
+        if i == (@invitees.count - 1)
+          @invite_string = @invitees[i]
+        else
+          @invite_string = @invitees[i] + ","
+        end
       end
     end
-
     #Get Calendar Information from Google API
-      
-      @user = User.find(session[:userid])
-      user_email=@user.email
+    user_email=@user.email
     @headers=["Authorization: Bearer #{@tokensHash[GoogleProvider.service_name].access_token}"]
     @requestURL = "https://www.googleapis.com/calendar/v3/users/#{user_email}/calendarList?"
     #@requestURL = "https://www.googleapis.com/calendar/v3/users/me/calendarList?minAccessRole=writer"
