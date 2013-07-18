@@ -24,7 +24,6 @@ class UsersController < ApplicationController
       @lname = params[:'openid.ext1.value.lastname']
       @email = params[:'openid.ext1.value.email']
       @identity_url = params[:'openid.identity']
-      #		@findUser = User.find_by_email(@email)
       @user = User.find_by_email(@email)
       #		@message
       if @user.nil?
@@ -42,6 +41,7 @@ class UsersController < ApplicationController
       redirect_to "/oauth"
     end
   end
+  
   def signout
     if session[:userid]
       session[:userid] = nil

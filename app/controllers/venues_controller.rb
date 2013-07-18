@@ -10,13 +10,13 @@ class VenuesController < ApplicationController
     #the controller doesn't do much here
     #show redirect to the users page when
      
-    # if (params[:location] || params[:query])
+    if (params[:location] || params[:query])
     @location=params[:location]
     @query=params[:query]
     client = HTTPClient.new
     version = Time.now.strftime("%Y%m%d")
     oauth_token = temp_token = "ISH5O3EJNGHGI5O4PRKF5GXADOM3S4K4AUJWVMDWLS35TVOH"
-    @url = "https://api.foursquare.com/v2/venues/search?near=#{@location}&query=#{@query}&limit=10&oauth_token=#{oauth_token}&v=#{version}"
+    @url = "https://api.foursquare.com/v2/venues/search?near=#{@location}&query=#{@query}&limit=1&oauth_token=#{oauth_token}&v=#{version}"
     # if (params[:location])
     #    @url = @url + "near=#{@location}"
     #  end
@@ -26,16 +26,23 @@ class VenuesController < ApplicationController
     #    @url = @url + "&oauth_token=s#{oauth_token}&v=#{version}"
     @response = client.get(@url)
      
+    @venues = Array.new
       #if @response.code == "200"
+=begin
       @responseJson = JSON.parse(@response.body)
-     search_venue = @responseJson["response"]["venues"]
-      @venue_name=search_venue["name"]
+      @responseJson["response"]["venues"].each do |venueJson|
+        venue = convertJsonToVenue(venueJson)
+        @venues.push(venue)
+      end
+=end
+      # search_venue = @responseJson["response"]["venues"]
+      # @venue_name=search_venue["name"]
       #  @responseJson["response"]["venues"][0].each do |result|
       #   @venue_name =    result["name"]
       # end
       #puts @responseJson
      
-
+end
       
    
   end
@@ -49,6 +56,7 @@ class VenuesController < ApplicationController
       
     @url = "https://api.foursquare.com/v2/venues/search?ll=40.7,-74&oauth_token=#{oauth_token}&v=#{version}"
     @result_url=   client.get(@url)
+
 
     #TODO use the information entered in the "search" page to make a query string that can be used to query FourSquare for venues
     #Should use a new method in the FourSquareProvider class to take a parameter and have it make the query string that can then use httpclient to do a get data.

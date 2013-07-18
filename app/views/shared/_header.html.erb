@@ -6,9 +6,8 @@
 		<ul>
 <% if session.has_key?(:userid)%>			
 			<li class="menulink"><%= link_to "Profile", "/profile" %></li>
+			<li class="menulink"><%= link_to "Search", "/venues/search" %></li>
 			<li class="menulink"><%= link_to "Sign Out", "/signout" %></li>
-<% else %>
-			<li class="menulink"><%= link_to "Login", "/login"%></li>
 <% end %>
 			<li class="menulink"><%= link_to "Privacy", "/privacy"%></li>
 		</ul>
