@@ -16,10 +16,12 @@
 		<% @venues.each do|v|%>
 		<%=v.id%>
 		<%end%>
-		
 		<ul>
+		<%if !@response.nil?%>
+		
 			<li><%=@response.body%></li>
 			<li><%=@url%>
+				<%end%>
 		</ul>
 		
 	</div>
