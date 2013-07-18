@@ -52,8 +52,6 @@ class EventsController < ApplicationController
     if (params[:event])
       event = params[:event]
       date = Date.new event["event_date(1i)"].to_i, event["event_date(2i)"].to_i, event["event_date(3i)"].to_i
-      
-      
     end
     #Get Calendar Information from Google API
     user_email=@user.email
