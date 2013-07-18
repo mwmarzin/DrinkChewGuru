@@ -43,16 +43,22 @@ class EventsController < ApplicationController
     @venue = VenuesController.getVenueInformation(venue_id, @tokensHash[FourSquareProvider.service_name].access_token)
 
     @friends = @user.getFriendsList()
-    @invitees = "";
+    @invitees = Array.new;
 
     params.each do |key,value|
       if key.start_with?("invitee_")
-        @invitees = @invitees + key.split('_')[1] + "," 
+        @invitees.push(key.split('_')[1])
       end
     end
-    if @invitees.end_with?(',')
-      @invitees.chop
+    
+    for i in 0..(@invitees.count - 1)
+      if i == (@invitees.count - 1)
+        @invite_string = @invitees[i]
+      else
+        @invite_string = @invitees[i] + ","
+      end
     end
+
     
     respond_to do |format|
       format.html # new.html.erb
@@ -96,6 +102,10 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
+    
+    
+    #@event = Event.create(:user_id => @user.id, :date_time, :email_invitees, :facebook_id, :facebook_invitees, :description, :google_id, :loacation_id)
+    
     
     respond_to do |format|
       if @event.save
