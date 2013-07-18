@@ -4,17 +4,17 @@
 	<div id="content">
 		<h3> Profile for <%= "#{@user.first_name} #{@user.last_name}" %> </h3>
 		
-		<table>
-			<tr><th>Planned Events:</th></tr>
-			<% if @user.events.count == 0%>
-				<tr><td>No Events Planned!</td></tr>
-				<tr><td><%= link_to "Click here to start creating a new event", "/venues/search" %></td></tr>
-			<% else %>
+		<h4>Planned Events:</h4>
+		<% if @user.events.count == 0%>
+			<p>No Events Planned!</p> <br/>
+			<%= link_to "Click here to start creating a new event", "/venues/search" %>
+		<% else %>
+			<ul>
 				<% @user.events.each do |event|%>
-					<tr><td><%= event.date_time%></td></tr>
+					<li><%= event.date_time%></li>
 				<% end %>
-			<% end %>
-		</table>
+			</ul>
+		<% end %>
 		
 		<h4>Todos From FourSquare</h4>
 		<p>Click on the name of the location to create an event there.</p>
@@ -46,13 +46,5 @@
 			</tr>
 		<% end %>
 		</table>
-				
-		<ul>
-		<% params.each do |param| %>
-		<li><%= param %></li>
-		<% end %>
-		</ul>
-		<p>Invitee Ids</p>
-		<p><%= @invitees %></p>
 	</div>
 </div>
