@@ -31,7 +31,8 @@ class EventsController < ApplicationController
     @venue = VenuesController.getVenueInformation(@venue_id, @tokensHash[FourSquareProvider.service_name].access_token)
 
     @friends = @user.getFriendsList()
-    @invitees = Array.new;
+    @invitees = Array.new
+    client = HTTPClient.new
 
     params.each do |key,value|
       if key.start_with?("invitee_")
