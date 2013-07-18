@@ -43,9 +43,9 @@ class EventsController < ApplicationController
     if @invitees.count > 0
       for i in 0..(@invitees.count - 1)
         if i == (@invitees.count - 1)
-          @invite_string = @invitees[i]
+          @invite_string += @invitees[i]
         else
-          @invite_string = @invitees[i] + ","
+          @invite_string += @invitees[i] + ","
         end
       end
     end
