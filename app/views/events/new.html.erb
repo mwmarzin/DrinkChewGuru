@@ -16,10 +16,10 @@
 		<%=text_field_tag(:Event_Name)%><br/>
 		
 		<%=label_tag(:LABELEvent_Date, "Enter Date:")%>
-		<%=date_field(:Event_Date)%><br/>
+		<%=date_field(:user,:Event_Date)%><br/>
 		
 		<%=label_tag(:LABELEvent_Time, "Enter Time:")%>
-		<%=datetime_field(:Event_Time)%><br/>
+		<%=datetime_field(:user,:Event_Time)%><br/>
 		
 		<%=label_tag(:Event_Description, "Event Description:")%>
 		<%=text_area_tag(:Event_Description, "Blah Blah", size: "24x6")%><br/>
