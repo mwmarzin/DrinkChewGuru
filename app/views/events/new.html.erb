@@ -12,6 +12,7 @@
 		<!-- Form for Google Calendar and Event Info -->
 		<h4>Event Info</h4>
 		
+		<%= hidden_field_tag 'venue_id', "#{@venue_id}" %>
 		<%=label_tag(:LABELEvent_Name, "Enter Event Name:")%>
 		<%=text_field_tag(:Event_Name)%><br/>
 		 		

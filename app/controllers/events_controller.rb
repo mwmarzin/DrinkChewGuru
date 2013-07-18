@@ -9,17 +9,6 @@ class EventsController < ApplicationController
   #TODO clean up this file with functions we don't need
   #It seems like we should keep all of these functions 
   
-=begin
-  def index
-    @events = Event.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render :json => @events }
-    end
-  end
-=end
-  
   
   # GET /events/1
   # GET /events/1.json
@@ -38,9 +27,9 @@ class EventsController < ApplicationController
   # GET /events/new.json
   def new
     #TODO we should be reading in an id parameter for the venue id, we can use the VenueController's class function to get information about the venue and display the _venue_info partial in the app/shared directory to display the . 
-    venue_id = params[:venue_id]
+    @venue_id = params[:venue_id]
 
-    @venue = VenuesController.getVenueInformation(venue_id, @tokensHash[FourSquareProvider.service_name].access_token)
+    @venue = VenuesController.getVenueInformation(@venue_id, @tokensHash[FourSquareProvider.service_name].access_token)
 
     @friends = @user.getFriendsList()
     @invitees = Array.new;
@@ -102,8 +91,12 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    
-    
+    venue_id = params[:venue_id]
+    venue = VenuesController.getVenueInformation(venue_id, @tokensHash[FourSquareProvider.service_name].access_token)
+    create_event_hash = createFacebookEvent(@tokensHash[FacebookProvider.service_name].access_token,
+                                            name,
+                                            venue,)
+    #self.createFacebookEvent(oauth_token="", name="Home", venue=Venue.new, start_time="2012-07-04T19:00:00-0700", end_time="2012-07-04T19:00:00-0700", description="", privacy_type = "FRIENDS")
     #@event = Event.create(:user_id => @user.id, :date_time, :email_invitees, :facebook_id, :facebook_invitees, :description, :google_id, :loacation_id)
     
     
@@ -148,7 +141,29 @@ class EventsController < ApplicationController
     end
   end
   
-  def self.createFacebookEvent
+  def self.createFacebookEvent(oauth_token="", name="Home", venue=Venue.new, start_time="2012-07-04T19:00:00-0700", end_time="2012-07-04T19:00:00-0700", description="", privacy_type = "FRIENDS")
+    client = HTTPClient.new
+    returnHash = Hash.new
+    postURL = "https://graph.facebook.com/me/events"
+    headers={"access_token"=>oauth_token,
+      "name"=>name,
+      "start_time" => start_time,
+      "end_time" =>  end_time,
+      "location" => venue.to_s,
+      "privacy_type" =>privacy_type,
+      "description" => description
+    }
+    @response = client.post(postURL, headers)
     
+    @eventJson = JSON.parse(response.body)
+    if @eventJson["id"]
+      returnHash["id"] = @eventJson["id"]
+      returnHash["success"] = true
+    else
+      returnHash["success"] = false
+    end
+    
+    return returnHash
   end
+
 end
