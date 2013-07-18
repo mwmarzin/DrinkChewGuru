@@ -52,17 +52,11 @@ class UsersController < ApplicationController
   end
 
   def profile
-    @todos = @user.getTodos()
-    @friends = @user.getFriendsList()
-    @invitees = "";
-
-    params.each do |key,value|
-      if key.start_with?("invitee_")
-        @invitees = @invitees + key.split('_')[1] + "," 
-      end
-    end
-    if @invitees.end_with?(',')
-      @invitees.chop
+    begin
+      @todos = @user.getTodos()
+    rescue
+      flash.now[:alert] = "There was a problem getting the To-Dos from FourSquare. We're sorry."
+      @todos = Array.new
     end
   end
   

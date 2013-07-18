@@ -16,7 +16,7 @@
 			<% @venues.each do |venue|%>
 			<li>
 				<span class="todoListing">
-				<%= link_to "#{venue.name}", "/events/create/#{venue.id}" %>
+				<%= link_to "#{venue.name}", "/events/new/#{venue.id}" %>
 				</span>
 				<br/>
 				<span class="todoLocation">

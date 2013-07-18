@@ -79,20 +79,20 @@ class OauthTokensController < ApplicationController
     @token = @user.oauth_tokens.build({:provider => @tokenHash[:provider], :access_token => @tokenHash[:access_token],
       :expires_in =>  @tokenHash[:expires_in], :refresh_token =>  @tokenHash[:refresh_token]})
 										  
-    if @token.save
-      flash[:notice] = "Successfully linked profile to #{params[:provider]}."
-    else
-      flash[:alert] = "Encountered a problem saving your token for #{params[:provider]} to our database. Seek help!"
-    end
+      if @token.save
+        flash[:notice] = "Successfully linked profile to #{params[:provider]}."
+      else
+        flash[:alert] = "Encountered a problem saving your token for #{params[:provider]} to our database. Seek help!"
+      end
       
-    redirect_to "/oauth"
+      redirect_to "/oauth"
 			
-    #rescue => e
-    #flash[:alert] = "Sorry! We encountered an error getting data from #{params[:provider]}. If this continues. Please contact an admin."
-    #redirect_to(:controller => "oauth_tokens", :action =>"index")
-    #logger.info 'ERROR on create in oauth tokens'
-    #logger.info e.message
-    #end
+    rescue => e
+      flash[:alert] = "Sorry! We encountered an error getting data from #{params[:provider]}. If this continues. Please contact an admin."
+      redirect_to(:controller => "oauth_tokens", :action =>"index")
+      logger.info 'ERROR on create in oauth tokens'
+      logger.info e.message
+    end
   end
 
   def getProviderClass(providerName)

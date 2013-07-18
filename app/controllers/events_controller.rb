@@ -48,7 +48,6 @@ class EventsController < ApplicationController
       end
     end
 
-    
     respond_to do |format|
       format.html # new.html.erb
       format.json { render :json => @event }
@@ -114,7 +113,7 @@ class EventsController < ApplicationController
     
     create_event_hash = createFacebookEvent(@tokensHash[FacebookProvider.service_name].access_token,
                                             name,
-                                            venue,)
+                                            venue)
     #self.createFacebookEvent(oauth_token="", name="Home", venue=Venue.new, start_time="2012-07-04T19:00:00-0700", end_time="2012-07-04T19:00:00-0700", description="", privacy_type = "FRIENDS")
     #@event = Event.create(:user_id => @user.id, :date_time, :email_invitees, :facebook_id, :facebook_invitees, :description, :google_id, :loacation_id)
 
