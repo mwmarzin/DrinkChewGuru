@@ -14,7 +14,7 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
     #TODO this should query based the id being equal to the id in the events table on the session[:userid] being equal to the user_id column in the table
-    @event = Event.find(params[:event_name])
+    @event = Event.find(params[:event_id])
 
 
     respond_to do |format|
