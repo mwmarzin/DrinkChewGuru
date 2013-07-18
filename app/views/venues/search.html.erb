@@ -1,13 +1,14 @@
-<html>
 <%= render "shared/header" %>
 <div id="page">
 	<div id="content">
 		<h2>search a venue</h2>
 		
 		<%=form_tag do %>
-		enter location:<%=search_field_tag 'location'%><br/>
-		enter search:<%=search_field_tag 'query'%><br/>
-		<%=submit_tag 'submit your search'%>
+		<table>
+			<tr><td>enter location:</td><td><%=search_field_tag 'location'%></td></tr>
+			<tr><td>enter search:</td><td><%=search_field_tag 'query'%></td></tr>
+			<tr><td colspan=2><%=submit_tag 'submit your search'%></td></tr>
+		</table>
 		<%end%>
 		<div>
 			<%=@location%><br/>
@@ -24,6 +25,13 @@
 		<%end%>
 		</ul>
 		
+		<% if @venues.count > 0%>
+		<ul>
+			<% @venues.each do |venue|%>
+			<li><%= link_to "#{venue.name}", "/event/create/#{venue.id}" %></li>
+			<% end %>
+		</ul>
+		<% end  %>
+		
 	</div>
 </div>
-</html>
