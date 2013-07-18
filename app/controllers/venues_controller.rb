@@ -20,11 +20,14 @@ class VenuesController < ApplicationController
       @url = "https://api.foursquare.com/v2/venues/search?"
       
       if (!params[:location].nil? && !params[:location].blank?)
-        #TODO make sure there is no space between the city and the state.
-        @url = @url + "near='#{@location}'"
+        #replace the spaces with a %20 to escape the html
+        @location = @location.sub(" ", "%20")
+        @url = @url + "near=#{@location}"
       end
       
       if (!params[:query].nil? && !params[:query].blank?)
+        #replace the spaces with a %20 to escape the html
+        @query = @quer.sub(" ", "%20")
         @url = @url + "&query=#{@query}"
       end
       @url = @url + "&oauth_token=#{oauth_token}&v=#{version}"
@@ -35,7 +38,7 @@ class VenuesController < ApplicationController
       @responseJson = JSON.parse(@response.body)
       if (@responseJson["response"] && @responseJson["response"])
         @responseJson["response"]["venues"].each do |venueJson|
-          venue = convertJsonToVenue(venueJson)
+          venue = VenuesController.convertJsonToVenue(venueJson)
           @venues.push(venue)
         end
       end
