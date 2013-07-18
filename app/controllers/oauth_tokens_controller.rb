@@ -44,13 +44,14 @@ class OauthTokensController < ApplicationController
       @state = params[:state]
       
       #Verify that the state is okay
-      if (@provider != FourSquareProvider.service_name)
-        if(@state != session[:state])
-          raise "Problem verifying state"
-        else
-          session[:state] = nil
-        end
-      end
+      #if (@provider != FourSquareProvider.service_name)
+      #  if(@state != session[:state])
+      #    raise "Problem verifying state"
+      #  else
+      #    session[:state] = nil
+      #  end
+      #end
+      
       @exchangeURL = @provider.getOAuthExchangeTokenURL(@code)
       client = HTTPClient.new
       
