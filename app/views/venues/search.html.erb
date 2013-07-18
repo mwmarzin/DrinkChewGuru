@@ -14,21 +14,19 @@
 			<%=@location%><br/>
 			<%=@query%><br/>
 		</div>
-		<% @venues.each do|v|%>
-		<%=v.id%>
-		<%end%>
-		<ul>
-		<%if !@response.nil?%>
-		
-			<li><%=@response.body%></li>
-			<li><%=@url%>
-		<%end%>
-		</ul>
 		
 		<% if @venues.count > 0%>
 		<ul>
 			<% @venues.each do |venue|%>
-			<li><%= link_to "#{venue.name}", "/event/create/#{venue.id}" %></li>
+			<li>
+				<span class="todoListing">
+				<%= link_to "#{venue.name}", "/event/create/#{venue.id}" %>
+				</span>
+				<br/>
+				<span class="todoLocation">
+					<%= "#{venue.location.to_s}%>
+				</span>
+			</li>
 			<% end %>
 		</ul>
 		<% end  %>
