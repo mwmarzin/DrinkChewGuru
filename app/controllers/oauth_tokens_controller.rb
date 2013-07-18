@@ -24,7 +24,7 @@ class OauthTokensController < ApplicationController
         format.html # index.html.erb
       end
     end
-  end
+ # end
 
   def call
     @provider = getProviderClass(params[:provider])
