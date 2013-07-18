@@ -27,7 +27,7 @@ class VenuesController < ApplicationController
         @url = @url + "&oauth_token=s#{oauth_token}&v=#{version}"
     @response = client.get(@url)
      
-         if @response.code == "200"
+        # if @response.code == "200"
 
       @responseJson = JSON.parse(@response.body)
       @responseJson["response"]["venues"].each do |venueJson|
@@ -41,7 +41,7 @@ class VenuesController < ApplicationController
       #   @venue_name =    result["name"]
       # end
       #puts @responseJson
-     end
+    # end
 end
       
    
