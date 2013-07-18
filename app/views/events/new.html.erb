@@ -76,8 +76,9 @@
 		<p><%= @requestURL%></p>
 		<p>Response</p>
 		<p><%= @response.body%></p>
-		<% if date%>
-		<p><%= "Date: #{date}"%></p>
+		
+		<% if !date.nil? %>
+		<p><%= "Date: #{date}" %></p>
 		<% end %>
 	</div>
 </div>

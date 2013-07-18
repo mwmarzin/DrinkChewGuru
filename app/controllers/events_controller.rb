@@ -33,6 +33,7 @@ class EventsController < ApplicationController
     @friends = @user.getFriendsList()
     @invitees = Array.new
     client = HTTPClient.new
+    date = nil
 
     params.each do |key,value|
       if key.start_with?("invitee_")
