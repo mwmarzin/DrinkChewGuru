@@ -16,14 +16,15 @@ class VenuesController < ApplicationController
       @query=params[:query]
       client = HTTPClient.new
       version = Time.now.strftime("%Y%m%d")
-      oauth_token = temp_token = "ISH5O3EJNGHGI5O4PRKF5GXADOM3S4K4AUJWVMDWLS35TVOH"
+      oauth_token = @tokensHash[FourSquareProvider.service_name].access_token
       @url = "https://api.foursquare.com/v2/venues/search?"
       
-      if (params[:location].nil? &&   params[:location].blank?)
-        @url = @url + "near=#{@location}"
+      if (!params[:location].nil? && !params[:location].blank?)
+        #TODO make sure there is no space between the city and the state.
+        @url = @url + "near='#{@location}'"
       end
       
-      if (params[:query].nil? &&   params[:query].blank?)
+      if (!params[:query].nil? && !params[:query].blank?)
         @url = @url + "&query=#{@query}"
       end
       @url = @url + "&oauth_token=#{oauth_token}&v=#{version}"
