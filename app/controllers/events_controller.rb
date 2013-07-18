@@ -62,7 +62,30 @@ class EventsController < ApplicationController
 
   # GET /events/1/edit
   def edit
-    @event = Event.find(params[:id])
+    #@event = Event.find(params[:id])
+    #TODO we should be reading in an id parameter for the venue id, we can use the VenueController's class function to get information about the venue and display the _venue_info partial in the app/shared directory to display the . 
+    venue_id = params[:event_id]
+
+    @venue = VenuesController.getVenueInformation(venue_id, @tokensHash[FourSquareProvider.service_name].access_token)
+
+    @friends = @user.getFriendsList()
+    @invitees = "";
+
+    params.each do |key,value|
+      if key.start_with?("invitee_")
+        @invitees = @invitees + key.split('_')[1] + "," 
+      end
+    end
+    if @invitees.end_with?(',')
+      @invitees.chop
+    end
+    
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render :json => @event }
+    end
+    
+    
   end
 
   # POST /events
