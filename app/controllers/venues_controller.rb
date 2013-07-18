@@ -18,7 +18,7 @@ class VenuesController < ApplicationController
     version = Time.now.strftime("%Y%m%d")
     oauth_token = temp_token = "ISH5O3EJNGHGI5O4PRKF5GXADOM3S4K4AUJWVMDWLS35TVOH"
     @url = "https://api.foursquare.com/v2/venues/search?"
-   if (params[:location].nil? &&   (params[:location].blank?)
+   if (params[:location].nil? &&   params[:location].blank?)
         @url = @url + "near=#{@location}"
       end
         if (params[:query].nil? &&   (params[:query].blank?)
