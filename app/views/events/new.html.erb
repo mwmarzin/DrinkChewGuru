@@ -10,6 +10,7 @@
 		<%= render "shared/venue_info" %>
 		<%= form_tag("/events/new/#{@venue_id}", method: "post") do  %>
 		<!-- Form for Google Calendar and Event Info -->
+		<h3>Start Creating Your Event</h3><br/>
 		<h4>Event Info</h4>
 		
 		<%= hidden_field_tag 'venue_id', "#{@venue_id}" %>
