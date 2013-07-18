@@ -21,7 +21,7 @@ class VenuesController < ApplicationController
    if (params[:location].nil? &&   params[:location].blank?)
         @url = @url + "near=#{@location}"
       end
-        if (params[:query].nil? &&   (params[:query].blank?)
+        if (params[:query].nil? &&   params[:query].blank?)
        @url = @url + "&query=#{@query}"
       end
         @url = @url + "&oauth_token=s#{oauth_token}&v=#{version}"
