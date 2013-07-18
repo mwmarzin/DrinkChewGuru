@@ -13,11 +13,15 @@
 			<%=@location%><br/>
 			<%=@query%><br/>
 		</div>
+		<% @venues.each do|v|%>
+		<%=v.id%>
+		<%end%>
+		
 		<ul>
 			<li><%=@response.body%></li>
 			<li><%=@url%>
 		</ul>
-
+		
 	</div>
 </div>
 </html>

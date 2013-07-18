@@ -9,39 +9,39 @@ class VenuesController < ApplicationController
     #TODO display a page that the user can user to search foursquare for a venue
     #the controller doesn't do much here
     #show redirect to the users page when
-     
+      @venues = Array.new
+
     if (params[:location] || params[:query])
     @location=params[:location]
     @query=params[:query]
     client = HTTPClient.new
     version = Time.now.strftime("%Y%m%d")
     oauth_token = temp_token = "ISH5O3EJNGHGI5O4PRKF5GXADOM3S4K4AUJWVMDWLS35TVOH"
-    @url = "https://api.foursquare.com/v2/venues/search?near=#{@location}&query=#{@query}&limit=1&oauth_token=#{oauth_token}&v=#{version}"
-    # if (params[:location])
-    #    @url = @url + "near=#{@location}"
-    #  end
-    #    if (params[:query])
-    #   @url = @url + "&query=#{@query}"
-    #  end
-    #    @url = @url + "&oauth_token=s#{oauth_token}&v=#{version}"
+    @url = "https://api.foursquare.com/v2/venues/search?"
+   if (params[:location].nil? &&   (params[:location].blank?)
+        @url = @url + "near=#{@location}"
+      end
+        if (params[:query].nil? &&   (params[:query].blank?)
+       @url = @url + "&query=#{@query}"
+      end
+        @url = @url + "&oauth_token=s#{oauth_token}&v=#{version}"
     @response = client.get(@url)
      
-    @venues = Array.new
-      #if @response.code == "200"
-=begin
+         if @response.code == "200"
+
       @responseJson = JSON.parse(@response.body)
       @responseJson["response"]["venues"].each do |venueJson|
         venue = convertJsonToVenue(venueJson)
         @venues.push(venue)
       end
-=end
+
       # search_venue = @responseJson["response"]["venues"]
       # @venue_name=search_venue["name"]
       #  @responseJson["response"]["venues"][0].each do |result|
       #   @venue_name =    result["name"]
       # end
       #puts @responseJson
-     
+     end
 end
       
    
