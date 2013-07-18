@@ -28,7 +28,6 @@ class EventsController < ApplicationController
   def new
     #TODO we should be reading in an id parameter for the venue id, we can use the VenueController's class function to get information about the venue and display the _venue_info partial in the app/shared directory to display the . 
     @venue_id = params[:venue_id]
-
     @venue = VenuesController.getVenueInformation(@venue_id, @tokensHash[FourSquareProvider.service_name].access_token)
 
     @friends = @user.getFriendsList()
@@ -47,6 +46,12 @@ class EventsController < ApplicationController
         @invite_string += @invitees[i] + ","
       end
     end
+
+    #Get Calendar Information from Google API
+    headers={"Authorization: Bearer"=>@tokenHash[GoogleProvider.service_name].access_token}
+    @requestURL = "https://www.googleapis.com/calendar/v3/users/me/calendarList"
+    #@requestURL = "https://www.googleapis.com/calendar/v3/users/me/calendarList?minAccessRole=writer"
+    @response = client.get(@requestURL,headers)
 
     respond_to do |format|
       format.html # new.html.erb
