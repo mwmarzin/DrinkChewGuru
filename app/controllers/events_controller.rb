@@ -77,8 +77,8 @@ class EventsController < ApplicationController
       end
     end
     
-    for i in 0..(@invitees - 1)
-      if i == (@invitees - 1)
+    for i in 0..(@invitees.count - 1)
+      if i == (@invitees.count - 1)
         @invite_string = @invitees[i]
       else
         @invite_string = @invitees[i] + ","
