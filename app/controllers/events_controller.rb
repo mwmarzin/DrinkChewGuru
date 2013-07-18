@@ -49,8 +49,11 @@ class EventsController < ApplicationController
     end
 
     #Get Calendar Information from Google API
+      
+      @user = User.find(session[:userid])
+      user_email=@user.email
     @headers=["Authorization: Bearer #{@tokensHash[GoogleProvider.service_name].access_token}"]
-    @requestURL = "https://www.googleapis.com/calendar/v3/users/me/calendarList"
+    @requestURL = "https://www.googleapis.com/calendar/v3/users/{user_email}/calendarList?"
     #@requestURL = "https://www.googleapis.com/calendar/v3/users/me/calendarList?minAccessRole=writer"
     @response = client.get(@requestURL,@headers)
 
