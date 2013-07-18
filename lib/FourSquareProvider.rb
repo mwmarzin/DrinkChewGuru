@@ -7,9 +7,10 @@ class FourSquareProvider < Provider
   @access_url = "https://foursquare.com/oauth2/authenticate"
   @exchange_url = "https://foursquare.com/oauth2/access_token"
   @perms = ""
-  @state = rand(99999)
+  @state = 0
 
   def self.getOAuthTokenRequestURL()
+    session[:state] = 0
     @request = "#{@access_url}?"       +
       "client_id=#{@client_id}"        +
       "&redirect_uri=#{@redirect_uri}" +

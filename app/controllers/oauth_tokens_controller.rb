@@ -24,7 +24,7 @@ class OauthTokensController < ApplicationController
         format.html # index.html.erb
       end
     end
- # end
+  end
 
   def call
     @provider = getProviderClass(params[:provider])
@@ -46,33 +46,11 @@ class OauthTokensController < ApplicationController
       @exchangeURL = @provider.getOAuthExchangeTokenURL(@code)
       client = HTTPClient.new
     
-      #TODO there should be a better way to handle this then to hardcode if the provider wants a POST or a GET. Maybe something in the provider classes?
       if params[:provider] == "Google"
         @tokenResponse = client.post(@provider.exchange_url, @provider.getOAuthExchangeParams(@code))
       else
         @tokenResponse = client.get(@exchangeURL)
       end
-    
-      @tokenHash = @provider.returnToken(@tokenResponse)
-    
-      #The next couple lines are just to test getting data with the tokens we've just retrieved from the provider
-      @requestURL = ""
-      if params[:provider] == "Facebook"  
-        headers={"access_token"=>@tokenHash[:access_token]}
-        @requestURL = "https://graph.facebook.com/me/friends?fields=first_name,picture&limit=5"
-        @response = client.get(@requestURL,headers)
-      elsif params[:provider] == "Google"
-        headers={"Authorization: Bearer"=>@tokenHash[:access_token]}
-        @requestURL = "https://www.googleapis.com/calendar/v3/users/me/calendarList?minAccessRole=writer"
-        @response = client.get(@requestURL,headers)
-      elsif params[:provider] == "FourSquare"
-        @requestURL = "https://api.foursquare.com/v2/lists/self/todos?oauth_token=#{@tokenHash[:access_token]}"
-    
-        @response = client.get(@requestURL)
-      end
-	  
-
-      @responseJSON = JSON.parse(@response.body)
       
       @token = @user.oauth_tokens.build({:provider => @tokenHash[:provider], :access_token => @tokenHash[:access_token], :expires_in =>  @tokenHash[:expires_in], :refresh_token =>  @tokenHash[:refresh_token]})
 										  
@@ -82,13 +60,11 @@ class OauthTokensController < ApplicationController
         flash[:alert] = "Encountered a problem saving your token for #{params[:provider]} to our database. Seek help!"
       end
       
-      redirect_to "/oauth"
+      redirect_to("/oauth")
 			
     rescue => e
       flash[:alert] = "Sorry! We encountered an error getting data from #{params[:provider]}. If this continues. Please contact an admin."
       redirect_to("/oauth")
-      logger.info 'ERROR on create in oauth tokens'
-      logger.info e.message
     end
   end
 

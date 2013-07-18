@@ -10,6 +10,8 @@ class GoogleProvider < Provider
   @service_name = "Google"
   
   def self.getOAuthTokenRequestURL()
+    state = rand(9999)
+    session[:state] = state
     @request = "#{@access_url}?"       +
       "client_id=#{@client_id}"        +
       "&redirect_uri=#{@redirect_uri}" +
