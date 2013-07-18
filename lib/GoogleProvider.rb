@@ -9,15 +9,13 @@ class GoogleProvider < Provider
   @perms = "https://www.googleapis.com/auth/calendar https://www.google.com/m8/feeds https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/userinfo.profile"
   @service_name = "Google"
   
-  def self.getOAuthTokenRequestURL()
-    state = rand(9999)
-    session[:state] = state
+  def self.getOAuthTokenRequestURL(state =0 )
     @request = "#{@access_url}?"       +
       "client_id=#{@client_id}"        +
       "&redirect_uri=#{@redirect_uri}" +
       "&scope=#{@perms}"               +
       "&response_type=code"            +
-      "&state=#{@state}"               +
+      "&state=#{state}"                +
       "&approval_prompt=force"         +
       "&access_type=offline"
   end
@@ -34,7 +32,7 @@ class GoogleProvider < Provider
   def self.getOAuthExchangeParams(code)
     return {:client_id => @client_id, :client_secret => @client_secret,
             :grant_type => 'authorization_code', :code => code, 
-            :redirect_uri => @redirect_uri,}  
+            :redirect_uri => @redirect_uri}  
   end
   
   def self.returnToken(response, state=0)

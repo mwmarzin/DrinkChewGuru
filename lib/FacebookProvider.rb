@@ -9,13 +9,11 @@ class FacebookProvider < Provider
   @state = rand(99999)
   @service_name = "Facebook"
   
-  def self.getOAuthTokenRequestURL()
-    state = rand(9999)
-    session[:state] = state
+  def self.getOAuthTokenRequestURL(state=0)
     @request = "#{@access_url}?" +
       "client_id=#{@client_id}" +
       "&redirect_uri=#{@redirect_uri}" +
-      "&state=#{@state}"+
+      "&state=#{state}"+
       "&scope=#{@perms}"
   end
   

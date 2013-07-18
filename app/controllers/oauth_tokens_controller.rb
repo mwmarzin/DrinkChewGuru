@@ -28,8 +28,8 @@ class OauthTokensController < ApplicationController
 
   def call
     @provider = getProviderClass(params[:provider])
-
-    redirect_to(@provider.getOAuthTokenRequestURL())
+    session[:state] = rand(9999)
+    redirect_to(@provider.getOAuthTokenRequestURL(session[:state]))
   end
   
   
@@ -42,10 +42,18 @@ class OauthTokensController < ApplicationController
     
       @code = params[:code]
       @state = params[:state]
-    
+      
+      #Verify that the state is okay
+      if (@provider != FourSquareProvider.service_name)
+        if(@state != session[:state])
+          raise "Problem verifying state"
+        else
+          session[:state] = nil
+        end
+      end
       @exchangeURL = @provider.getOAuthExchangeTokenURL(@code)
       client = HTTPClient.new
-    
+      
       if params[:provider] == "Google"
         @tokenResponse = client.post(@provider.exchange_url, @provider.getOAuthExchangeParams(@code))
       else
