@@ -27,9 +27,10 @@ class VenuesController < ApplicationController
       
       if (!params[:query].nil? && !params[:query].blank?)
         #replace the spaces with a %20 to escape the html
-        @query = @quer.sub(" ", "%20")
+        @query = @query.sub(" ", "%20")
         @url = @url + "&query=#{@query}"
       end
+      
       @url = @url + "&oauth_token=#{oauth_token}&v=#{version}"
       @response = client.get(@url)
      
