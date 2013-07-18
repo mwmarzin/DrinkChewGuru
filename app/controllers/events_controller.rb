@@ -151,9 +151,7 @@ class EventsController < ApplicationController
   def self.createFacebookEvent(oauth_token="", name="Home", venue=Venue.new, start_time="2012-07-04T19:00:00-0700", end_time="2012-07-04T19:00:00-0700", description="", privacy_type = "FRIENDS")
     client = HTTPClient.new
     returnHash = Hash.new
-#    postURL = "https://graph.facebook.com/me/events"
-	postURL = "https://www.googleapis.com/calendar/v3/users/@user.id/lists?"
-
+    postURL = "https://graph.facebook.com/me/events"
     headers={"access_token"=>oauth_token,
       "name"=>name,
       "start_time" => start_time,
