@@ -9,8 +9,17 @@ class ApplicationController < ActionController::Base
       @user = User.find(session[:userid])
       @tokensHash = @user.oauth_tokens.index_by(&:provider)
       
-      @user.oauth_tokens.each do |token|
-        
+      @userHasAllTokens = false
+      
+      if ( @tokensHash[FourSquareProvider.service_name] &&
+        @tokensHash[GoogleProvider.service_name]     &&
+        @tokensHash[FacebookProvider.service_name] )
+        @userHasAllTokens = true
+      end
+      
+      if @userHasAllTokens == false
+        flash[:alert] = "You need tokens for each provider. Please login with each of the following services"
+        redirect_to "/oauth"
       end
       #TODO could check in here if the users tokens are still valid, if they aren't call another method to refresh the token
       #if the refresh fails, redirect to "/oauth"

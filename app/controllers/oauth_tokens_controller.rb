@@ -8,6 +8,16 @@ require 'time'
 class OauthTokensController < ApplicationController
   before_filter :checklogin, :only => [:index, :create]
   
+  def checklogin
+    if !session[:userid]
+      flash[:alert] = "Please sign in."
+      redirect_to("/")
+    else
+      @user = User.find(session[:userid])
+      @tokensHash = @user.oauth_tokens.index_by(&:provider)
+    end
+  end
+  
   def index
     @userHasAllTokens = false
     #check to see that the user has tokens for all the Providers
