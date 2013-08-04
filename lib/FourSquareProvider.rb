@@ -1,7 +1,7 @@
 require 'Provider'
 class FourSquareProvider < Provider
-  @client_id = "EXE00JNPDHGUAQXEDXMCCKQ0KOCY2RKT0JVGSAIUZC0LDDDB"
-  @client_secret = "KJX1SGYG1ENHBQ02O2B4AUA1R3OFALH1I2MBTNLOOA54NWWX"
+  @client_id = "XXXXX"
+  @client_secret = "XXXXX"
   @redirect_uri = "http://drinkchewguru.elasticbeanstalk.com/oauth/FourSquare/callback"
   @service_name = "FourSquare"
   @access_url = "https://foursquare.com/oauth2/authenticate"

@@ -1,7 +1,7 @@
 require 'Provider'
 class GoogleProvider < Provider
-  @client_id = "307247955504.apps.googleusercontent.com"
-  @client_secret = "W1kRezogoDm61Gmyp_gqgI7y"
+  @client_id = "XXXXX"
+  @client_secret = "XXXXX"
   @redirect_uri = "http://drinkchewguru.elasticbeanstalk.com/oauth/Google/callback"
   @access_url = "https://accounts.google.com/o/oauth2/auth"
   @exchange_url = "https://accounts.google.com/o/oauth2/token"
